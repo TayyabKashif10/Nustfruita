@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -37,4 +38,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //Firebase Bom
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+
+    // Firebase analytics
+    implementation("com.google.firebase:firebase-analytics")
+
 }

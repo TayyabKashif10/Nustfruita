@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "164718930879",
+    "project_id": "nustfruta-2f9e3",
+    "storage_bucket": "nustfruta-2f9e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164718930879:android:ec86f6ccac54f295ed4f0a",
+        "android_client_info": {
+          "package_name": "com.nustfruta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxOs_iwvguvqqKJ-Tdgcu5J3jYvoYK92o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
