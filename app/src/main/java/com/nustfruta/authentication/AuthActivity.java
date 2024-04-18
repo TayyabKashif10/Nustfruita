@@ -1,4 +1,4 @@
-package com.nustfruta;
+package com.nustfruta.authentication;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.nustfruta.R;
 
 public class AuthActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
@@ -28,7 +30,6 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
 
             //TODO: implement guest account logic
         }
-
     }
 
     Button login, register;
