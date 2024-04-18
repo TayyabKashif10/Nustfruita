@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Nustfruta</string>
+    <string name="loginButtonText">Login</string>
+    <string name="registerButtonText">Register</string>
+    <string name="appBrand">NustFruta</string>
+
+
 </resources>

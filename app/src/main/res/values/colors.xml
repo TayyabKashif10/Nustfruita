@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="smokyBlack">#171101</color>
+    <color name="earthYellow">#F6C076</color>
+    <color name="keppel">#57A095</color>
+    <color name="gunmetal">#1C2D32</color>
+    <color name="redwood">#AA4242</color>
 </resources>
