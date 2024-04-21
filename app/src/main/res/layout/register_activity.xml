@@ -3,10 +3,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/authScreen"
+    android:id="@+id/registerScreen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.AuthActivity">
+    tools:context=".authentication.RegisterActivity">
 
     <TextView
         android:id="@+id/registerTitle"
@@ -21,7 +21,7 @@
         android:textSize="50sp"/>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/usernameCard"
+        android:id="@+id/nameCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,16 +47,17 @@
                 android:layout_centerVertical="true"/>
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/name"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
                 android:layout_toEndOf="@id/profileIcon"
                 android:ems="10"
-                android:hint="@string/username"
+                android:hint="@string/full_name"
                 android:inputType="text"
                 android:backgroundTint="@color/transparent"
+                android:autofillHints="name"
                  />
 
 
@@ -69,7 +70,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameCard"
+        app:layout_constraintTop_toBottomOf="@+id/nameCard"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/md_theme_light_primary"
         app:cardCornerRadius="40dp">
@@ -98,14 +99,15 @@
                 android:layout_toEndOf="@id/phoneIcon"
                 android:backgroundTint="@color/transparent"
                 android:layout_marginStart="5dp"
-                android:hint="@string/phone"/>
+                android:hint="@string/phone"
+                android:autofillHints="phone"/>
 
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/emailCard"
+        android:id="@+id/registerEmailCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -122,7 +124,7 @@
             android:paddingHorizontal="10dp">
 
             <ImageView
-                android:id="@+id/emailIcon"
+                android:id="@+id/registerEmailIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/email_icon_description"
@@ -131,27 +133,28 @@
                 android:layout_centerVertical="true"/>
 
             <EditText
-                android:id="@+id/userEmail"
+                android:id="@+id/registerUserEmail"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:layout_toEndOf="@id/emailIcon"
+                android:layout_toEndOf="@id/registerEmailIcon"
                 android:backgroundTint="@color/transparent"
                 android:layout_marginStart="5dp"
-                android:hint="@string/email"/>
+                android:hint="@string/email"
+                android:autofillHints="emailAddress"/>
 
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/passwordCard"
+        android:id="@+id/registerPasswordCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailCard"
+        app:layout_constraintTop_toBottomOf="@+id/registerEmailCard"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/md_theme_light_primary"
         app:cardCornerRadius="40dp">
@@ -163,7 +166,7 @@
             android:paddingHorizontal="10dp">
 
             <ImageView
-                android:id="@+id/passwordIcon"
+                android:id="@+id/registerPasswordIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/password_icon_description"
@@ -172,27 +175,28 @@
                 android:layout_centerVertical="true"/>
 
             <EditText
-                android:id="@+id/userPassword"
+                android:id="@+id/registerUserPassword"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:layout_toEndOf="@id/passwordIcon"
+                android:layout_toEndOf="@id/registerPasswordIcon"
                 android:backgroundTint="@color/transparent"
                 android:layout_marginStart="5dp"
-                android:hint="@string/password"/>
+                android:hint="@string/password"
+                android:autofillHints="password"/>
 
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/register"
         style="@style/AuthButtonStyle"
-        android:text="@string/loginButtonText"
+        android:text="@string/registerButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordCard" />
+        app:layout_constraintTop_toBottomOf="@+id/registerPasswordCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

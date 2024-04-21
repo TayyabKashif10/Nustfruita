@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.nustfruta.R;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
@@ -24,9 +24,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.register_activity);
+        setContentView(R.layout.login_activity);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.registerScreen), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.loginScreen), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
