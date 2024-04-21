@@ -1,9 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 
-    <style name="Base.Theme.Nustfruta" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
     </style>
 
-    <style name="Theme.Nustfruta" parent="Base.Theme.Nustfruta" >
-    </style>
 </resources>
