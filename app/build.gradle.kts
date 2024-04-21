@@ -46,4 +46,10 @@ dependencies {
     // Firebase analytics
     implementation("com.google.firebase:firebase-analytics")
 
+    // Firebase database
+    implementation("com.google.firebase:firebase-database")
+
+    // Firebase authentication
+    implementation("com.google.firebase:firebase-auth")
+
 }

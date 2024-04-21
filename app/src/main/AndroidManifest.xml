@@ -21,6 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- exported is false because only the app itself should be able to call AuthActivity-->
+        <activity
+            android:name=".authentication.AuthActivity"
+            android:exported="false">
+        </activity>
+
+
     </application>
 
 </manifest>
