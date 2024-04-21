@@ -9,10 +9,11 @@
     tools:context=".authentication.AuthActivity">
 
     <TextView
-        android:id="@+id/nustfrutaTitle"
+        android:id="@+id/nustfruitaTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/appBrand"
+        android:textColor="#EA6E47"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,31 +23,27 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        style="@style/AuthButtonStyle"
         android:layout_marginTop="300dp"
         android:text="@string/loginButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/nustfrutaTitle" />
+        app:layout_constraintTop_toTopOf="@id/nustfruitaTitle" />
 
     <Button
         android:id="@+id/register"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        style="@style/AuthButtonStyle"
         android:layout_marginTop="50dp"
-
         android:text="@string/registerButtonText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/login" />
 
-
-
     <TextView
         android:id="@+id/guestText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/seed"
         android:text="Continue as Guest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
