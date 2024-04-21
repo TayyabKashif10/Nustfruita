@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.nustfruta" />
+                  <option name="mobileSdkAppId" value="1:164718930879:android:ec86f6ccac54f295ed4f0a" />
+                  <option name="projectId" value="nustfruta-2f9e3" />
+                  <option name="projectNumber" value="164718930879" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
