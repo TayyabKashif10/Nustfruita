@@ -29,6 +29,14 @@
         </activity>
 
 
+        <activity
+            android:name=".authentication.RegisterActivity"
+            android:exported="false">
+        </activity>
+
+
+
+
     </application>
 
 </manifest>

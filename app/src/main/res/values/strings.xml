@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">Nustfruta</string>
+    <string name="app_name">Nustfruita</string>
     <string name="loginButtonText">Login</string>
     <string name="registerButtonText">Register</string>
-    <string name="appBrand">NustFruta</string>
-
-
+    <string name="appBrand">NustFruita</string>
+    <string name="profile_icon_description">An image of a person</string>
+    <string name="username">Username</string>
+    <string name="phone_icon_description">An icon of a phone</string>
+    <string name="phone">Phone</string>
+    <string name="email_icon_description">An icon of an email</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="password_icon_description">An icon of the letters ABC</string>
+    <string name="input_field_width">200dp</string>
 </resources>

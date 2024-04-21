@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authentication.AuthActivity">
+
+    <TextView
+        android:id="@+id/registerTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registerButtonText"
+        android:textColor="#EA6E47"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="100dp"
+        android:textSize="50sp"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/usernameCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:cardCornerRadius="40dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:id="@+id/profileIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/profile_icon_description"
+                android:src = "@drawable/profile_icon"
+                app:tint="#EA6E47"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/profileIcon"
+                android:ems="10"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:backgroundTint="@color/transparent"
+                 />
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/phoneCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameCard"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:cardCornerRadius="40dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:id="@+id/phoneIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/phone_icon_description"
+                android:src = "@drawable/phone_icon"
+                app:tint="#EA6E47"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/userPhone"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="phone"
+                android:layout_toEndOf="@id/phoneIcon"
+                android:backgroundTint="@color/transparent"
+                android:layout_marginStart="5dp"
+                android:hint="@string/phone"/>
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/emailCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneCard"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:cardCornerRadius="40dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:id="@+id/emailIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/email_icon_description"
+                android:src = "@drawable/email_icon"
+                app:tint="#EA6E47"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/userEmail"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:layout_toEndOf="@id/emailIcon"
+                android:backgroundTint="@color/transparent"
+                android:layout_marginStart="5dp"
+                android:hint="@string/email"/>
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/passwordCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailCard"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:cardCornerRadius="40dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:id="@+id/passwordIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/password_icon_description"
+                android:src = "@drawable/password_icon"
+                app:tint="#EA6E47"
+                android:layout_centerVertical="true"/>
+
+            <EditText
+                android:id="@+id/userPassword"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:layout_toEndOf="@id/passwordIcon"
+                android:backgroundTint="@color/transparent"
+                android:layout_marginStart="5dp"
+                android:hint="@string/password"/>
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:id="@+id/login"
+        style="@style/AuthButtonStyle"
+        android:text="@string/loginButtonText"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordCard" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
