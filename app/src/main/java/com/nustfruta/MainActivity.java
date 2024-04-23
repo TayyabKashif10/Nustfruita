@@ -9,7 +9,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.nustfruta.authentication.AuthActivity;
+import com.nustfruta.authentication.LoginPhoneNumberActivity;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent authenticate = new Intent(this, AuthActivity.class);
+        Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
         startActivity(authenticate);
     }
 }
