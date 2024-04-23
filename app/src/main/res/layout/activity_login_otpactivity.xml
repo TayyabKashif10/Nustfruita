@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.LoginPhoneNumberActivity">
+    tools:context=".authentication.LoginotpActivity">
 
     <LinearLayout
         android:id="@+id/fruitArray"
@@ -27,7 +27,7 @@
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/apple_icon_description"
                 app:srcCompat="@drawable/fruit_apple"
-                app:tint="@color/apple_red" />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,7 +49,8 @@
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
                 android:contentDescription="@string/pearIconDescription"
-                app:srcCompat="@drawable/fruit_pear" />
+                app:srcCompat="@drawable/fruit_pear"
+                app:tint="@color/pear_green"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:text="@string/num2"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
 
@@ -70,20 +72,20 @@
         android:layout_height="200dp"
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
-        android:contentDescription="@string/phoneIconDescription"
+        android:contentDescription="@string/password_icon_description"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/phone_icon"
+        app:srcCompat="@drawable/password_icon"
         app:tint="@color/seed" />
 
     <TextView
-        android:id="@+id/phoneNumPrompt"
+        android:id="@+id/otpPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/phone_num_prompt"
+        android:text="@string/otp_prompt"
         android:textColor="@color/orange"
         android:textSize="25sp"
 
@@ -91,8 +93,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
+
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/phoneCard"
+        android:id="@+id/otpCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -100,47 +103,41 @@
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneNumPrompt">
+        app:layout_constraintTop_toBottomOf="@+id/otpPrompt">
 
         <RelativeLayout
 
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp">
 
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/countryCodePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                app:ccp_countryPreference="PK"
-                app:ccp_defaultNameCode="PK" />
 
             <EditText
-                android:id="@+id/signInPhoneField"
-                android:layout_width="130dp"
+                android:id="@+id/otpField"
+                android:layout_width="75dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/countryCodePicker"
-                android:autofillHints="phone"
+                android:autofillHints="smsOTPCode"
                 android:backgroundTint="@color/transparent"
                 android:ems="10"
-                android:hint="@string/phoneNumberPlaceHolder"
-                android:inputType="phone"
-                android:importantForAutofill = "yes"/>
+                android:hint="@string/otp_placeholder"
+                android:inputType="numberPassword"
+                android:layout_centerInParent="true"
+                android:importantForAutofill="yes"/>
 
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
     <Button
-        android:id="@+id/sendOTPbtn"
+        android:id="@+id/verifyOTPBtn"
         style="@style/AuthButtonStyle"
-        android:layout_marginTop="30dp"
-        android:text="@string/send_otp"
+        android:text="@string/verify"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phoneCard" />
+        app:layout_constraintTop_toBottomOf="@id/otpCard"
+        android:layout_marginTop="30dp"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -149,6 +146,4 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5
 " />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

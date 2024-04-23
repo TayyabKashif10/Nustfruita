@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileTitle"
         android:layout_marginTop="120dp"
-        android:backgroundTint="@color/md_theme_light_primary"
+        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp">
 
         <RelativeLayout
@@ -70,7 +70,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameCard"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/md_theme_light_primary"
+        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp">
 
         <RelativeLayout
@@ -112,7 +112,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInPhoneCard"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/md_theme_light_primary"
+        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp">
 
         <RelativeLayout
@@ -154,7 +154,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailCard"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/md_theme_light_primary"
+        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp">
 
         <RelativeLayout

@@ -65,4 +65,6 @@
     <color name="orange">#EA6E47</color>
     <color name="apple_red">#C7372F</color>
     <color name="pear_green">#97CC4D</color>
+    <color name="white">#FFFFFF</color>
+    <color name="textFieldTint">#006B5E</color>
 </resources>
