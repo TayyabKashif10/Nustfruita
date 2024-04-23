@@ -52,4 +52,6 @@ dependencies {
     // Firebase authentication
     implementation("com.google.firebase:firebase-auth")
 
+    // country code picker
+    implementation("com.hbb20:ccp:2.7.3")
 }
