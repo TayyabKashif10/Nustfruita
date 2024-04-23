@@ -26,4 +26,7 @@
     <string name="phoneNumberPlaceHolder">XXX XXXXXXX</string>
     <string name="pearIconDescription">Image of a pear wih number 2 on top</string>
     <string name="phoneIconDescription">Image of a Phone</string>
+    <string name="otp_prompt">Enter 6 digit OTP</string>
+    <string name="otp_placeholder">XXXXXX</string>
+    <string name="verify">Verify</string>
 </resources>
