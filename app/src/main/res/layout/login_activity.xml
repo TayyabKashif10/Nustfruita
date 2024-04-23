@@ -9,7 +9,7 @@
     tools:context=".authentication.LoginActivity">
 
     <TextView
-        android:id="@+id/loginTitle"
+        android:id="@+id/signInTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/loginButtonText"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginTitle"
+        app:layout_constraintTop_toBottomOf="@+id/signInTitle"
         android:layout_marginTop="250dp"
         android:backgroundTint="@color/md_theme_light_primary"
         app:cardCornerRadius="40dp">
@@ -113,5 +113,4 @@
         android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginPasswordCard" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,4 +13,9 @@
     <string name="password_icon_description">An icon of the letters ABC</string>
     <string name="input_field_width">200dp</string>
     <string name="full_name">Full Name</string>
+    <string name="profile">Profile</string>
+    <string name="save">Save</string>
+    <string name="house_icon_description">An icon of a house</string>
+    <string name="hostel">Hostel</string>
+    <string name="sign_in">Sign In</string>
 </resources>
