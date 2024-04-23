@@ -80,7 +80,7 @@
             android:paddingHorizontal="10dp">
 
             <ImageView
-                android:id="@+id/phoneIcon"
+                android:id="@+id/phoneFieldPhoneIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/phone_icon_description"
@@ -94,7 +94,7 @@
                 android:layout_height="50dp"
                 android:ems="10"
                 android:inputType="phone"
-                android:layout_toEndOf="@id/phoneIcon"
+                android:layout_toEndOf="@id/phoneFieldPhoneIcon"
                 android:backgroundTint="@color/transparent"
                 android:layout_marginStart="5dp"
                 android:hint="@string/phone"

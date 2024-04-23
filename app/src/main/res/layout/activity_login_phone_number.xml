@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".authentication.LoginPhoneNumberActivity">
+
+    <LinearLayout
+        android:id="@+id/fruitArray"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/apple_icon_description"
+                    app:srcCompat="@drawable/fruit_apple"
+                    app:tint="@color/apple_red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/num1"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:contentDescription="@string/pearIconDescription"
+                    app:srcCompat="@drawable/fruit_pear" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/num2"
+                    android:textSize="30sp" />
+
+            </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/phoneIcon"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@string/phoneIconDescription"
+        app:layout_constraintTop_toBottomOf="@+id/fruitArray"
+        app:srcCompat="@drawable/phone_icon"
+        android:layout_marginTop="50dp"
+        app:tint="@color/seed" />
+
+    <TextView
+        android:id="@+id/phoneNumPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_num_prompt"
+        android:textColor="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneIcon"
+
+        android:layout_marginTop="70dp"
+        android:textSize="25sp"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/phoneCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/md_theme_light_primary"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumPrompt"
+        android:layout_marginTop="40dp">
+
+        <RelativeLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="10dp">
+
+           <com.hbb20.CountryCodePicker
+               android:id="@+id/countryCodePicker"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:ccp_countryPreference="PK"
+               android:layout_centerVertical="true"
+               app:ccp_defaultNameCode="PK"
+               />
+
+            <EditText
+                android:id="@+id/signInPhoneField"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/countryCodePicker"
+                android:backgroundTint="@color/transparent"
+                android:ems="10"
+                android:hint="@string/phoneNumberPlaceHolder"
+                android:inputType="phone"
+                android:autofillHints="phone"/>
+
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        android:id="@+id/sendOTPbtn"
+        style="@style/AuthButtonStyle"
+        android:text="@string/send_otp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phoneCard" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
