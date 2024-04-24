@@ -15,7 +15,7 @@
         android:layout_height="110dp">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="300dp"
@@ -28,7 +28,7 @@
             app:layout_constraintVertical_bias="0.301" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
@@ -41,7 +41,7 @@
             app:layout_constraintVertical_bias="0.824" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
+            android:id="@+id/minusButton"
             ap
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             android:src="@drawable/minus_icon"
             app:fabCustomSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintEnd_toStartOf="@+id/quantity"
             app:maxImageSize="15dp"
             app:tint="#FFEA6E47">
 
@@ -59,7 +59,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
+            android:id="@+id/plusButton"
             text
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,12 +69,12 @@
             android:src="@drawable/add_icon"
             app:fabCustomSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintStart_toEndOf="@+id/quantity"
             app:maxImageSize="15dp"
             app:tint="#FFEA6E47" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rs Price"
@@ -86,6 +86,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.684" />
+
+        <ImageView
+            android:id="@+id/productIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/banana_icon" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
