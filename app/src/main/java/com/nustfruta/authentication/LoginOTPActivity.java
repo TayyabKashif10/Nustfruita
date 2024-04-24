@@ -25,6 +25,9 @@ import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.nustfruta.Constants;
 import com.nustfruta.R;
+import com.nustfruta.models.User;
+import com.nustfruta.models.UserType;
+import com.nustfruta.utility.FirebaseUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -149,13 +152,15 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
     public void signIn(PhoneAuthCredential phoneAuthCredential)
     {
+        // register the user with firebase authentication
         mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    //TODO: Do something with the user information to store it?
-                    // TODO: move on to next activity, with the signed user.
+                    FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","",""), task.getResult().getUser().getUid());
+
+                    // TODO: move on to next activity
                     Toast.makeText(getApplicationContext(), "SIGNED IN BOI", Toast.LENGTH_SHORT).show();
                 }
                 else
