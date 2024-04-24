@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.LoginotpActivity">
+    tools:context=".authentication.LoginOTPActivity">
 
     <LinearLayout
         android:id="@+id/fruitArray"
@@ -146,4 +146,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5
 " />
+
+    <TextView
+        android:id="@+id/resendText"
+        android:text="@string/resend_otp_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/seed"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/verifyOTPBtn"
+        android:enabled="false"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
