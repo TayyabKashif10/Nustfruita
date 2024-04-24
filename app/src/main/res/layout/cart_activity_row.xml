@@ -4,65 +4,56 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="400dp"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/md_theme_dark_inversePrimary">
+    android:layout_gravity="center_horizontal"
+    app:cardBackgroundColor="@color/md_theme_dark_inversePrimary"
+    app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="110dp">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="28dp"
-            android:background="@color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/banana_icon" />
-
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="300dp"
             android:text="Product"
             android:textColor="#EA6E47"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView2"
-            app:layout_constraintHorizontal_bias="0.064"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.318" />
+            app:layout_constraintVertical_bias="0.301" />
 
         <TextView
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="q"
+            android:text="1"
             android:textColor="#EA6E47"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.873"
+            app:layout_constraintHorizontal_bias="0.872"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.824" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton"
+            ap
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="-5dp"
             android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/minus_icon"
+            app:fabCustomSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            app:fabCustomSize="15dp"
-            ap
-            android:src="@drawable/add_icon"
-            app:tint="@color/md_theme_dark_tertiary"
-            >
+            app:maxImageSize="15dp"
+            app:tint="#FFEA6E47">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
@@ -70,14 +61,31 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButton2"
             text
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-5dp"
             android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/add_icon"
+            app:fabCustomSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:maxImageSize="15dp"
+            app:tint="#FFEA6E47" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs Price"
+            android:textColor="#EA6E47"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.082"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.684" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
