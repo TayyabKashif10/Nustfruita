@@ -36,7 +36,7 @@ public class FirebaseUtil {
     {
 
         database = FirebaseDatabase.getInstance();
-
+        //TODO: remove
     }
 
     public User getCurrentUser()
