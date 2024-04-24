@@ -19,8 +19,8 @@ public class FirebaseUtil {
 
     public static FirebaseDatabase database;
 
+    // this is made a class field so that it can be updated by the listener throughout the app runtime.
     public static User currentUserObject;
-
     public static String getCurrentUserID()
     {
 
@@ -36,6 +36,15 @@ public class FirebaseUtil {
     {
 
         database = FirebaseDatabase.getInstance();
+
+    }
+
+    public User getCurrentUser()
+    {
+        if (getCurrentUserID()==null)
+        {
+            return null;
+        }
         FirebaseDatabase.getInstance().getReference("users").child(getCurrentUserID()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -49,6 +58,7 @@ public class FirebaseUtil {
             }
         });
 
+        return currentUserObject;
     }
 
     // Store user inside database, with the key as its UID.
