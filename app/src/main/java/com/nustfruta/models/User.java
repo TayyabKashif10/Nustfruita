@@ -6,6 +6,8 @@ public class User {
     String phoneNumber;
     String fullName;
     String email;
+
+    // addresses are stored as HOSTEL.ROOMNUMBER format
     String hostelAddress;
 
     public User(UserType userType, String phoneNumber, String fullName, String email, String hostelAddress) {

@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nustfruta.authentication.LoginOTPActivity;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
+import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.utility.FirebaseUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,19 +30,20 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
 
         //TODO: Add a splash activity for logo, which moves on to loginPhoneNumberActivity as a final result.
 
-        if (FirebaseUtil.getCurrentUserID() == null)
-        {
-            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
-            startActivity(authenticate);
-        }
-        else
-        {
-
-        }
+//        if (FirebaseUtil.getCurrentUserID() == null)
+//        {
+//            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
+//            startActivity(authenticate);
+//        }
+//        else
+//        {
+//
+//        }
 
     }
 }
