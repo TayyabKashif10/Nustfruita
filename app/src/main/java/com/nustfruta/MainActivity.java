@@ -9,9 +9,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.nustfruta.authentication.AuthActivity;
+import com.google.firebase.database.FirebaseDatabase;
+import com.nustfruta.authentication.LoginOTPActivity;
+import com.nustfruta.authentication.LoginPhoneNumberActivity;
+import com.nustfruta.utility.FirebaseUtil;
 
 public class MainActivity extends AppCompatActivity {
+
+    //TODO: Remove ALL toasts.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +29,19 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent authenticate = new Intent(this, AuthActivity.class);
-        startActivity(authenticate);
+
+
+        //TODO: Add a splash activity for logo, which moves on to loginPhoneNumberActivity as a final result.
+
+        if (FirebaseUtil.getCurrentUserID() == null)
+        {
+            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
+            startActivity(authenticate);
+        }
+        else
+        {
+
+        }
+
     }
 }
