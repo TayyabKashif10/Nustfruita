@@ -4,11 +4,13 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="400dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     app:cardBackgroundColor="@color/md_theme_dark_inversePrimary"
-    app:cardCornerRadius="20dp">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,20 +20,24 @@
             android:id="@+id/productName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="300dp"
-            android:text="Product"
-            android:textColor="#EA6E47"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="13dp"
+            android:text="@string/product"
+            android:textColor="#FFEA6E47"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/productPrice"
+            app:layout_constraintEnd_toStartOf="@+id/productIcon"
+            app:layout_constraintHorizontal_bias="0.156"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.301" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
+            android:text="@string/_1"
             android:textColor="#EA6E47"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,11 +48,11 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/minusButton"
-            ap
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="-5dp"
             android:clickable="true"
+            android:contentDescription="@string/minus_button"
             android:focusable="true"
             android:src="@drawable/minus_icon"
             app:fabCustomSize="15dp"
@@ -60,12 +66,13 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/plusButton"
-            text
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-5dp"
             android:clickable="true"
+            android:contentDescription="@string/plusbutton"
             android:focusable="true"
+            android:onClick="plusClick"
             android:src="@drawable/add_icon"
             app:fabCustomSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,15 +84,15 @@
             android:id="@+id/productPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs Price"
-            android:textColor="#EA6E47"
+            android:layout_marginBottom="28dp"
+            android:text="@string/rs_price"
+            android:textColor="#FFEA6E47"
             android:textSize="13sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.082"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.684" />
+            app:layout_constraintHorizontal_bias="0.107"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/productIcon"
@@ -93,8 +100,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="20dp"
+            android:contentDescription="@string/banana"
+            app:layout_constraintBottom_toBottomOf="@+id/quantity"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/banana_icon" />
 
 

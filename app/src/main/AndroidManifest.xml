@@ -25,6 +25,9 @@
         <activity
             android:name=".authentication.AuthActivity"
             android:exported="false"/>
+
+        <activity android:name=".CartAndCheckout.CartActivity"
+            android:exported="true"/>
         <activity
             android:name=".authentication.RegisterActivity"
             android:exported="false"/>
