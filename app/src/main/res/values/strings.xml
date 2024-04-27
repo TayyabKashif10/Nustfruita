@@ -19,4 +19,21 @@
     <string name="_1">1</string>
     <string name="rs_price">Rs Price</string>
     <string name="banana">banana</string>
+    <string name="profile">Profile</string>
+    <string name="save">Save</string>
+    <string name="house_icon_description">An icon of a house</string>
+    <string name="hostel">Hostel</string>
+    <string name="sign_in">Sign In</string>
+    <string name="num1">1</string>
+    <string name="num2">2</string>
+    <string name="apple_icon_description">Image of an Apple with number 1 on top.</string>
+    <string name="phone_num_prompt">Enter Phone Number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="phoneNumberPlaceHolder">XXX XXXXXXX</string>
+    <string name="pearIconDescription">Image of a pear wih number 2 on top</string>
+    <string name="phoneIconDescription">Image of a Phone</string>
+    <string name="otp_prompt">Enter 6 digit OTP</string>
+    <string name="otp_placeholder">XXXXXX</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp_prompt">Resend OTP in 30 seconds</string>
 </resources>
