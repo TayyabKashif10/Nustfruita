@@ -53,13 +53,13 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void initProductArrayList() {
-        productArrayList.add(new Product("test1", 2, "Rs. 22", R.drawable.banana_icon));
-        productArrayList.add(new Product("test2", 50, "Rs. 2441", R.drawable.banana_icon));
-        productArrayList.add(new Product("test3", 5, "Rs. 234", R.drawable.banana_icon));
-        productArrayList.add(new Product("test4", 9, "Rs. 1233", R.drawable.banana_icon));
-        productArrayList.add(new Product("test5", 6, "Rs. 20", R.drawable.banana_icon));
-        productArrayList.add(new Product("testicle", 1, "Rs. 102", R.drawable.banana_icon));
-        productArrayList.add(new Product("test7", 5, "Rs. 22", R.drawable.banana_icon));
+        productArrayList.add(new Product("test1", 2, 100, R.drawable.banana_icon));
+        productArrayList.add(new Product("test2", 50, 50, R.drawable.banana_icon));
+        productArrayList.add(new Product("test3", 5, 210, R.drawable.banana_icon));
+        productArrayList.add(new Product("test4", 9, 520, R.drawable.banana_icon));
+        productArrayList.add(new Product("test5", 6, 10, R.drawable.banana_icon));
+        productArrayList.add(new Product("testicle", 1, 25, R.drawable.banana_icon));
+        productArrayList.add(new Product("test7", 5, 30, R.drawable.banana_icon));
 
     }
 
@@ -103,8 +103,8 @@ public class CartActivity extends AppCompatActivity {
             if (getItemViewType(position) == 0) {
                 Product product = productArrayList.get(position);
                 holder.productName.setText(product.getName());
-                holder.price.setText(product.getProductPrice());
-                holder.quantity.setText(product.getStringQuantity());
+                holder.price.setText(Integer.toString(product.getQuantity() * product.getProductPricePerUnit()));
+                holder.quantity.setText(Integer.toString(product.getQuantity()));
                 holder.productIcon.setImageResource(productArrayList.get(position).getImage());
             }
         }
@@ -125,8 +125,9 @@ public class CartActivity extends AppCompatActivity {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView productName, price, quantity, backToMenu;
-        public ImageView productIcon, arrowIcon;
+        public TextView productName, price, quantity, subtotal, subtotalPrice, delivery,
+                deliveryPrice, dashedLine, total, totalPrice;
+        public ImageView productIcon;
         public FloatingActionButton plusButton, minusButton;
 
 
@@ -168,8 +169,13 @@ public class CartActivity extends AppCompatActivity {
 
         public ViewHolder(@NonNull View itemView, int itemViewType) {
             super(itemView);
-            backToMenu = itemView.findViewById(R.id.explore_menu);
-            arrowIcon = itemView.findViewById(R.id.right_arrow);
+            subtotal = itemView.findViewById(R.id.subtotal);
+            subtotalPrice = itemView.findViewById(R.id.subtotalPrice);
+            delivery = itemView.findViewById(R.id.delivery);
+            deliveryPrice = itemView.findViewById(R.id.deliveryPrice);
+            dashedLine = itemView.findViewById(R.id.lineDivider);
+            total = itemView.findViewById(R.id.total);
+            totalPrice = itemView.findViewById(R.id.totalPrice);
         }
 
     }

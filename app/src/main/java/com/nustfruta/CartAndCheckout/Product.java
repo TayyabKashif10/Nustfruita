@@ -7,25 +7,21 @@ public class Product {
 
     // TODO: Implement functionality to modify quantity and hence change price.
     public int quantity;
-    public String stringQuantity;
-    public String productPrice;
+    public int productPricePerUnit;
 
-    public Product(String name, int quantity, String productPrice, int image) {
+    public Product(String name, int quantity, int productPricePerUnit, int image) {
         this.name = name;
         this.quantity = quantity;
-        stringQuantity = String.valueOf(quantity);
-        this.productPrice = productPrice;
+        this.productPricePerUnit = productPricePerUnit;
         this.image = image;
     }
 
     public void increaseQuantity() {
         quantity++;
-        stringQuantity = String.valueOf(quantity);
     }
 
     public void decreaseQuantity() {
         quantity--;
-        stringQuantity = String.valueOf(quantity);
     }
 
     private int image;
@@ -35,17 +31,16 @@ public class Product {
         return image;
     }
 
-    public String getStringQuantity() {
-        return stringQuantity;
-    }
-
-    public String getProductPrice() {
-        return productPrice;
+    public int getProductPricePerUnit() {
+        return productPricePerUnit;
     }
 
     public String getName() {
         return name;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
 }
 
