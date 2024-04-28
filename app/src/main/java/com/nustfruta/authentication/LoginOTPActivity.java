@@ -160,7 +160,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","",""), task.getResult().getUser().getUid());
+                    FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
 
                     Intent intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
 

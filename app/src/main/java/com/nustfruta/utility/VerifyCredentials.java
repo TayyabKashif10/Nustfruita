@@ -9,7 +9,7 @@ public abstract class VerifyCredentials {
 
     public static boolean verifyFullName(String name)
     {
-        return name.length() > Constants.MIN_NAME_LENGTH;
+        return name.length() >= Constants.MIN_NAME_LENGTH;
     }
 
     public static boolean verifyEmail(String email)

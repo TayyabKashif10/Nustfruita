@@ -2,20 +2,23 @@ package com.nustfruta.models;
 
 public class User {
 
-    UserType userType;
-    String phoneNumber;
-    String fullName;
-    String email;
+    private UserType userType;
+    private String phoneNumber;
+    private String fullName;
+    private String email;
 
     // addresses are stored as HOSTEL.ROOMNUMBER format
-    String hostelAddress;
+    private String hostel;
 
-    public User(UserType userType, String phoneNumber, String fullName, String email, String hostelAddress) {
+    private String roomNumber;
+
+    public User(UserType userType, String phoneNumber, String fullName, String email, String hostel, String roomNumber) {
         this.userType = userType;
         this.phoneNumber = phoneNumber;
         this.fullName = fullName;
         this.email = email;
-        this.hostelAddress = hostelAddress;
+        this.hostel = hostel;
+        this.roomNumber = roomNumber;
     }
 
 
@@ -55,13 +58,30 @@ public class User {
         this.email = email;
     }
 
-    public String getHostelAddress() {
-        return hostelAddress;
+
+    public String getHostel() {
+        return hostel;
     }
 
-    public void setHostelAddress(String hostelAddress) {
-        this.hostelAddress = hostelAddress;
+    public void setHostel(String hostel) {
+        this.hostel = hostel;
     }
+
+    public String getRoomNumber() {
+        return roomNumber;
+    }
+
+    public void setRoomNumber(String roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+
+    public  boolean isCompleteProfile()
+    {
+
+        return !this.getEmail().isEmpty() && !this.getFullName().isEmpty() && !this.getHostel().isEmpty()  && !this.getRoomNumber().isEmpty();
+    }
+
 }
 
 

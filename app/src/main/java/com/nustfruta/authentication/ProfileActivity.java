@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,12 +17,24 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.utility.FirebaseUtil;
 import com.nustfruta.utility.VerifyCredentials;
 
+import java.util.Objects;
+
+
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    User currentSignedUser;
+
+
     @Override
     public void onClick(View v) {
 
@@ -39,7 +52,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         } else if (v.getId() == roomNumber.getId()) {
 
             String hostelText = (hostelFieldContainer.getEditText()).getText().toString();
-            if (hostelText.isEmpty())
+            String hostelHint = hostel.getHint().toString();
+            if (hostelText.isEmpty() && hostelHint.equals("Hostel"))
             {
                 roomNumber.setError("Select the hostel first.");
             }
@@ -66,6 +80,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
 
         initializeViews();
+        getUser();
         saveBtn.setOnClickListener(this);
         hostel.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, Constants.hostelNames));
         hostel.setOnClickListener(this);
@@ -105,6 +120,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         // returns empty string if nothing is selected, and item string otherwise.
         String inputHostel = (hostelFieldContainer.getEditText()).getText().toString();
+        String inputHostelHint = hostel.getHint().toString();
 
         if (!inputName.isEmpty() && !VerifyCredentials.verifyFullName(inputName))
         {
@@ -142,18 +158,72 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
+        Snackbar.make(saveBtn,currentSignedUser.getPhoneNumber(),Snackbar.LENGTH_SHORT).show();
 
-        Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
+        currentSignedUser.setEmail(inputEmail);
+        currentSignedUser.setFullName(inputName);
 
-        FirebaseUtil.currentUserObject.setEmail(inputEmail);
-        FirebaseUtil.currentUserObject.setFullName(inputName);
-        FirebaseUtil.currentUserObject.setHostelAddress(inputHostel + "." +inputRoomNumber);
+        /*
+        * For the extended drop down menu text field, we use both the hint and the text as user input.
+        * the hint is by default "Hostel". if the hint remains Hostel, that means the user didnt select anything
+        * and the hostel should be saved as empty, which is what getText() will return, so we set that.
+        *
+        * if the hint is not hostel, that means the previously stored value of hostel in database is the hint, so it should
+        * just propagate that, the getText() method will return an empty string here.
+        *
+        * if hint is empty, that means it has been replaced by user selected text, so just use that.
+        *
+        * Now the question is, why use hints and texts both and create this mess? Because we want to popualte the field
+        * with the previously stored database value. if we do that with setText(), the drop down part of the field stops working for some reason
+        * so previously stored values are saved as hints, and user selected are saved as text.
+        * */
+
+        if (!inputHostel.isEmpty())
+        {
+            currentSignedUser.setHostel(inputHostel);
+        }
+
+
+        currentSignedUser.setRoomNumber(inputRoomNumber);
 
         //over-write the user with the new details.
-        FirebaseUtil.storeUser(FirebaseUtil.currentUserObject, FirebaseUtil.getCurrentUserID());
+        FirebaseUtil.storeUser(currentSignedUser, FirebaseUtil.getCurrentUserID());
 
         Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
     }
 
+    public void getUser()
+    {
+
+        FirebaseUtil.getCurrentUserReference().addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        currentSignedUser = snapshot.getValue(User.class);
+                        populateProfileFields();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+    }
+
+    public void populateProfileFields()
+    {
+        fullName.setText(currentSignedUser.getFullName());
+        email.setText(currentSignedUser.getEmail());
+
+        // if no hostel has been saved, display the default hint "Hostel", displaying the empty text
+        // as hint will leave the field empty. if its not empty, display the previously selected hostel as the hint.
+        if (!currentSignedUser.getHostel().isEmpty())
+        {
+            hostel.setHint(currentSignedUser.getHostel());
+        }
+
+        roomNumber.setText(currentSignedUser.getRoomNumber());
+    }
 
 }
