@@ -1,11 +1,13 @@
 package com.nustfruta.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -20,6 +22,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.nustfruta.MainActivity;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
@@ -33,7 +36,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
     User currentSignedUser;
-
 
     @Override
     public void onClick(View v) {
@@ -58,6 +60,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 roomNumber.setError("Select the hostel first.");
             }
         }
+        else if (v.getId() == skipText.getId()) {
+
+            // shift to main activity
+            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
 
     }
 
@@ -65,6 +74,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     TextInputLayout hostelFieldContainer;
     AutoCompleteTextView hostel;
+
+    TextView skipText;
     Button saveBtn;
 
 
@@ -85,6 +96,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         hostel.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, Constants.hostelNames));
         hostel.setOnClickListener(this);
         roomNumber.setOnClickListener(this);
+
+        // if its the first time the user has come across profile completion (first time user, directly after registration), allow user to skip completion.
+        if (getIntent().getExtras()!= null && getIntent().getExtras().getString("caller", "unknown").equals("LoginOTPActivity"))
+        {
+            skipText.setVisibility(View.VISIBLE);
+            skipText.setOnClickListener(this);
+        }
     }
 
     public void initializeViews()
@@ -95,6 +113,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         roomNumber = findViewById(R.id.room);
         saveBtn = findViewById(R.id.saveBtn);
         hostelFieldContainer = findViewById(R.id.hostelFieldContainer);
+        skipText = findViewById(R.id.skipText);
     }
 
     public void saveProfile()
@@ -190,7 +209,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUtil.storeUser(currentSignedUser, FirebaseUtil.getCurrentUserID());
 
         Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
+
+
+        // shift to main activity
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+
     }
+
+
+
 
     public void getUser()
     {

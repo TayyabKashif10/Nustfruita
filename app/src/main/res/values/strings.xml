@@ -35,4 +35,5 @@
     <string name="room">Room</string>
     <string name="room_number_description">An icon of the numbers 123</string>
     <string name="hostel_field_prompt">Select Hostel</string>
+    <string name="skip_profile_completion_prompt">Skip for Now</string>
 </resources>
