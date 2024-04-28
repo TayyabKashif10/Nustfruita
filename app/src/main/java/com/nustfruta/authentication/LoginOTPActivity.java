@@ -25,6 +25,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+import com.nustfruta.MainActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
@@ -34,6 +38,9 @@ import com.nustfruta.utility.FirebaseUtil;
 import java.util.concurrent.TimeUnit;
 
 public class LoginOTPActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+     public static boolean  firstTimeUser = true;
 
     @Override
     public void onClick(View v) {
@@ -119,18 +126,14 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                 .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
 
-                    //OTP is added automatically
+                    // this method triggers when OTP is added automatically / autofilled
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
 
-                        //TODO: Sign the user in the app
-                        Toast.makeText(LoginOTPActivity.this, "Verification Completed", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
-                        //TODO: Tell user that the verification has been failed.
-                        Toast.makeText(LoginOTPActivity.this, "Verification Failed", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -138,7 +141,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                         super.onCodeSent(s, forceResendingToken);
                         resendingToken = forceResendingToken;
                         verificationOTP = s;
-                        Toast.makeText(LoginOTPActivity.this, "OTP sent", Toast.LENGTH_LONG).show();
+                        Snackbar.make(verifyOTPBtn, "OTP sent", Snackbar.LENGTH_SHORT).show();
                     }
                 });
 
@@ -158,16 +161,31 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
         mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 if (task.isSuccessful())
                 {
-                    FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
+                    if (task.getResult().getUser().getMetadata().getCreationTimestamp() != task.getResult().getUser().getMetadata().getLastSignInTimestamp())
+                    {
+                        firstTimeUser = false;
+                    }
 
-                    Intent intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
+                    Intent intent;
+                    if (firstTimeUser)
+                    {
+                        FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
+                        intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
+                        intent.putExtra("caller", "LoginOTPActivity");
+                    }
+                    else
+                    {
+                        intent = new Intent(LoginOTPActivity.this, MainActivity.class);
+                    }
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                    Snackbar.make(verifyOTPBtn, "Verified OTP", Snackbar.LENGTH_SHORT).show();
+
                 }
+
                 else
                 {
                     otpField.setError("Invalid OTP");
