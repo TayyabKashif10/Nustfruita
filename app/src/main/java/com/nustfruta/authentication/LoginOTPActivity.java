@@ -1,5 +1,6 @@
 package com.nustfruta.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -160,8 +162,11 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                 {
                     FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","",""), task.getResult().getUser().getUid());
 
-                    // TODO: move on to next activity
-                    Toast.makeText(getApplicationContext(), "SIGNED IN BOI", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    Snackbar.make(verifyOTPBtn, "Verified OTP", Snackbar.LENGTH_SHORT).show();
                 }
                 else
                 {

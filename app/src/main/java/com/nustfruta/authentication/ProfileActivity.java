@@ -2,7 +2,6 @@ package com.nustfruta.authentication;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -15,8 +14,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
-import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.utility.FirebaseUtil;
@@ -28,7 +27,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         if (v.getId() == saveBtn.getId())
         {
-            updateProfile();
+            saveProfile();
         } else if (v.getId() == hostel.getId()) {
 
             // remove error from hostel text field because it doesn't remove it automatically like other EditText views
@@ -39,14 +38,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         } else if (v.getId() == roomNumber.getId()) {
 
-            // TODO: complete logic for taking hostel and room number together.
-            // TODO: they can be left empty together, or filled together, set up other fields such that they can be left empty as well (part of incomplete profile behavior)
-
             String hostelText = (hostelFieldContainer.getEditText()).getText().toString();
             if (hostelText.isEmpty())
             {
                 roomNumber.setError("Select the hostel first.");
-                roomNumber.clearFocus();
             }
         }
 
@@ -87,8 +82,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         hostelFieldContainer = findViewById(R.id.hostelFieldContainer);
     }
 
-    public void updateProfile()
+    public void saveProfile()
     {
+
+        // this is for the possibility where the user has selected room number first, then hostel and the error doesnt go away (from the last time save button was called)
+        roomNumber.setError(null);
+
+
+        boolean validDataEntered = true;
         // this should never execute because the user should not be able to get to this activity without registering a phone number first.
         // if a guest acount is implemented, make him register a phone number first before getting to this activity.
 
@@ -98,8 +99,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        boolean validDataEntered = true;
-
         String inputName = fullName.getText().toString();
         String inputEmail = email.getText().toString();
         String inputRoomNumber = roomNumber.getText().toString();
@@ -107,29 +106,35 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         // returns empty string if nothing is selected, and item string otherwise.
         String inputHostel = (hostelFieldContainer.getEditText()).getText().toString();
 
-        if (!VerifyCredentials.verifyFullName(inputName))
+        if (!inputName.isEmpty() && !VerifyCredentials.verifyFullName(inputName))
         {
             validDataEntered = false;
             fullName.setError("Name must be at least 5 characters.");
         }
 
-        if (!VerifyCredentials.verifyEmail(inputEmail))
+        if (!inputEmail.isEmpty() && !VerifyCredentials.verifyEmail(inputEmail))
         {
             validDataEntered = false;
             email.setError("Invalid Email Address");
         }
 
-        if (!VerifyCredentials.verifyHostel(inputHostel))
+        if (!inputHostel.isEmpty() && !VerifyCredentials.verifyHostel(inputHostel))
         {
             validDataEntered = false;
             hostel.setError("Please select a hostel.");
             hostelFieldContainer.setEndIconVisible(false);
         }
 
-        if (!VerifyCredentials.verifyRoomNumber(inputRoomNumber))
+        if (!inputRoomNumber.isEmpty() && !VerifyCredentials.verifyRoomNumber(inputRoomNumber))
         {
             validDataEntered = false;
             roomNumber.setError("Invalid Room Number");
+        }
+
+        if (inputHostel.isEmpty() && !inputRoomNumber.isEmpty())
+        {
+            validDataEntered = false;
+            roomNumber.setError("Select Hostel First");
         }
 
         if (!validDataEntered)
@@ -138,6 +143,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
 
 
+        Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
+
         FirebaseUtil.currentUserObject.setEmail(inputEmail);
         FirebaseUtil.currentUserObject.setFullName(inputName);
         FirebaseUtil.currentUserObject.setHostelAddress(inputHostel + "." +inputRoomNumber);
@@ -145,6 +152,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         //over-write the user with the new details.
         FirebaseUtil.storeUser(FirebaseUtil.currentUserObject, FirebaseUtil.getCurrentUserID());
 
+        Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
     }
 
 

@@ -33,7 +33,6 @@ abstract public class FirebaseUtil {
 
         database = FirebaseDatabase.getInstance();
         fetchCurrentUser();
-        //TODO: remove
     }
 
     // syncs the instance of the currentUser object with the realtime database

@@ -30,20 +30,20 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
+
 
         //TODO: Add a splash activity for logo, which moves on to loginPhoneNumberActivity as a final result.
 
-//        if (FirebaseUtil.getCurrentUserID() == null)
-//        {
-//            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
-//            startActivity(authenticate);
-//        }
-//        else
-//        {
-//
-//        }
+        if (FirebaseUtil.getCurrentUserID() == null)
+        {
+            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
+            startActivity(authenticate);
+        }
+        else
+        {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        }
 
     }
 }
