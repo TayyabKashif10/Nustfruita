@@ -12,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nustfruta.authentication.LoginOTPActivity;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
+import com.nustfruta.postorder.OrderTracking;
 import com.nustfruta.utility.FirebaseUtil;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (FirebaseUtil.getCurrentUserID() == null)
         {
-            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
+            Intent authenticate = new Intent(this, OrderTracking.class);
             startActivity(authenticate);
         }
         else

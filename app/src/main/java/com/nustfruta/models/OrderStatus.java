@@ -5,5 +5,5 @@ public enum OrderStatus {
     CONFIRMED,
     PACKING,
     ON_WAY,
-    DELIVERED;
+    DELIVERED
 }

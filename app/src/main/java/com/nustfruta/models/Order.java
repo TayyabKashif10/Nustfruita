@@ -1,21 +1,26 @@
 package com.nustfruta.models;
 
-import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.ArrayList;
 
 public class Order {
     private int orderID;
-    private LocalDateTime date;
+    private ArrayList<Product> productList;
+    private Calendar dateTime, estDateTime;
     private User user;
     private OrderStatus status;
 
-    Order(int orderID, LocalDateTime date, User user, OrderStatus status) {
+    public Order(int orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<Product> productList) {
         this.orderID = orderID;
-        this.date = date;
+        this.dateTime = dateTime;
+        this.estDateTime = estDateTime;
         this.user = user;
         this.status = status;
+        this.productList = productList;
     }
 
-    Order() {
+    // requirement for firebase implementation
+    public Order() {
     }
 
     public int getOrderID() {
@@ -26,12 +31,20 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public Calendar getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDateTime(Calendar dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public Calendar getEstDateTime() {
+        return estDateTime;
+    }
+
+    public void setEstDateTime(Calendar estDateTime) {
+        this.estDateTime = estDateTime;
     }
 
     public User getUser() {
@@ -48,5 +61,13 @@ public class Order {
 
     public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    public ArrayList<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(ArrayList<Product> productList) {
+        this.productList = productList;
     }
 }
