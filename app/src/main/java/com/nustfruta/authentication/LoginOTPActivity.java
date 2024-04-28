@@ -1,5 +1,6 @@
 package com.nustfruta.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -17,13 +18,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.nustfruta.Constants;
+import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
 import com.nustfruta.models.UserType;
@@ -158,10 +160,13 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful())
                 {
-                    FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","",""), task.getResult().getUser().getUid());
+                    FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
 
-                    // TODO: move on to next activity
-                    Toast.makeText(getApplicationContext(), "SIGNED IN BOI", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
+
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    Snackbar.make(verifyOTPBtn, "Verified OTP", Snackbar.LENGTH_SHORT).show();
                 }
                 else
                 {
