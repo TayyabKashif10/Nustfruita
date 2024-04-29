@@ -72,7 +72,18 @@ public class OrderTracking extends AppCompatActivity {
         fruits[4] = findViewById(R.id.ivPineappleDelivered);
 
         rvProducts = findViewById(R.id.rvProductList);
-        adapter = new OrderTrackingAdapter(productList);
+        // show only first 3 items ordered and ... if any more items
+        ArrayList<Product> firstThree = new ArrayList<>();
+        for (int i = 0; i < 3; i++)
+            if (i + 1 > productList.size())
+                break;
+            else
+                firstThree.add(productList.get(i));
+
+        if (productList.size() > 3)
+            firstThree.add(new Product(0, 0, "...", 0));
+
+        adapter = new OrderTrackingAdapter(firstThree);
         rvProducts.setLayoutManager(new LinearLayoutManager(this));
         rvProducts.setAdapter(adapter);
 
@@ -101,7 +112,7 @@ public class OrderTracking extends AppCompatActivity {
         tvOrderID.setText(Integer.toString(order.getOrderID()));
 
         tvOrderDate = findViewById(R.id.tvOrderDate);
-        EstimatedDate = findViewById(R.id.EstimatedDate);
+        EstimatedDate = findViewById(R.id.tvEstimatedDate);
         tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
         EstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
 

@@ -46,8 +46,12 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Product thisProduct = productList.get(position);
-        viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
-        viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getPrice() * thisProduct.getQuantity()));
+        if (thisProduct.getName().equals("..."))
+            viewHolder.tvProductName.setText("...");
+        else {
+            viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
+            viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getPrice() * thisProduct.getQuantity()));
+        }
     }
 
     @Override
