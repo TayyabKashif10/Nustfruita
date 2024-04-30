@@ -5,6 +5,7 @@
     <string name="appBrand">NustFruita</string>
     <string name="profile_icon_description">An image of a person</string>
     <string name="username">Username</string>
+    <string name="plusbutton">plus button</string>
     <string name="phone_icon_description">An icon of a phone</string>
     <string name="phone">Phone</string>
     <string name="email_icon_description">An icon of an email</string>
@@ -13,6 +14,11 @@
     <string name="password_icon_description">An icon of the letters ABC</string>
     <string name="input_field_width">200dp</string>
     <string name="full_name">Full Name</string>
+    <string name="minus_button">minus button</string>
+    <string name="product">Product</string>
+    <string name="_1">1</string>
+    <string name="rs_price">Rs Price</string>
+    <string name="banana">banana</string>
     <string name="profile">Profile</string>
     <string name="save">Save</string>
     <string name="house_icon_description">An icon of a house</string>
