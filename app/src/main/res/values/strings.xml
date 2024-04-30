@@ -36,4 +36,11 @@
     <string name="otp_placeholder">XXXXXX</string>
     <string name="verify">Verify</string>
     <string name="resend_otp_prompt">Resend OTP in 30 seconds</string>
+    <string name="rs_500">Rs. 500</string>
+    <string name="_1_items">1 items</string>
+    <string name="checkout"><![CDATA[Checkout >>]]></string>
+    <string name="sub_total">Sub Total</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="rs_550">Rs. 550</string>
+    <string name="total">Total</string>
 </resources>

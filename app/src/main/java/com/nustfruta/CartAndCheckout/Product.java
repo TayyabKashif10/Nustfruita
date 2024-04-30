@@ -6,8 +6,8 @@ public class Product {
     private final String name;
 
     // TODO: Implement functionality to modify quantity and hence change price.
-    public int quantity;
-    public int productPricePerUnit;
+    private int quantity;
+    private int productPricePerUnit;
 
     public Product(String name, int quantity, int productPricePerUnit, int image) {
         this.name = name;
