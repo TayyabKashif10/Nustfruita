@@ -2,15 +2,12 @@ package com.nustfruta;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
-import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.utility.FirebaseUtil;
 
 public class SplashActivity extends AppCompatActivity {

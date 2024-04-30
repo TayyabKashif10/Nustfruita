@@ -4,11 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="110dp">
+    android:layout_height="160dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
-        android:layout_height="100dp"
+        android:layout_height="150dp"
         android:layout_gravity="center_horizontal"
         android:clickable="false"
         android:focusable="false"
@@ -31,8 +31,19 @@
             android:layout_height="match_parent"
             android:background="#171717">
 
+
+            <View
+                android:id="@+id/lastLineDivider"
+                android:layout_width="300dp"
+                android:layout_height="0.5dp"
+                android:background="@color/md_theme_light_primaryContainer"
+                app:layout_constraintBottom_toTopOf="@+id/deliveryNotes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lastProductPrice" />
+
             <TextView
-                android:id="@+id/productName"
+                android:id="@+id/lastProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
@@ -46,18 +57,18 @@
                 android:textColor="@color/md_theme_light_primaryContainer"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/productPrice"
+                app:layout_constraintBottom_toTopOf="@+id/lastProductPrice"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/quantity"
+                android:id="@+id/lastQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="7dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="23dp"
+                android:layout_marginBottom="54dp"
                 android:shadowColor="#80000000"
                 android:shadowDx="2"
                 android:shadowDy="2"
@@ -73,11 +84,11 @@
 
 
             <TextView
-                android:id="@+id/productPrice"
+                android:id="@+id/lastProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
-                android:layout_marginBottom="28dp"
+                android:layout_marginBottom="68dp"
                 android:shadowColor="#80000000"
                 android:shadowDx="2"
                 android:shadowDy="2"
@@ -90,42 +101,62 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <ImageView
-                android:id="@+id/productIcon"
+                android:id="@+id/lastProductIcon"
                 android:layout_width="62dp"
                 android:layout_height="45dp"
                 android:layout_marginEnd="36dp"
                 android:layout_marginBottom="17dp"
                 android:contentDescription="@string/banana"
                 android:elevation="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/quantity"
+                app:layout_constraintBottom_toBottomOf="@+id/lastQuantity"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:srcCompat="@drawable/banana_icon" />
 
             <ImageView
-                android:id="@+id/minusButton"
+                android:id="@+id/lastMinusButton"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginTop="1dp"
                 android:layout_marginEnd="11dp"
                 android:background="#BF76F8E1"
                 android:elevation="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/quantity"
-                app:layout_constraintTop_toBottomOf="@+id/productIcon"
+                app:layout_constraintEnd_toStartOf="@+id/lastQuantity"
+                app:layout_constraintTop_toBottomOf="@+id/lastProductIcon"
                 app:srcCompat="@drawable/minus_icon"
                 app:tint="#FFEA6E47" />
 
             <ImageView
-                android:id="@+id/plusButton"
+                android:id="@+id/lastPlusButton"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="1dp"
                 android:background="#BF76F8E1"
                 android:elevation="16dp"
-                app:layout_constraintStart_toEndOf="@+id/quantity"
-                app:layout_constraintTop_toBottomOf="@+id/productIcon"
+                app:layout_constraintStart_toEndOf="@+id/lastQuantity"
+                app:layout_constraintTop_toBottomOf="@+id/lastProductIcon"
                 app:srcCompat="@drawable/add_icon"
                 app:tint="#FFEA6E47" />
+
+            <EditText
+                android:id="@+id/deliveryNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginBottom="16dp"
+                android:background="@color/transparent"
+                android:drawableLeft="@drawable/note_icon"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/md_theme_light_primaryContainer"
+                android:ems="10"
+                android:hint="Add Delivery Instructions (Optional)"
+                android:inputType="text"
+                android:textColorHint="#3376F8E1"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
