@@ -115,8 +115,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
             holder.quantity.setText(Integer.toString(product.getQuantity()));
             holder.productIcon.setImageResource(productArrayList.get(position).getImage());
         }
-
-
     }
 
     // How many items
