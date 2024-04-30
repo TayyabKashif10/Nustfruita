@@ -30,6 +30,7 @@
     <string name="otp_placeholder">XXXXXX</string>
     <string name="verify">Verify</string>
     <string name="resend_otp_prompt">Resend OTP in 30 seconds</string>
+
     <string name="order_id">Order ID:</string>
     <string name="order_date">Order Date:</string>
     <string name="estimated_arrival">Estimated Arrival:</string>
@@ -47,4 +48,12 @@
     <string name="delivery">Delivery:</string>
     <string name="total">Total</string>
     <string name="delivery_fees">99</string>
+
+    <string name="complete_profile_prompt">Complete Your Profile</string>
+    <string name="credential_icon_description">Icon of a credential card.</string>
+    <string name="room">Room</string>
+    <string name="room_number_description">An icon of the numbers 123</string>
+    <string name="hostel_field_prompt">Select Hostel</string>
+    <string name="skip_profile_completion_prompt">Skip for Now</string>
+
 </resources>

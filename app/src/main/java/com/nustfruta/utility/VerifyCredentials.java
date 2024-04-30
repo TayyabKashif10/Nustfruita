@@ -1,34 +1,30 @@
 package com.nustfruta.utility;
 
+import android.text.TextUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class VerifyCredentials {
+public abstract class VerifyCredentials {
 
-    public static boolean verifyPhone(String phoneNumber)
+    public static boolean verifyFullName(String name)
     {
-
-        String validPhoneRegex = "^(\\+92|92|0)?\\d{10}$";
-        Pattern pattern = Pattern.compile(validPhoneRegex);
-        Matcher matcher = pattern.matcher(phoneNumber);
-        return matcher.matches();
+        return name.length() >= Constants.MIN_NAME_LENGTH;
     }
 
     public static boolean verifyEmail(String email)
     {
-        String validEmailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-        Pattern pattern = Pattern.compile(validEmailRegex);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
+      return !email.isEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    public static boolean verifyPassword(String password)
+    public static boolean verifyRoomNumber(String room)
     {
-        // This regex pattern enforces a password to have at least 8 characters, with at least one uppercase letter, one lowercase letter, one digit, and one special character.
-        String validPasswordRegex = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$\n";
-        Pattern pattern = Pattern.compile(validPasswordRegex);
-        Matcher matcher = pattern.matcher(password);
-        return matcher.matches();
+        return !room.isEmpty() && Integer.parseInt(room) <= Constants.HOSTEL_UPPER_ROOM_LIMIT && Integer.parseInt(room) >= Constants.HOSTEL_LOWER_ROOM_LIMIT;
+    }
+
+    public static boolean verifyHostel(String hostel)
+    {
+        return !hostel.isEmpty();
     }
 
 
