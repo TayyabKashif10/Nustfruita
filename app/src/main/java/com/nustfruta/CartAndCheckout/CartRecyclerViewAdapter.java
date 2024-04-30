@@ -21,9 +21,10 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, price, quantity, subtotal, subtotalPrice, delivery,
-                deliveryPrice, dashedLine, total, totalPrice;
-        public ImageView productIcon;
-        public FloatingActionButton plusButton, minusButton;
+                deliveryPrice, total, totalPrice;
+
+        public View dashedLine;
+        public ImageView productIcon, plusButton, minusButton;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -92,8 +93,8 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         LayoutInflater inflater = LayoutInflater.from(context);
 
         if (viewType == 1) {
-            View view = inflater.inflate(R.layout.explore_menu_row, parent, false);
-            viewHolder = new CartActivity.ViewHolder(view, viewType);
+            View view = inflater.inflate(R.layout.last_product_row, parent, false);
+            viewHolder = new CartRecyclerViewAdapter.ViewHolder(view, viewType);
             return viewHolder;
         }
 
@@ -114,17 +115,19 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
             holder.quantity.setText(Integer.toString(product.getQuantity()));
             holder.productIcon.setImageResource(productArrayList.get(position).getImage());
         }
+
+
     }
 
     // How many items
     @Override
     public int getItemCount() {
-        return productArrayList.size() + 1;
+        return productArrayList.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == productArrayList.size())
+        if (position == productArrayList.size() - 1)
             return 1;
         else
             return 0;
