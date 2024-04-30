@@ -17,7 +17,7 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".postorder.OrderTracking"
+            android:name=".postorder.OrderTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".authentication.LoginOTPActivity"

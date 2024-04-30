@@ -1,14 +1,17 @@
 package com.nustfruta.models;
 
 public class Product {
-    private int productID, price, quantity;
+    private int productID, unitPrice, quantity;
     private String name;
 
-    public Product(int productID, int price, String name, int quantity) {
+    private int image;
+
+    public Product(int productID, int unitPrice, String name, int quantity, int image) {
         this.productID = productID;
-        this.price = price;
+        this.unitPrice = unitPrice;
         this.name = name;
         this.quantity = quantity;
+        this.image = image;
     }
 
     public Product() {
@@ -22,12 +25,12 @@ public class Product {
         this.productID = productID;
     }
 
-    public int getPrice() {
-        return price;
+    public int getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
     public String getName() {
@@ -44,5 +47,17 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public void incrementQuantity() {
+        quantity++;
+    }
+
+    public void decrementQuantity() {
+        quantity--;
+    }
+
+    public int getImage() {
+        return image;
     }
 }

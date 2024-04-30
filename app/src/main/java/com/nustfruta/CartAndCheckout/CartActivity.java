@@ -1,10 +1,7 @@
 package com.nustfruta.CartAndCheckout;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nustfruta.R;
+import com.nustfruta.models.Product;
+
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity {
 
-
     int[] productImages = {}; //TODO: INITIALIZE WITH R.drawable.
 
     public static ArrayList<Product> productArrayList;
-    public static RecyclerViewAdapter recyclerViewAdapter;
+    public static CartRecyclerViewAdapter cartRecyclerViewAdapter;
 
 
     @Override
@@ -40,8 +38,8 @@ public class CartActivity extends AppCompatActivity {
 
         initProductArrayList();
 
-        recyclerViewAdapter = new RecyclerViewAdapter(CartActivity.this, productArrayList);
-        recyclerView.setAdapter(recyclerViewAdapter);
+        cartRecyclerViewAdapter = new CartRecyclerViewAdapter(CartActivity.this, productArrayList);
+        recyclerView.setAdapter(cartRecyclerViewAdapter);
 
 
     }
@@ -49,80 +47,13 @@ public class CartActivity extends AppCompatActivity {
     // to avoid memory leak
     public void onDestroy() {
         super.onDestroy();
-        recyclerViewAdapter = null;
+        cartRecyclerViewAdapter = null;
     }
 
     private void initProductArrayList() {
-        productArrayList.add(new Product("test1", 2, 100, R.drawable.banana_icon));
-        productArrayList.add(new Product("test2", 50, 50, R.drawable.banana_icon));
-        productArrayList.add(new Product("test3", 5, 210, R.drawable.banana_icon));
-        productArrayList.add(new Product("test4", 9, 520, R.drawable.banana_icon));
-        productArrayList.add(new Product("test5", 6, 10, R.drawable.banana_icon));
-        productArrayList.add(new Product("testicle", 1, 25, R.drawable.banana_icon));
-        productArrayList.add(new Product("test7", 5, 30, R.drawable.banana_icon));
-
+        //TODO: fetch product array.
     }
 
-
-    static class RecyclerViewAdapter extends RecyclerView.Adapter<com.nustfruta.CartAndCheckout.CartActivity.ViewHolder> {
-
-
-        private final Context context;
-        public ArrayList<Product> productArrayList;
-
-        public ViewHolder viewHolder;
-
-        public RecyclerViewAdapter(Context context, ArrayList<Product> productArrayList) {
-            this.context = context;
-            this.productArrayList = productArrayList;
-        }
-
-        // Where to get the single card as view holder object
-        @NonNull
-        @Override
-        public CartActivity.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-            LayoutInflater inflater = LayoutInflater.from(context);
-
-            if (viewType == 1) {
-                View view = inflater.inflate(R.layout.explore_menu_row, parent, false);
-                viewHolder = new CartActivity.ViewHolder(view, viewType);
-                return viewHolder;
-            }
-
-
-            View view = inflater.inflate(R.layout.cart_activity_row, parent, false);
-            viewHolder = new CartActivity.ViewHolder(view);
-
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull CartActivity.ViewHolder holder, int position) {
-
-            if (getItemViewType(position) == 0) {
-                Product product = productArrayList.get(position);
-                holder.productName.setText(product.getName());
-                holder.price.setText(Integer.toString(product.getQuantity() * product.getProductPricePerUnit()));
-                holder.quantity.setText(Integer.toString(product.getQuantity()));
-                holder.productIcon.setImageResource(productArrayList.get(position).getImage());
-            }
-        }
-
-        // How many items
-        @Override
-        public int getItemCount() {
-            return productArrayList.size() + 1;
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            if (position == productArrayList.size())
-                return 1;
-            else
-                return 0;
-        }
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, price, quantity, subtotal, subtotalPrice, delivery,
@@ -145,23 +76,21 @@ public class CartActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     minusButton.setImageResource(R.drawable.minus_icon);
-                    CartActivity.productArrayList.get(getAdapterPosition()).increaseQuantity();
-                    CartActivity.recyclerViewAdapter.notifyItemChanged(getAdapterPosition());
+                    CartActivity.productArrayList.get(getAdapterPosition()).incrementQuantity();
+                    CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getAdapterPosition());
                 }
             });
 
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartActivity.productArrayList.get(getAdapterPosition()).decreaseQuantity();
+                    CartActivity.productArrayList.get(getAdapterPosition()).decrementQuantity();
 
-                    if (CartActivity.productArrayList.get(getAdapterPosition()).quantity == 0) {
+                    if (CartActivity.productArrayList.get(getAdapterPosition()).getQuantity() == 0) {
                         CartActivity.productArrayList.remove(getAdapterPosition());
-                        CartActivity.recyclerViewAdapter.notifyItemRemoved(getAdapterPosition());
+                        CartActivity.cartRecyclerViewAdapter.notifyItemRemoved(getAdapterPosition());
                     } else
-                        CartActivity.recyclerViewAdapter.notifyItemChanged(getAdapterPosition());
-
-
+                        CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getAdapterPosition());
                 }
             });
         }

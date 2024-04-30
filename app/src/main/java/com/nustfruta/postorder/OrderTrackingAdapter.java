@@ -1,4 +1,4 @@
-package com.nustfruta.utility;
+package com.nustfruta.postorder;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +50,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
             viewHolder.tvProductName.setText("...");
         else {
             viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
-            viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getPrice() * thisProduct.getQuantity()));
+            viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getUnitPrice() * thisProduct.getQuantity()));
         }
     }
 

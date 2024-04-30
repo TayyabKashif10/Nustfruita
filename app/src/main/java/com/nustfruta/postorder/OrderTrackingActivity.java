@@ -20,12 +20,12 @@ import com.nustfruta.models.OrderStatus;
 import com.nustfruta.models.Product;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.DateFormat;
-import com.nustfruta.utility.OrderTrackingAdapter;
 
 import java.util.Calendar;
 import java.util.ArrayList;
 
-public class OrderTracking extends AppCompatActivity {
+public class OrderTrackingActivity extends AppCompatActivity {
+
     // dummies, provide from database later
     Order order;
     ArrayList<Product> productList;
@@ -53,10 +53,10 @@ public class OrderTracking extends AppCompatActivity {
 
         // dummy values, will be provided from database later
         productList = new ArrayList<>();
-        productList.add(new Product(1234, 299, "Oranges", 3));
-        productList.add(new Product(1314, 199, "Apples", 1));
-        productList.add(new Product(619, 169, "Bananas", 11));
-        productList.add(new Product(0, 9999, "sabih", 1));
+        productList.add(new Product(1234, 299, "Oranges", 3, 0));
+        productList.add(new Product(1314, 199, "Apples", 1,0));
+        productList.add(new Product(619, 169, "Bananas", 11,0));
+        productList.add(new Product(0, 9999, "sabih", 1,0));
         order = new Order(12345678, Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
 
         tintColors[0] = ContextCompat.getColor(this, R.color.apple_red);
@@ -81,7 +81,7 @@ public class OrderTracking extends AppCompatActivity {
                 firstThree.add(productList.get(i));
 
         if (productList.size() > 3)
-            firstThree.add(new Product(0, 0, "...", 0));
+            firstThree.add(new Product(0, 0, "...", 0,0));
 
         adapter = new OrderTrackingAdapter(firstThree);
         rvProducts.setLayoutManager(new LinearLayoutManager(this));
@@ -117,7 +117,7 @@ public class OrderTracking extends AppCompatActivity {
         EstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
 
         for (int i = 0; i < productList.size(); i++)
-            subtotal += productList.get(i).getPrice() * productList.get(i).getQuantity();
+            subtotal += productList.get(i).getUnitPrice() * productList.get(i).getQuantity();
         tvSubtotal = findViewById(R.id.tvSubtotal);
         tvSubtotal.setText(Integer.toString(subtotal));
 
