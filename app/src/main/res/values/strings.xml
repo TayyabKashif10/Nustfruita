@@ -61,5 +61,9 @@
     <string name="room_number_description">An icon of the numbers 123</string>
     <string name="hostel_field_prompt">Select Hostel</string>
     <string name="skip_profile_completion_prompt">Skip for Now</string>
+    <string name="pkr_0">PKR 0</string>
+    <string name="checkout">Checkout</string>
+    <string name="pkr_50">PKR 50</string>
+    <string name="item_1">Item 1</string>
 
 </resources>
