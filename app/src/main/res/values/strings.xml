@@ -30,10 +30,36 @@
     <string name="phone_num_prompt">Enter Phone Number</string>
     <string name="send_otp">Send OTP</string>
     <string name="phoneNumberPlaceHolder">XXX XXXXXXX</string>
-    <string name="pearIconDescription">Image of a pear wih number 2 on top</string>
+    <string name="pearIconDescription">Image of a pear with number 2 on top</string>
     <string name="phoneIconDescription">Image of a Phone</string>
     <string name="otp_prompt">Enter 6 digit OTP</string>
     <string name="otp_placeholder">XXXXXX</string>
     <string name="verify">Verify</string>
     <string name="resend_otp_prompt">Resend OTP in 30 seconds</string>
+
+    <string name="order_id">Order ID:</string>
+    <string name="order_date">Order Date:</string>
+    <string name="estimated_arrival">Estimated Arrival:</string>
+    <string name="order_status_pending">You\'re order is pending confirmation!</string>
+    <string name="order_status_confirmed">You\'re order has been confirmed!</string>
+    <string name="order_status_packing">Your order is being packed!</string>
+    <string name="order_status_on_way">Your order is on the way!</string>
+    <string name="order_status_delivered">Your order has been delivered!</string>
+    <string name="pending">Pending</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="packing">Packing</string>
+    <string name="on_way">On The Way</string>
+    <string name="delivered">Delivered</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="delivery">Delivery:</string>
+    <string name="total">Total</string>
+    <string name="delivery_fees">99</string>
+
+    <string name="complete_profile_prompt">Complete Your Profile</string>
+    <string name="credential_icon_description">Icon of a credential card.</string>
+    <string name="room">Room</string>
+    <string name="room_number_description">An icon of the numbers 123</string>
+    <string name="hostel_field_prompt">Select Hostel</string>
+    <string name="skip_profile_completion_prompt">Skip for Now</string>
+
 </resources>

@@ -6,28 +6,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".authentication.ProfileActivity">
-    <TextView
-        android:id="@+id/profileTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/profile"
-        android:textColor="#EA6E47"
+
+    <ImageView
+        android:id="@+id/credentialImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="100dp"
-        android:textSize="50sp"/>
+        app:srcCompat="@drawable/credentials_icon"
+        android:contentDescription="@string/credential_icon_description"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@id/completeProfilePrompt"
+        app:tint="@color/seed"/>
+
+    <TextView
+        android:id="@+id/completeProfilePrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/complete_profile_prompt"
+        android:textColor="@color/orange"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/guideline"  />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/nameCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:backgroundTint="@color/textFieldTint"
+        app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileTitle"
-        android:layout_marginTop="120dp"
-        android:backgroundTint="@color/textFieldTint"
-        app:cardCornerRadius="40dp">
+        app:layout_constraintTop_toBottomOf="@+id/guideline">
 
         <RelativeLayout
 
@@ -39,10 +60,10 @@
                 android:id="@+id/profileIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:contentDescription="@string/profile_icon_description"
-                android:src = "@drawable/profile_icon"
-                app:tint="#EA6E47"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/profile_icon"
+                app:tint="@color/orange" />
 
             <EditText
                 android:id="@+id/name"
@@ -51,54 +72,11 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="5dp"
                 android:layout_toEndOf="@id/profileIcon"
+                android:autofillHints="name"
+                android:backgroundTint="@color/transparent"
                 android:ems="10"
                 android:hint="@string/full_name"
-                android:inputType="text"
-                android:backgroundTint="@color/transparent"
-                android:autofillHints="name"
-                />
-
-
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/signInPhoneCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameCard"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/textFieldTint"
-        app:cardCornerRadius="40dp">
-
-        <RelativeLayout
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp">
-
-            <ImageView
-                android:id="@+id/phoneFieldPhoneIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/phone_icon_description"
-                android:src = "@drawable/phone_icon"
-                app:tint="#EA6E47"
-                android:layout_centerVertical="true"/>
-
-            <EditText
-                android:id="@+id/phoneField"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="phone"
-                android:layout_toEndOf="@id/phoneFieldPhoneIcon"
-                android:backgroundTint="@color/transparent"
-                android:layout_marginStart="5dp"
-                android:hint="@string/phone"
-                android:autofillHints="phone"/>
+                android:inputType="text" />
 
 
         </RelativeLayout>
@@ -108,12 +86,12 @@
         android:id="@+id/emailCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInPhoneCard"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/textFieldTint"
-        app:cardCornerRadius="40dp">
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameCard">
 
         <RelativeLayout
 
@@ -125,37 +103,74 @@
                 android:id="@+id/emailIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:contentDescription="@string/email_icon_description"
-                android:src = "@drawable/email_icon"
-                app:tint="#EA6E47"
-                android:layout_centerVertical="true"/>
+                android:src="@drawable/email_icon"
+                app:tint="@color/orange" />
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:layout_toEndOf="@id/emailIcon"
-                android:backgroundTint="@color/transparent"
                 android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/emailIcon"
+                android:autofillHints="emailAddress"
+                android:backgroundTint="@color/transparent"
+                android:ems="10"
                 android:hint="@string/email"
-                android:autofillHints="emailAddress"/>
+                android:inputType="textEmailAddress" />
 
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/hostelCard"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:id="@+id/hostelFieldContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/textFieldTint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailCard"
+        app:boxBackgroundColor="@color/textFieldTint"
+        app:boxCornerRadiusBottomEnd="40dp"
+        app:boxCornerRadiusBottomStart="40dp"
+        app:boxCornerRadiusTopEnd="40dp"
+        app:boxCornerRadiusTopStart="40dp"
+        app:startIconDrawable="@drawable/house_icon"
+        app:startIconTint="@color/orange"
+        app:startIconContentDescription="@string/house_icon_description"
+        app:boxStrokeColor="@color/transparent"
+        app:hintEnabled="false"
+        >
+
+
+        <AutoCompleteTextView
+            android:id="@+id/hostelField"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="@string/hostel"
+            android:inputType="none"
+            android:padding="15dp"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/roomCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/textFieldTint"
-        app:cardCornerRadius="40dp">
+        app:cardCornerRadius="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hostelFieldContainer">
 
         <RelativeLayout
 
@@ -164,36 +179,53 @@
             android:paddingHorizontal="10dp">
 
             <ImageView
-                android:id="@+id/houseIcon"
+                android:id="@+id/roomNumberIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/house_icon_description"
-                android:src = "@drawable/house_icon"
-                app:tint="#EA6E47"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/room_number_description"
+                android:src="@drawable/room_number_icon"
+                app:tint="@color/orange" />
 
             <EditText
-                android:id="@+id/hostel"
+                android:id="@+id/room"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:layout_toEndOf="@id/houseIcon"
-                android:backgroundTint="@color/transparent"
                 android:layout_marginStart="5dp"
-                android:hint="@string/hostel"
-                android:autofillHints="emailAddress"/>
+                android:layout_toEndOf="@id/roomNumberIcon"
+                android:autofillHints="emailAddress"
+                android:backgroundTint="@color/transparent"
+                android:ems="10"
+                android:hint="@string/room"
+                android:inputType="number"
+                />
 
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 
+
+    <TextView
+        android:id="@+id/skipText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/roomCard"
+        app:layout_constraintBottom_toTopOf="@id/saveBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/skip_profile_completion_prompt"
+        android:textColor="@color/orange"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        />
+
     <Button
-        android:id="@+id/save"
+        android:id="@+id/saveBtn"
         style="@style/AuthButtonStyle"
+        android:layout_marginTop="60dp"
         android:text="@string/save"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hostelCard" />
+        app:layout_constraintTop_toBottomOf="@+id/roomCard" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
