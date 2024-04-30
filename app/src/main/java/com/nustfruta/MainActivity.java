@@ -10,13 +10,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-
-import com.google.firebase.database.FirebaseDatabase;
-import com.nustfruta.authentication.LoginOTPActivity;
-import com.nustfruta.authentication.LoginPhoneNumberActivity;
-import com.nustfruta.postorder.OrderTracking;
-import com.nustfruta.utility.FirebaseUtil;
-import com.nustfruta.authentication.ProfileActivity;
+import com.nustfruta.CartAndCheckout.CartActivity;
+import com.nustfruta.postorder.OrderTrackingActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void buttonClicked(View view) {
-        Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(MainActivity.this, CartActivity.class);
         startActivity(intent);
     }
 }
