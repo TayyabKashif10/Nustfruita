@@ -14,7 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,10 +24,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-import com.nustfruta.MainActivity;
+import com.nustfruta.MenuActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
@@ -178,7 +174,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                     }
                     else
                     {
-                        intent = new Intent(LoginOTPActivity.this, MainActivity.class);
+                        intent = new Intent(LoginOTPActivity.this, MenuActivity.class);
                     }
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

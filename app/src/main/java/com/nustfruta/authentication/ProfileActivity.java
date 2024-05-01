@@ -22,14 +22,12 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.nustfruta.MainActivity;
+import com.nustfruta.MenuActivity;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.utility.FirebaseUtil;
 import com.nustfruta.utility.VerifyCredentials;
-
-import java.util.Objects;
 
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -63,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         else if (v.getId() == skipText.getId()) {
 
             // shift to main activity
-            Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+            Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
@@ -212,7 +210,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
 
         // shift to main activity
-        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
 

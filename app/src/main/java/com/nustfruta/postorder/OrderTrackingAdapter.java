@@ -15,8 +15,8 @@ import com.nustfruta.models.Product;
 import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
-
     private final ArrayList<Product> productList;
+
     private HeightListener heightListener;
 
     public void setHeightListener(HeightListener heightListener) {
