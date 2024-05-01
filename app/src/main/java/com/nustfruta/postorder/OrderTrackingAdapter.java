@@ -14,9 +14,7 @@ import com.nustfruta.models.Product;
 import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
-
     private final ArrayList<Product> productList;
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvProductName;
         final TextView tvProductPrice;
