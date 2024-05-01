@@ -33,6 +33,11 @@ abstract public class FirebaseUtil {
         return database.getReference("users").child(getCurrentUserID());
     }
 
+    public static DatabaseReference getFruitFactReference()
+    {
+        return database.getReference("fruit_facts");
+    }
+
     // set the callBack listeners for the current user to keep it updated.
     //  by setting this up, the current user persists throughout the app, through google auth itself
     static

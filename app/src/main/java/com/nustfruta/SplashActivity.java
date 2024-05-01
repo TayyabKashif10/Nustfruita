@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
+import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.utility.FirebaseUtil;
 
 public class SplashActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         else
         {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, MenuActivity.class);
             startActivity(intent);
         }
 
