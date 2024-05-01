@@ -41,35 +41,39 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
                 @Override
                 public void onClick(View v) {
                     minusButton.setImageResource(R.drawable.minus_icon);
-                    CartActivity.productArrayList.get(getAdapterPosition()).incrementQuantity();
-                    CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getAdapterPosition());
+                    CartActivity.productArrayList.get(getBindingAdapterPosition()).incrementQuantity();
+                    CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getBindingAdapterPosition());
                 }
             });
 
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    CartActivity.productArrayList.get(getAdapterPosition()).decrementQuantity();
+                    CartActivity.productArrayList.get(getBindingAdapterPosition()).decrementQuantity();
 
-                    if (CartActivity.productArrayList.get(getAdapterPosition()).getQuantity() == 0) {
-                        CartActivity.productArrayList.remove(getAdapterPosition());
-                        CartActivity.cartRecyclerViewAdapter.notifyItemRemoved(getAdapterPosition());
+                    if (CartActivity.productArrayList.get(getBindingAdapterPosition()).getQuantity() == 0) {
+                        CartActivity.productArrayList.remove(getBindingAdapterPosition());
+                        CartActivity.cartRecyclerViewAdapter.notifyItemRemoved(getBindingAdapterPosition());
                     } else
-                        CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getAdapterPosition());
+                        CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getBindingAdapterPosition());
                 }
             });
         }
 
 
-        public ViewHolder(@NonNull View itemView, int itemViewType) {
+        public ViewHolder(@NonNull View itemView, int viewType) {
             super(itemView);
-            subtotal = itemView.findViewById(R.id.subtotal);
-            subtotalPrice = itemView.findViewById(R.id.subtotalPrice);
-            delivery = itemView.findViewById(R.id.delivery);
-            deliveryPrice = itemView.findViewById(R.id.deliveryPrice);
-            dashedLine = itemView.findViewById(R.id.lineDivider);
-            total = itemView.findViewById(R.id.total);
-            totalPrice = itemView.findViewById(R.id.totalPrice);
+//            subtotal = itemView.findViewById(R.id.subtotal);
+//            subtotalPrice = itemView.findViewById(R.id.subtotalPrice);
+//            delivery = itemView.findViewById(R.id.delivery);
+//            deliveryPrice = itemView.findViewById(R.id.deliveryPrice);
+//            dashedLine = itemView.findViewById(R.id.lineDivider);
+//            total = itemView.findViewById(R.id.total);
+//            totalPrice = itemView.findViewById(R.id.totalPrice);
+
+
+
+
         }
 
     }
