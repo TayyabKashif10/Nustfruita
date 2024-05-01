@@ -3,6 +3,7 @@ package com.nustfruta.postorder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,13 @@ import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
     private final ArrayList<Product> productList;
+
+    private HeightListener heightListener;
+
+    public void setHeightListener(HeightListener heightListener) {
+        this.heightListener = heightListener;
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvProductName;
         final TextView tvProductPrice;
@@ -36,20 +44,26 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_text_row, viewGroup, false);
+        View llProductRow = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_text_row, viewGroup, false);
 
-        return new ViewHolder(view);
+        llProductRow.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                llProductRow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                if (heightListener != null)
+                    heightListener.onHeightObtained(llProductRow.getHeight());
+            }
+        });
+
+        return new ViewHolder(llProductRow);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         Product thisProduct = productList.get(position);
-        if (thisProduct.getName().equals("..."))
-            viewHolder.tvProductName.setText("...");
-        else {
-            viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
-            viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getUnitPrice() * thisProduct.getQuantity()));
-        }
+
+        viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
+        viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getUnitPrice() * thisProduct.getQuantity()));
     }
 
     @Override

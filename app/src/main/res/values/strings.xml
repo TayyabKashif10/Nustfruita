@@ -54,6 +54,7 @@
     <string name="delivery">Delivery:</string>
     <string name="total">Total</string>
     <string name="delivery_fees">99</string>
+    <string name="error">Error</string>
 
     <string name="complete_profile_prompt">Complete Your Profile</string>
     <string name="credential_icon_description">Icon of a credential card.</string>
