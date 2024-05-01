@@ -125,7 +125,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
     public void cartEmpty()
     {
-            context.startActivity(new Intent(CartActivity.this, EmptyBasket.class));
+            startActivity(new Intent(CartActivity.this, EmptyBasket.class));
     }
 
 
