@@ -65,5 +65,10 @@
     <string name="checkout">Checkout</string>
     <string name="pkr_50">PKR 50</string>
     <string name="item_1">Item 1</string>
+    <string name="minus_button_description">minus button description</string>
+    <string name="quot_plus_button_description_quot">\"plus button description\"</string>
+    <string name="item_card_description">item card description</string>
+    <string name="add_delivery_instructions">Add Delivery Instructions (Optional)</string>
+    <string name="rs_50">Rs. 50</string>
 
 </resources>

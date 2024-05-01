@@ -49,6 +49,9 @@
         <activity
             android:name=".authentication.LoginActivity"
             android:exported="false" />
+
+        <activity android:name=".CartAndCheckout.EmptyBasket"
+            android:exported="true" />
     </application>
 
 </manifest>
