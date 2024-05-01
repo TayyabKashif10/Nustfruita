@@ -1,13 +1,16 @@
 package com.nustfruta.CartAndCheckout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -19,12 +22,14 @@ import java.util.ArrayList;
 public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder> {
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView productName, price, quantity, subtotal, subtotalPrice, delivery,
-                deliveryPrice, total, totalPrice;
+    CartActivity parent;
 
-        public View dashedLine;
-        public ImageView productIcon, plusButton, minusButton;
+    ArrayList<Product> productList;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView productName, price, quantity;
+        public ImageView productIcon;
+        public ImageButton plusButton, minusButton;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -37,97 +42,57 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
             plusButton = itemView.findViewById(R.id.plusButton);
             minusButton = itemView.findViewById(R.id.minusButton);
 
-            plusButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    minusButton.setImageResource(R.drawable.minus_icon);
-                    CartActivity.productArrayList.get(getAdapterPosition()).incrementQuantity();
-                    CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getAdapterPosition());
-                }
-            });
-
-            minusButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CartActivity.productArrayList.get(getAdapterPosition()).decrementQuantity();
-
-                    if (CartActivity.productArrayList.get(getAdapterPosition()).getQuantity() == 0) {
-                        CartActivity.productArrayList.remove(getAdapterPosition());
-                        CartActivity.cartRecyclerViewAdapter.notifyItemRemoved(getAdapterPosition());
-                    } else
-                        CartActivity.cartRecyclerViewAdapter.notifyItemChanged(getAdapterPosition());
-                }
-            });
         }
-
-
-        public ViewHolder(@NonNull View itemView, int itemViewType) {
-            super(itemView);
-            subtotal = itemView.findViewById(R.id.subtotal);
-            subtotalPrice = itemView.findViewById(R.id.subtotalPrice);
-            delivery = itemView.findViewById(R.id.delivery);
-            deliveryPrice = itemView.findViewById(R.id.deliveryPrice);
-            dashedLine = itemView.findViewById(R.id.lineDivider);
-            total = itemView.findViewById(R.id.total);
-            totalPrice = itemView.findViewById(R.id.totalPrice);
-        }
-
     }
 
 
-    private final Context context;
-    public ArrayList<Product> productArrayList;
+    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<Product> productList) {
 
-    public CartRecyclerViewAdapter.ViewHolder viewHolder;
-
-    public CartRecyclerViewAdapter(Context context, ArrayList<Product> productArrayList) {
-        this.context = context;
-        this.productArrayList = productArrayList;
+        this.parent = parent;
+        this.productList = productList;
     }
 
     // Where to get the single card as view holder object
     @NonNull
     @Override
-    public CartRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        if (viewType == 1) {
-            View view = inflater.inflate(R.layout.last_product_row, parent, false);
-            viewHolder = new CartRecyclerViewAdapter.ViewHolder(view, viewType);
-            return viewHolder;
-        }
-
-
-        View view = inflater.inflate(R.layout.cart_activity_row, parent, false);
-        viewHolder = new CartRecyclerViewAdapter.ViewHolder(view);
-
-        return viewHolder;
+        LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+        View view = inflater.inflate(R.layout.cart_activity_row, viewGroup, false);
+        return new CartRecyclerViewAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.ViewHolder holder, int position) {
 
-        if (getItemViewType(position) == 0) {
-            Product product = productArrayList.get(position);
+            Product product = productList.get(position);
             holder.productName.setText(product.getName());
-            holder.price.setText(Integer.toString(product.getQuantity() * product.getUnitPrice()));
+            holder.price.setText("Rs. " + Integer.toString(product.getQuantity() * product.getUnitPrice()));
             holder.quantity.setText(Integer.toString(product.getQuantity()));
-            holder.productIcon.setImageResource(productArrayList.get(position).getImage());
-        }
+            holder.productIcon.setImageResource(productList.get(position).getImage());
+
+
+        // onClick listener of plus buttons
+        holder.plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.plusButton(holder.getBindingAdapterPosition());
+            }
+        });
+
+        // onClick listener of minus button
+        holder.minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                parent.minusButton(holder.getBindingAdapterPosition());
+            }
+        });
+
     }
 
     // How many items
     @Override
     public int getItemCount() {
-        return productArrayList.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == productArrayList.size() - 1)
-            return 1;
-        else
-            return 0;
+        return productList.size();
     }
 }
