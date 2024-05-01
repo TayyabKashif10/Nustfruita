@@ -42,6 +42,9 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setAdapter(cartRecyclerViewAdapter);
 
 
+
+
+
     }
 
     // to avoid memory leak
@@ -51,7 +54,11 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void initProductArrayList() {
-        //TODO: fetch product array.
+        productArrayList.add(new Product(1, 200, "Banana", 10, R.drawable.banana));
+        productArrayList.add(new Product(1, 500, "Strawberry", 50, R.drawable.banana));
+        productArrayList.add(new Product(1, 300, "Guava", 5, R.drawable.banana));
+        productArrayList.add(new Product(1, 100, "Pear", 2, R.drawable.banana));
+        productArrayList.add(new Product(1, 50, "Apple", 8, R.drawable.banana));
     }
 
 
