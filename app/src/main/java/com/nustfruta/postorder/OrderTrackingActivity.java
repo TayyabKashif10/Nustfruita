@@ -2,6 +2,7 @@ package com.nustfruta.postorder;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,21 +25,19 @@ import com.nustfruta.utility.DateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
 
-public class OrderTrackingActivity extends AppCompatActivity {
+public class OrderTrackingActivity extends AppCompatActivity implements HeightListener{
 
     // dummies, provide from database later
     Order order;
     ArrayList<Product> productList;
-    int subtotal = 0;
-    final int deliveryFees = 99;
 
+    final int maxItems = 3;
     RecyclerView rvProducts;
     OrderTrackingAdapter adapter;
 
     int[] tintColors = new int[5];
     ImageView[] fruits = new ImageView[5];
-
-    TextView tvOrderStatus, tvOrderID, tvOrderDate, EstimatedDate, tvSubtotal, tvTotal;
+    TextView tvOrderStatus, tvOrderID, tvOrderDate, tvEstimatedDate, tvSubtotal, tvTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,75 +58,95 @@ public class OrderTrackingActivity extends AppCompatActivity {
         productList.add(new Product(0, 9999, "sabih", 1,0));
         order = new Order(12345678, Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
 
-        tintColors[0] = ContextCompat.getColor(this, R.color.apple_red);
-        tintColors[1] = ContextCompat.getColor(this, R.color.pear_green);
-        tintColors[2] = ContextCompat.getColor(this, R.color.cherry_red);
-        tintColors[3] = ContextCompat.getColor(this, R.color.watermelon_red);
-        tintColors[4] = ContextCompat.getColor(this, R.color.pineapple_yellow);
+        initializeViews();
+        initializeColors();
+        initializeProductsList();
 
+        updateFruits();
+        setViewTexts();
+    }
+
+    private void initializeViews() {
         fruits[0] = findViewById(R.id.ivApplePending);
         fruits[1] = findViewById(R.id.ivPearConfirmed);
         fruits[2] = findViewById(R.id.ivCherriesPacking);
         fruits[3] = findViewById(R.id.ivWatermelonOnWay);
         fruits[4] = findViewById(R.id.ivPineappleDelivered);
-
-        rvProducts = findViewById(R.id.rvProductList);
-        // show only first 3 items ordered and ... if any more items
-        ArrayList<Product> firstThree = new ArrayList<>();
-        for (int i = 0; i < 3; i++)
-            if (i + 1 > productList.size())
-                break;
-            else
-                firstThree.add(productList.get(i));
-
-        if (productList.size() > 3)
-            firstThree.add(new Product(0, 0, "...", 0,0));
-
-        adapter = new OrderTrackingAdapter(firstThree);
-        rvProducts.setLayoutManager(new LinearLayoutManager(this));
-        rvProducts.setAdapter(adapter);
-
-        updateFruits();
-
         tvOrderStatus = findViewById(R.id.tvOrderStatus);
-        switch (order.getStatus()) {
-            case PENDING:
-                tvOrderStatus.setText(R.string.order_status_pending);
-                break;
-            case CONFIRMED:
-                tvOrderStatus.setText(R.string.order_status_confirmed);
-                break;
-            case PACKING:
-                tvOrderStatus.setText(R.string.order_status_packing);
-                break;
-            case ON_WAY:
-                tvOrderStatus.setText(R.string.order_status_on_way);
-                break;
-            case DELIVERED:
-                tvOrderStatus.setText(R.string.order_status_delivered);
-                break;
-        }
-
         tvOrderID = findViewById(R.id.tvOrderID);
-        tvOrderID.setText(Integer.toString(order.getOrderID()));
-
         tvOrderDate = findViewById(R.id.tvOrderDate);
-        EstimatedDate = findViewById(R.id.tvEstimatedDate);
-        tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
-        EstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
-
-        for (int i = 0; i < productList.size(); i++)
-            subtotal += productList.get(i).getUnitPrice() * productList.get(i).getQuantity();
+        tvEstimatedDate = findViewById(R.id.tvEstimatedDate);
         tvSubtotal = findViewById(R.id.tvSubtotal);
-        tvSubtotal.setText(Integer.toString(subtotal));
-
         tvTotal = findViewById(R.id.tvTotal);
-        tvTotal.setText(Integer.toString(subtotal + deliveryFees));
     }
 
-    protected void updateFruits() {
+    private void initializeColors() {
+        tintColors[0] = ContextCompat.getColor(this, R.color.apple_red);
+        tintColors[1] = ContextCompat.getColor(this, R.color.pear_green);
+        tintColors[2] = ContextCompat.getColor(this, R.color.cherry_red);
+        tintColors[3] = ContextCompat.getColor(this, R.color.watermelon_red);
+        tintColors[4] = ContextCompat.getColor(this, R.color.pineapple_yellow);
+    }
+
+    private void initializeProductsList() {
+        rvProducts = findViewById(R.id.rvProductList);
+        adapter = new OrderTrackingAdapter(productList);
+
+        adapter.setHeightListener(this);
+
+        rvProducts.setLayoutManager(new LinearLayoutManager(this));
+        rvProducts.setAdapter(adapter);
+    }
+
+    private void updateFruits() {
         int status = order.getStatus().ordinal();
         for (int i = 0; i <= status; i++)
             fruits[i].setColorFilter(tintColors[i], PorterDuff.Mode.SRC_ATOP);
+        tvOrderStatus.setTextColor(tintColors[status]);
+    }
+
+    private void setViewTexts() {
+        final int deliveryFees = 99;
+
+        tvOrderStatus.setText(getOrderStatus());
+
+        tvOrderID.setText(Integer.toString(order.getOrderID()));
+
+        tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
+        tvEstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
+
+        tvSubtotal.setText(String.format("PKR %d", calcSubtotal()));
+        tvTotal.setText(String.format("PKR %d", calcSubtotal() + deliveryFees));
+    }
+
+    private int getOrderStatus() {
+        switch (order.getStatus()) {
+            case PENDING:
+                return R.string.order_status_pending;
+            case CONFIRMED:
+                return R.string.order_status_confirmed;
+            case PACKING:
+                return R.string.order_status_packing;
+            case ON_WAY:
+                return R.string.order_status_on_way;
+            case DELIVERED:
+                return R.string.order_status_delivered;
+            default:
+                return R.string.error;
+        }
+    }
+
+    private int calcSubtotal() {
+        int subtotal = 0;
+        for (int i = 0; i < productList.size(); i++)
+            subtotal += productList.get(i).getUnitPrice() * productList.get(i).getQuantity();
+        return subtotal;
+    }
+
+    @Override
+    public void onHeightObtained(int height) {
+        ViewGroup.LayoutParams rvLayoutParams = rvProducts.getLayoutParams();
+        rvLayoutParams.height = height * Math.min(productList.size(), maxItems);
+        rvProducts.setLayoutParams(rvLayoutParams);
     }
 }
