@@ -35,7 +35,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
     public EditText deliveryNotes;
 
-    public TextView checkoutPrice, checkoutItems, subtotalPrice, totalPrice;
+    public TextView checkoutPrice, subtotalPrice;
 
     public int subtotal = 0;
 
@@ -76,9 +76,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             // Configuring the checkout static card display
             checkoutButton = findViewById(R.id.checkoutButton);
             checkoutPrice = findViewById(R.id.checkoutPrice);
-            checkoutItems = findViewById(R.id.checkoutItems);
             subtotalPrice = findViewById(R.id.subtotalPrice);
-            totalPrice = findViewById(R.id.totalPrice);
+
 
 
             // Calculating subtotal to display when cart activity view is inflated
@@ -86,21 +85,27 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
                 subtotal += productArrayList.get(i).getQuantity() * productArrayList.get(i).getUnitPrice();
 
             // Displaying initial subtotal price, total price, checkout price.
-            checkoutPrice.setText("Rs. " + (subtotal + 50));
-            subtotalPrice.setText("Rs. " + subtotal);
-            totalPrice.setText("Rs. " + (subtotal + 50));
-            checkoutItems.setText(String.format("%d items", productArrayList.size()));
+            checkoutPrice.setText("PKR " + (subtotal + 50));
+            subtotalPrice.setText("PKR " + subtotal);
+
+
+            checkoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deliveryNotesString = deliveryNotes.getText().toString();
+                }
+            });
         }
     }
 
     // to avoid memory leak
 
     private void initProductArrayList() {
-//        productArrayList.add(new Product(1, 200, "Banana", 2, R.drawable.banana));
-//        productArrayList.add(new Product(2, 500, "Strawberry", 2, R.drawable.banana));
-//        productArrayList.add(new Product(3, 300, "Guava", 5, R.drawable.banana));
-//        productArrayList.add(new Product(4, 100, "Pear", 2, R.drawable.banana));
-//        productArrayList.add(new Product(5, 50, "Apple", 8, R.drawable.banana));
+        productArrayList.add(new Product(1, 200, "Banana", 2, R.drawable.banana));
+        productArrayList.add(new Product(2, 500, "Strawberry", 2, R.drawable.banana));
+        productArrayList.add(new Product(3, 300, "Guava", 5, R.drawable.banana));
+        productArrayList.add(new Product(4, 100, "Pear", 2, R.drawable.banana));
+        productArrayList.add(new Product(5, 50, "Apple", 2, R.drawable.banana));
     }
 
 
@@ -122,8 +127,6 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
             productArrayList.remove(position);
 
-            checkoutItems.setText(productArrayList.size() + " items");
-
             cartRecyclerViewAdapter.notifyItemRemoved(position);
         }
         else
@@ -135,9 +138,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
 
         // Updating the displayed prices on static card view
-        checkoutPrice.setText("Rs. " + (subtotal + 50));
-        subtotalPrice.setText("Rs. " + subtotal);
-        totalPrice.setText("Rs. " + (subtotal + 50));
+        checkoutPrice.setText("PKR " + (subtotal + 50));
+        subtotalPrice.setText("PKR " + subtotal);
     }
 
 
@@ -149,9 +151,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         subtotal += productArrayList.get(position).getUnitPrice();
 
         // Updating the displayed checkout price
-        checkoutPrice.setText("Rs. " + (subtotal + 50));
-        subtotalPrice.setText("Rs. " + subtotal);
-        totalPrice.setText("Rs. " + (subtotal + 50));
+        checkoutPrice.setText("PKR " + (subtotal + 50));
+        subtotalPrice.setText("PKR " + subtotal);
 
         cartRecyclerViewAdapter.notifyItemChanged(position);
     }
