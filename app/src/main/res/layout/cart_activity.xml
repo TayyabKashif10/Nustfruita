@@ -5,6 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00FFFFFF"
     android:elevation="16dp"
     android:outlineProvider="background"
     tools:context=".CartAndCheckout.CartActivity">
@@ -23,10 +24,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="250dp"
         android:background="#00000000"
-        app:cardCornerRadius="20dp"
-        android:layout_marginBottom="-20dp"
+        android:backgroundTint="#FFEA6E47"
         android:outlineProvider="background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,50 +34,172 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#FFEA6E47">
+
+            <TextView
+                android:id="@+id/checkoutItems"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="20dp"
+                android:shadowColor="#000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:text="@string/item_1"
+                android:textColor="@color/primary_light"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/checkoutPrice"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <EditText
+                android:id="@+id/deliveryNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginBottom="120dp"
+                android:background="@color/transparent"
+                android:drawableStart="@drawable/note_icon"
+                android:drawablePadding="5dp"
+                android:drawableTint="@color/primary_light"
+                android:ems="10"
+                android:hint="@string/add_delivery_instructions"
+                android:inputType="text"
+                android:textColorHint="#9976F8E1"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                android:autofillHints="false" />
 
             <TextView
                 android:id="@+id/checkoutPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:shadowColor="#454545"
+                android:layout_marginBottom="14dp"
+                android:shadowColor="#000000"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="3"
                 android:text="@string/pkr_0"
-                android:textColor="@color/md_theme_light_primaryContainer"
+                android:textColor="@color/primary_light"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/checkoutButton"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/checkoutButton" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/checkoutButton"
                 android:layout_width="200dp"
-                android:layout_height="55dp"
+                android:layout_height="80dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="@color/orange"
+                android:layout_marginBottom="14dp"
+                android:backgroundTint="#810909"
                 android:shadowColor="#000000"
                 android:shadowDx="2"
-
                 android:shadowDy="2"
                 android:shadowRadius="3"
                 android:text="@string/checkout"
-                android:textColor="@color/md_theme_light_primaryContainer"
+                android:textColor="@color/primary_light"
                 android:textColorLink="#00FFFFFF"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
+            <TextView
+                android:id="@+id/subtotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="10dp"
+                android:text="@string/pkr_0"
+                android:textColor="@color/primary_light"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/deliveryPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="10dp"
+                android:text="@string/rs_50"
+                android:textColor="@color/primary_light"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subtotalPrice" />
 
+            <View
+                android:id="@+id/lineDivider"
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/primary_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/delivery" />
 
+            <TextView
+                android:id="@+id/subtotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:paddingTop="10dp"
+                android:text="@string/pkr_0"
+                android:textColor="@color/primary_light"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:paddingTop="10dp"
+                android:text="@string/pkr_50"
+                android:textColor="@color/primary_light"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/subtotal" />
 
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:paddingTop="10dp"
+                android:text="@string/pkr_50"
+                android:textColor="@color/primary_light"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lineDivider" />
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+
+                android:paddingTop="10dp"
+                android:text="@string/total"
+
+                android:textColor="@color/primary_light"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lineDivider" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

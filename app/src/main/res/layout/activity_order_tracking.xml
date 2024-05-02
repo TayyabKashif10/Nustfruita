@@ -97,6 +97,7 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:layout_alignParentStart="true"
+            android:textColor="@color/onBackground"
         />
 
         <TextView
@@ -107,7 +108,8 @@
             android:layout_marginStart="188dp"
             android:textSize="18sp"
             tools:text="@tools:sample/us_phones"
-            android:layout_alignBaseline="@id/tvOrderIDLabel"/>
+            android:layout_alignBaseline="@id/tvOrderIDLabel"
+            android:textColor="@color/onBackground"/>
 
         <TextView
             android:id="@+id/tvOrderDateLabel"
@@ -119,6 +121,7 @@
             android:textStyle="bold"
             android:layout_alignParentStart="true"
             android:layout_below="@id/tvOrderIDLabel"
+            android:textColor="@color/onBackground"
              />
 
         <TextView
@@ -130,7 +133,8 @@
             android:layout_alignParentEnd="true"
             android:textSize="18sp"
             tools:text="@tools:sample/date/mmddyy"
-            android:layout_alignBaseline="@id/tvOrderDateLabel"/>
+            android:layout_alignBaseline="@id/tvOrderDateLabel"
+            android:textColor="@color/onBackground"/>
 
         <TextView
             android:id="@+id/tvEstimatedDateLabel"
@@ -142,6 +146,7 @@
             android:textStyle="bold"
             android:layout_alignParentStart="true"
             android:layout_below="@id/tvOrderDateLabel"
+            android:textColor="@color/onBackground"
              />
 
         <TextView
@@ -152,7 +157,9 @@
             android:layout_alignParentEnd="true"
             android:textSize="18sp"
             tools:text="@tools:sample/date/ddmmyy"
-            android:layout_alignBaseline="@id/tvEstimatedDateLabel"/>
+            android:layout_alignBaseline="@id/tvEstimatedDateLabel"
+            android:textColor="@color/onBackground"/>
+
     </RelativeLayout>
 
     <View
@@ -160,7 +167,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/md_theme_light_primary"
+        android:background="@color/primary_light"
         app:layout_constraintBottom_toTopOf="@+id/rvProductList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -176,14 +183,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"/>
+        android:layout_marginHorizontal="20dp" />
 
     <View
         android:id="@+id/vLine2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/md_theme_light_primary"
+        android:background="@color/primary_light"
         app:layout_constraintBottom_toTopOf="@+id/tvSubtotalLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -199,6 +206,7 @@
         android:text="@string/subtotal"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/onBackground"
         app:layout_constraintBottom_toTopOf="@+id/tvDeliveryLabel"
         app:layout_constraintEnd_toStartOf="@+id/tvSubtotal"
         app:layout_constraintHorizontal_bias="0.5"
@@ -211,6 +219,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="textEnd"
         android:textSize="18sp"
+        android:textColor="@color/onBackground"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvSubtotalLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -226,6 +235,7 @@
         android:text="@string/delivery"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:textColor="@color/onBackground"
         app:layout_constraintBottom_toTopOf="@+id/vLine3"
         app:layout_constraintEnd_toStartOf="@+id/tvDelivery"
         app:layout_constraintHorizontal_bias="0.5"
@@ -239,6 +249,7 @@
         android:text="@string/delivery_fees"
         android:textAlignment="textEnd"
         android:textSize="18sp"
+        android:textColor="@color/onBackground"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvDeliveryLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -250,7 +261,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginBottom="8dp"
-        android:background="@color/md_theme_light_primary"
+        android:background="@color/primary_light"
         app:layout_constraintBottom_toTopOf="@+id/tvTotalLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -264,6 +275,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:text="@string/total"
+        android:textColor="@color/onBackground"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -78,7 +78,8 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/password_icon"
-        app:tint="@color/seed" />
+
+        app:tint="@color/primary_color" />
 
     <TextView
         android:id="@+id/otpPrompt"
@@ -86,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="@string/otp_prompt"
-        android:textColor="@color/orange"
+        android:textColor="@color/secondary_color"
         android:textSize="25sp"
 
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:backgroundTint="@color/textFieldTint"
+        android:backgroundTint="@color/primary_light"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -111,19 +112,20 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp">
 
-
             <EditText
                 android:id="@+id/otpField"
                 android:layout_width="75dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="5dp"
                 android:autofillHints="smsOTPCode"
-                android:backgroundTint="@color/transparent"
+                android:backgroundTint="@color/primary_light"
                 android:ems="10"
                 android:hint="@string/otp_placeholder"
                 android:inputType="numberPassword"
                 android:layout_centerInParent="true"
-                android:importantForAutofill="yes"/>
+                android:importantForAutofill="yes"
+                android:textColorHint="@color/grey"
+                android:textColor="@color/black"/>
 
 
         </RelativeLayout>
@@ -153,7 +155,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textColor="@color/seed"
+        android:textColor="@color/secondary_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/verifyOTPBtn"
