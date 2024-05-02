@@ -17,7 +17,7 @@
         android:contentDescription="@string/credential_icon_description"
         android:layout_marginBottom="50dp"
         app:layout_constraintBottom_toTopOf="@id/completeProfilePrompt"
-        app:tint="@color/seed"/>
+        app:tint="@color/primary_color"/>
 
     <TextView
         android:id="@+id/completeProfilePrompt"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:text="@string/complete_profile_prompt"
-        android:textColor="@color/orange"
+        android:textColor="@color/secondary_color"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +53,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp">
+            android:paddingHorizontal="10dp"
+            android:background="@color/primary_light">
 
             <ImageView
                 android:id="@+id/profileIcon"
@@ -63,7 +63,7 @@
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/profile_icon_description"
                 android:src="@drawable/profile_icon"
-                app:tint="@color/orange" />
+                app:tint="@color/secondary_color" />
 
             <EditText
                 android:id="@+id/name"
@@ -76,7 +76,8 @@
                 android:backgroundTint="@color/transparent"
                 android:ems="10"
                 android:hint="@string/full_name"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColorHint="@color/grey"/>
 
 
         </RelativeLayout>
@@ -87,7 +88,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -97,7 +97,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp">
+            android:paddingHorizontal="10dp"
+            android:background="@color/primary_light">
 
             <ImageView
                 android:id="@+id/emailIcon"
@@ -106,7 +107,7 @@
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/email_icon_description"
                 android:src="@drawable/email_icon"
-                app:tint="@color/orange" />
+                app:tint="@color/secondary_color" />
 
             <EditText
                 android:id="@+id/email"
@@ -118,7 +119,8 @@
                 android:backgroundTint="@color/transparent"
                 android:ems="10"
                 android:hint="@string/email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/grey"/>
 
 
         </RelativeLayout>
@@ -130,17 +132,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/textFieldTint"
+        android:backgroundTint="@color/primary_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailCard"
-        app:boxBackgroundColor="@color/textFieldTint"
+        app:boxBackgroundColor="@color/primary_light"
         app:boxCornerRadiusBottomEnd="40dp"
         app:boxCornerRadiusBottomStart="40dp"
         app:boxCornerRadiusTopEnd="40dp"
         app:boxCornerRadiusTopStart="40dp"
         app:startIconDrawable="@drawable/house_icon"
-        app:startIconTint="@color/orange"
+        app:startIconTint="@color/secondary_color"
         app:startIconContentDescription="@string/house_icon_description"
         app:boxStrokeColor="@color/transparent"
         app:hintEnabled="false"
@@ -166,7 +168,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/textFieldTint"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +177,8 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="10dp">
+            android:paddingHorizontal="10dp"
+            android:background="@color/primary_light">
 
             <ImageView
                 android:id="@+id/roomNumberIcon"
@@ -185,7 +187,7 @@
                 android:layout_centerVertical="true"
                 android:contentDescription="@string/room_number_description"
                 android:src="@drawable/room_number_icon"
-                app:tint="@color/orange" />
+                app:tint="@color/secondary_color" />
 
             <EditText
                 android:id="@+id/room"
@@ -198,8 +200,8 @@
                 android:ems="10"
                 android:hint="@string/room"
                 android:inputType="number"
+                android:textColorHint="@color/grey"
                 />
-
 
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
@@ -214,7 +216,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/skip_profile_completion_prompt"
-        android:textColor="@color/orange"
+        android:textColor="@color/secondary_color"
         android:textSize="15sp"
         android:visibility="invisible"
         />
@@ -224,6 +226,7 @@
         style="@style/AuthButtonStyle"
         android:layout_marginTop="60dp"
         android:text="@string/save"
+        android:textColor="@color/onPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/roomCard" />
