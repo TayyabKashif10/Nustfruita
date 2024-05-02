@@ -77,6 +77,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             checkoutButton = findViewById(R.id.checkoutButton);
             checkoutPrice = findViewById(R.id.checkoutPrice);
             checkoutItems = findViewById(R.id.checkoutItems);
+            deliveryNotes = findViewById(R.id.deliveryNotes);
             subtotalPrice = findViewById(R.id.subtotalPrice);
             totalPrice = findViewById(R.id.totalPrice);
 
@@ -90,17 +91,25 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             subtotalPrice.setText("Rs. " + subtotal);
             totalPrice.setText("Rs. " + (subtotal + 50));
             checkoutItems.setText(String.format("%d items", productArrayList.size()));
+
+
+            checkoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deliveryNotesString = deliveryNotes.getText().toString();
+                }
+            });
         }
     }
 
     // to avoid memory leak
 
     private void initProductArrayList() {
-//        productArrayList.add(new Product(1, 200, "Banana", 2, R.drawable.banana));
-//        productArrayList.add(new Product(2, 500, "Strawberry", 2, R.drawable.banana));
-//        productArrayList.add(new Product(3, 300, "Guava", 5, R.drawable.banana));
-//        productArrayList.add(new Product(4, 100, "Pear", 2, R.drawable.banana));
-//        productArrayList.add(new Product(5, 50, "Apple", 8, R.drawable.banana));
+        productArrayList.add(new Product(1, 200, "Banana", 2, R.drawable.banana));
+        productArrayList.add(new Product(2, 500, "Strawberry", 2, R.drawable.banana));
+        productArrayList.add(new Product(3, 300, "Guava", 5, R.drawable.banana));
+        productArrayList.add(new Product(4, 100, "Pear", 2, R.drawable.banana));
+        productArrayList.add(new Product(5, 50, "Apple", 8, R.drawable.banana));
     }
 
 
