@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.AppTheme"
 
         tools:targetApi="31" >
         <activity
@@ -37,21 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity> <!-- exported is false because only the app itself should be able to call AuthActivity -->
-        <activity
-            android:name=".authentication.AuthActivity"
-            android:exported="false"/>
 
-        <activity android:name=".CartAndCheckout.CartActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".authentication.RegisterActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".authentication.LoginActivity"
-            android:exported="false" />
-
-        <activity android:name=".CartAndCheckout.EmptyBasket"
-            android:exported="true" />
     </application>
 
 </manifest>

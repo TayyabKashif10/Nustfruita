@@ -8,14 +8,13 @@
     tools:context=".MenuActivity"
     >
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardA"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="60dp"
         app:cardCornerRadius="30dp"
-        app:cardBackgroundColor="@color/seed"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -26,22 +25,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:textColor="#FF3D00"
             android:text="@string/sample_fact"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardB"
         android:layout_width="match_parent"
         android:layout_height="130dp"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="60dp"
-        app:cardBackgroundColor="@color/seed"
         app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +52,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center_horizontal"
-            android:textColor="#FF3D00"
             android:text="@string/sample_fact"
             android:layout_marginHorizontal="20dp"
             android:layout_marginVertical="10dp"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
