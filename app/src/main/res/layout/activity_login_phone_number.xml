@@ -35,7 +35,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:text="@string/num1"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/white"/>
 
         </RelativeLayout>
 
