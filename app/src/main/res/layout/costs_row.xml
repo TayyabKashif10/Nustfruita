@@ -45,7 +45,6 @@
                 android:paddingTop="10dp"
 
                 android:text="Delivery fees"
-                android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +63,6 @@
                 android:paddingTop="10dp"
 
                 android:text="@string/rs_50"
-                android:textColor="@color/white"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"

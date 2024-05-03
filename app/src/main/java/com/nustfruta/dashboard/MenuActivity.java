@@ -1,4 +1,4 @@
-package com.nustfruta;
+package com.nustfruta.dashboard;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.nustfruta.R;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseUtil;
 

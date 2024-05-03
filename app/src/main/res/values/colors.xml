@@ -7,7 +7,6 @@
 
     <color name="onPrimary">#EBF2F3</color>
 
-
     <color name="secondary_color">#D5885D</color>
     <color name="secondary_light">#eccab8</color>
     <color name="secondary_dark">#c95f0f</color>
@@ -27,6 +26,6 @@
     <color name="grey">#434343</color>
 
     <color name="onBackground">#f2f3ff</color>
-    <color name="background_color">#072723</color>
+    <color name="background_color">#001512</color>
     <color name="cartRowBackground">#CC000000</color>
 </resources>
