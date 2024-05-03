@@ -97,8 +97,9 @@
                 android:layout_width="200dp"
                 android:layout_height="80dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="14dp"
-                android:backgroundTint="#810909"
+
+                android:layout_marginBottom="32dp"
+                android:backgroundTint="#001F25"
                 android:shadowColor="#000000"
                 android:shadowDx="2"
                 android:shadowDy="2"

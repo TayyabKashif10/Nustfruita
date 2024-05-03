@@ -35,7 +35,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
     public EditText deliveryNotes;
 
-    public TextView checkoutPrice, subtotalPrice;
+    public TextView checkoutPrice;
 
     public int subtotal = 0;
 
@@ -76,7 +76,6 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             // Configuring the checkout static card display
             checkoutButton = findViewById(R.id.checkoutButton);
             checkoutPrice = findViewById(R.id.checkoutPrice);
-            subtotalPrice = findViewById(R.id.subtotalPrice);
 
 
 
@@ -86,13 +85,12 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
             // Displaying initial subtotal price, total price, checkout price.
             checkoutPrice.setText("PKR " + (subtotal + 50));
-            subtotalPrice.setText("PKR " + subtotal);
 
 
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deliveryNotesString = deliveryNotes.getText().toString();
+                    // TODO: Place order, send order to database
                 }
             });
         }
@@ -114,7 +112,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             setContentView(R.layout.empty_basket);
     }
 
-    public void minusButton(int position) {
+    public void minusButton(CartRecyclerViewAdapter.ViewHolder holder, int position) {
 
         // Decrease quantity of given item
         productArrayList.get(position).decrementQuantity();
@@ -139,12 +137,13 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
         // Updating the displayed prices on static card view
         checkoutPrice.setText("PKR " + (subtotal + 50));
-        subtotalPrice.setText("PKR " + subtotal);
+
+        cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
     }
 
 
 
-    public void plusButton(int position) {
+    public void plusButton(CartRecyclerViewAdapter.ViewHolder holder, int position) {
         productArrayList.get(position).incrementQuantity();
 
         // Updating subtotal variable.
@@ -152,8 +151,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
         // Updating the displayed checkout price
         checkoutPrice.setText("PKR " + (subtotal + 50));
-        subtotalPrice.setText("PKR " + subtotal);
 
+        cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
         cartRecyclerViewAdapter.notifyItemChanged(position);
     }
 
