@@ -15,14 +15,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/noun_fruit_basket_6572243__1_"
-        app:tint="@color/primary_color" />
+        app:tint="@color/primary_light" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your basket is empty"
-        android:textColor="@color/secondary_color"
+        android:textColor="@color/primary_light"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:backgroundTint="@color/secondary_color"
-        android:text="Back to menu"
-        android:textColor="@color/onSecondary"
+        android:text="@string/back_to_menu"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
