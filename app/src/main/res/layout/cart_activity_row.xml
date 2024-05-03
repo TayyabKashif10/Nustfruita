@@ -16,7 +16,7 @@
         android:paddingRight="5dp"
         android:paddingBottom="10dp"
         app:cardBackgroundColor="#CC000000"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="10dp"
         app:cardElevation="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -37,12 +37,9 @@
                 android:layout_marginStart="36dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="13dp"
-                android:shadowColor="#80000000"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="3"
+
                 android:text="@string/product"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/productPrice"
@@ -62,7 +59,7 @@
                 android:shadowDy="2"
                 android:shadowRadius="3"
                 android:text="@string/_1"
-                android:textColor="@color/primary_light"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.872"
@@ -82,7 +79,7 @@
                 android:shadowDy="2"
                 android:shadowRadius="3"
                 android:text="@string/rs_price"
-                android:textColor="#9976F8E1"
+                android:textColor="@color/white"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -114,7 +111,7 @@
                 app:layout_constraintStart_toEndOf="@+id/quantity"
                 app:layout_constraintTop_toTopOf="@+id/quantity"
                 app:srcCompat="@drawable/add_icon"
-                app:tint="@color/orange" />
+                app:tint="@color/white" />
 
             <ImageButton
                 android:id="@+id/minusButton"
@@ -128,7 +125,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/quantity"
                 app:layout_constraintTop_toTopOf="@+id/quantity"
                 app:srcCompat="@drawable/minus_icon"
-                app:tint="@color/orange" />
+                app:tint="@color/white" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
