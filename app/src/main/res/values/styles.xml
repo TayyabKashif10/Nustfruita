@@ -13,5 +13,4 @@
         <item name="android:bottomLeftRadius">16dp</item>
         <item name="android:bottomRightRadius">16dp</item>
     </style>
-
 </resources>

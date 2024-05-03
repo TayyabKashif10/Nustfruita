@@ -73,5 +73,9 @@
     <string name="rs_50">Rs. 50</string>
 
     <string name="sample_fact">Grapes explode if you put them in the microwave.</string>
+
+    <string name="fruitfact">FruitFact</string>
+
     <string name="back_to_menu">Back to menu</string>
+
 </resources>

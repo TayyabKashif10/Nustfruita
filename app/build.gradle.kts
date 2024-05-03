@@ -1,3 +1,5 @@
+
+
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
@@ -9,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nustfruta"
-        minSdk = 24
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

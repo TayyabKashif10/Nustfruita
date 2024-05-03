@@ -27,5 +27,6 @@
     <color name="grey">#434343</color>
 
     <color name="onBackground">#f2f3ff</color>
-
+    <color name="background_color">#072723</color>
+    <color name="cartRowBackground">#CC000000</color>
 </resources>
