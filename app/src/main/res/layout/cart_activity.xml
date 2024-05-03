@@ -24,17 +24,20 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="#00000000"
-        app:cardCornerRadius="20dp"
         android:layout_marginBottom="-20dp"
+        android:background="#00000000"
         android:outlineProvider="background"
+        app:cardBackgroundColor="@color/watermelon_red"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/secondary_gradient">
+
 
             <TextView
                 android:id="@+id/checkoutPrice"
@@ -46,7 +49,7 @@
                 android:shadowDy="2"
                 android:shadowRadius="3"
                 android:text="@string/pkr_0"
-                android:textColor="@color/primary_dark"
+                android:textColor="@color/primary_light"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/checkoutButton"
@@ -72,10 +75,6 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-
-
-
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
