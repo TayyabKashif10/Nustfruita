@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -47,6 +48,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     CardView cardA, cardB, currentCard;
     TextView textA, textB;
 
+    Toolbar toolbar;
+
     // number of fruit facts stored in database
     int fruitFactNumber;
 
@@ -65,6 +68,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         });
         fetchedFact = getString(R.string.sample_fact);
         initializeViews();
+        setSupportActionBar(toolbar);
         syncFruitFactNumber();
         factChangeHandler = new Handler();
     }
@@ -108,6 +112,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     public void initializeViews()
     {
+        toolbar = findViewById(R.id.toolBar);
         cardA = findViewById(R.id.cardA);
         currentCard = cardA;
         cardB = findViewById(R.id.cardB);
