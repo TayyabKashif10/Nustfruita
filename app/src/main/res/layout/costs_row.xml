@@ -3,24 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="85dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="391dp"
+        android:layout_width="350dp"
         android:layout_height="75dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="#171717">
 
             <TextView
                 android:id="@+id/subtotal"
                 android:layout_width="wrap_content"
-                android:layout_height = "wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
+                android:layout_marginTop="6dp"
                 android:paddingTop="10dp"
                 android:shadowColor="#454545"
                 android:shadowDx="2"
@@ -38,13 +42,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:textColor="@color/md_theme_light_primaryContainer"
                 android:paddingTop="10dp"
                 android:shadowColor="#454545"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
                 android:text="Delivery fees"
+                android:textColor="@color/md_theme_light_primaryContainer"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +58,7 @@
                 android:id="@+id/subtotalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/md_theme_light_primaryContainer"
+                android:layout_marginTop="6dp"
                 android:layout_marginEnd="30dp"
                 android:paddingTop="10dp"
                 android:shadowColor="#454545"
@@ -62,6 +66,7 @@
                 android:shadowDy="2"
                 android:shadowRadius="2"
                 android:text="@string/rs_50"
+                android:textColor="@color/md_theme_light_primaryContainer"
                 android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
