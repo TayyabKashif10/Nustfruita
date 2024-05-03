@@ -22,7 +22,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.nustfruta.MenuActivity;
+import com.nustfruta.dashboard.MenuActivity;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;

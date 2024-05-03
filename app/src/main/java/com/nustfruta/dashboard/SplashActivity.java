@@ -1,4 +1,4 @@
-package com.nustfruta;
+package com.nustfruta.dashboard;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.splashscreen.SplashScreen;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.utility.FirebaseUtil;
 
@@ -35,6 +37,7 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
             return insets;
         });
     }
+
 
     // switches to next activity once splash screen is closed
     @Override

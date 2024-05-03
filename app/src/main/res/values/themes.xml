@@ -12,10 +12,5 @@
         <item name="colorOnBackground">@color/onBackground</item>
     </style>
 
-    <style name="Theme.SplashTheme" parent="Theme.SplashScreen.IconBackground">
-        <item name="android:windowSplashScreenBackground">@color/background_color</item>
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.AppTheme</item>
-    </style>
 
 </resources>

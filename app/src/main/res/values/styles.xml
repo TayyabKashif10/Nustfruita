@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <style name="Theme.SplashTheme" parent="Theme.SplashScreen">
+        <item name="android:windowSplashScreenBackground">@color/background_color</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/inset_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.AppTheme</item>
+    </style>
 
     <style name="AuthButtonStyle">
         <item name="android:layout_width">300dp</item>
