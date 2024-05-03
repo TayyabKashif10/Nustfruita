@@ -16,6 +16,9 @@
         <activity
             android:name=".MenuActivity"
             android:exported="false" />
+
+        <activity android:name=".CartAndCheckout.CartActivity"
+            android:exported="true" />
         <activity
             android:name=".postorder.OrderTrackingActivity"
             android:exported="false" />
