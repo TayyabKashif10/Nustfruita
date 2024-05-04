@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="370dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:clickable="true"
+        android:contentDescription='@string/item_card_description'
+        android:focusable="false"
+
+        app:cardBackgroundColor="@color/cartRowBackground"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#171717">
+
+            <TextView
+                android:id="@+id/tvIDLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/id_label"
+                android:textColor="@color/light_grey"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvStatus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/onBackground"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvIDLabel"
+                app:layout_constraintStart_toEndOf="@+id/tvIDLabel"
+                tools:text="1423552" />
+
+
+            <ImageView
+                android:id="@+id/backIcon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/forward_arrow"
+                android:scaleX="-1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/back_icon"
+                app:tint="@color/onBackground" />
+
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/light_grey"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvDateLabel"
+                app:layout_constraintStart_toStartOf="@+id/tvIDLabel"
+                app:layout_constraintTop_toBottomOf="@+id/tvIDLabel"
+                tools:text="Delivered" />
+
+
+            <TextView
+                android:id="@+id/tvDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ordered_on"
+                android:textColor="@color/light_grey"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvStatus"
+                app:layout_constraintTop_toBottomOf="@+id/tvStatus" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/onBackground"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tvDateLabel"
+                app:layout_constraintStart_toEndOf="@+id/tvDateLabel"
+                tools:text="24/03/2024" />
+
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:textColor="@color/onBackground"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/tvDateLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="PKR 1742" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

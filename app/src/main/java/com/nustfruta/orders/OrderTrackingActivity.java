@@ -1,4 +1,6 @@
-package com.nustfruta.postorder;
+package com.nustfruta.orders;
+
+import static com.nustfruta.utility.Constants.DELIVERY_FEES;
 
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 
 public class OrderTrackingActivity extends AppCompatActivity implements HeightListener{
 
-    // dummies, provide from database later
+    // dummies, provide from Your Orders activity later
     Order order;
     ArrayList<Product> productList;
 
@@ -106,8 +108,6 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
     }
 
     private void setViewTexts() {
-        final int deliveryFees = 99;
-
         tvOrderStatus.setText(getOrderStatus());
 
         tvOrderID.setText(Integer.toString(order.getOrderID()));
@@ -115,8 +115,8 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
         tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
         tvEstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
 
-        tvSubtotal.setText(String.format("PKR %d", calcSubtotal()));
-        tvTotal.setText(String.format("PKR %d", calcSubtotal() + deliveryFees));
+        tvSubtotal.setText(String.format("PKR %d", order.getTotal() - DELIVERY_FEES));
+        tvTotal.setText(String.format("PKR %d", order.getTotal()));
     }
 
     private int getOrderStatus() {
@@ -134,13 +134,6 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
             default:
                 return R.string.error;
         }
-    }
-
-    private int calcSubtotal() {
-        int subtotal = 0;
-        for (int i = 0; i < productList.size(); i++)
-            subtotal += productList.get(i).getUnitPrice() * productList.get(i).getQuantity();
-        return subtotal;
     }
 
     @Override

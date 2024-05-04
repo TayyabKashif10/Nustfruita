@@ -5,7 +5,6 @@ package com.nustfruta.utility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 abstract public class Constants {
     public static final Long OTP_TIMEOUT = 60L;
@@ -18,5 +17,7 @@ abstract public class Constants {
     public static final int HOSTEL_LOWER_ROOM_LIMIT = 0;
 
     public static final int FACT_CHANGE_DELAY = 5*1000; // in milliseconds
+
+    public static final int DELIVERY_FEES = 99;
 
 }
