@@ -77,5 +77,14 @@
     <string name="fruitfact">FruitFact</string>
 
     <string name="back_to_menu">Back to menu</string>
+    <string name="company_name">NustFruita</string>
+    <string name="my_orders">My Orders</string>
+    <string name="about_us">About Us</string>
+    <string name="logout">Logout</string>
+    <string name="logout_icon_description">Logout icon</string>
+    <string name="information_icon_description">Information icon</string>
+    <string name="list_icon_description">A bullet point list icon</string>
+    <string name="company_logo_description">company logo</string>
+    <string name="edit_your_profile_prompt">Edit Your Profile</string>
 
 </resources>

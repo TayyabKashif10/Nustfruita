@@ -58,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 roomNumber.setError("Select the hostel first.");
             }
         }
+
         else if (v.getId() == skipText.getId()) {
 
             // shift to main activity
@@ -73,8 +74,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     TextInputLayout hostelFieldContainer;
     AutoCompleteTextView hostel;
 
-    TextView skipText;
+    TextView skipText, profileText;
     Button saveBtn;
+
+    boolean firstTimeUser;
 
 
     @Override
@@ -95,12 +98,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         hostel.setOnClickListener(this);
         roomNumber.setOnClickListener(this);
 
-        // if its the first time the user has come across profile completion (first time user, directly after registration), allow user to skip completion.
-        if (getIntent().getExtras()!= null && getIntent().getExtras().getString("caller", "unknown").equals("LoginOTPActivity"))
+        firstTimeUser = getIntent().getExtras()!= null && getIntent().getExtras().getString("caller", "unknown").equals("LoginOTPActivity");
+
+        // if its the first time the user has come across profile completion allow user to skip completion, set unique text for Profile Activity.
+        if (firstTimeUser)
         {
             skipText.setVisibility(View.VISIBLE);
             skipText.setOnClickListener(this);
+            profileText.setText(getString(R.string.complete_profile_prompt));
         }
+        //TODO: remove
+        profileText.setText("nigga");
     }
 
     public void initializeViews()
@@ -112,6 +120,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         saveBtn = findViewById(R.id.saveBtn);
         hostelFieldContainer = findViewById(R.id.hostelFieldContainer);
         skipText = findViewById(R.id.skipText);
+        profileText = findViewById(R.id.profileText);
     }
 
     public void saveProfile()
@@ -164,7 +173,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             roomNumber.setError("Invalid Room Number");
         }
 
-        if (inputHostel.isEmpty() && !inputRoomNumber.isEmpty())
+        if (inputHostelHint.equals("Hostel")&& inputHostel.isEmpty() && !inputRoomNumber.isEmpty())
         {
             validDataEntered = false;
             roomNumber.setError("Select Hostel First");

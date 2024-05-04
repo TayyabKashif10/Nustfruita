@@ -16,15 +16,15 @@
         app:srcCompat="@drawable/credentials_icon"
         android:contentDescription="@string/credential_icon_description"
         android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toTopOf="@id/completeProfilePrompt"
+        app:layout_constraintBottom_toTopOf="@id/profileText"
         app:tint="@color/primary_color"/>
 
     <TextView
-        android:id="@+id/completeProfilePrompt"
+        android:id="@+id/profileText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:text="@string/complete_profile_prompt"
+        android:text="@string/edit_your_profile_prompt"
         android:textColor="@color/secondary_color"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
         android:id="@+id/nameCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         app:cardCornerRadius="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -224,7 +224,7 @@
     <Button
         android:id="@+id/saveBtn"
         style="@style/AuthButtonStyle"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="40dp"
         android:text="@string/save"
         android:textColor="@color/onPrimary"
         app:layout_constraintEnd_toEndOf="parent"
