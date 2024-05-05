@@ -1,5 +1,6 @@
 package com.nustfruta.orders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -19,7 +20,7 @@ import com.nustfruta.models.User;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class YourOrdersActivity extends AppCompatActivity {
+public class YourOrdersActivity extends AppCompatActivity implements OrderClickListener {
 
     // dummy, provide from database later
     ArrayList<Order> orderList;
@@ -43,12 +44,12 @@ public class YourOrdersActivity extends AppCompatActivity {
         ArrayList<Product> productList = new ArrayList<>();
         productList.add(new Product(1234, 299, "Oranges", 3, 0));
         productList.add(new Product(1314, 199, "Apples", 1,0));
-        orderList.add(new Order(12345678, Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.ON_WAY, productList));
+        orderList.add(new Order("firstOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.ON_WAY, productList));
 
         productList.clear();
         productList.add(new Product(619, 169, "Bananas", 11,0));
         productList.add(new Product(0, 9999, "sabih", 1,0));
-        orderList.add(new Order(12341234, Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.DELIVERED, productList));
+        orderList.add(new Order("secondOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.DELIVERED, productList));
 
         initializeOrderList();
     }
@@ -56,8 +57,16 @@ public class YourOrdersActivity extends AppCompatActivity {
     private void initializeOrderList() {
         rvOrderList = findViewById(R.id.rvOrderList);
         adapter = new YourOrdersAdapter(orderList);
+        adapter.setOrderClickListener(this);
 
         rvOrderList.setLayoutManager(new LinearLayoutManager(this));
         rvOrderList.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(String orderID) {
+        Intent intent = new Intent(this, OrderTrackingActivity.class);
+        intent.putExtra("ID", orderID);
+        startActivity(intent);
     }
 }

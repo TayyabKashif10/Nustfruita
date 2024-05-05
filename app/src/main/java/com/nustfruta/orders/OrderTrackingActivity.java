@@ -2,11 +2,13 @@ package com.nustfruta.orders;
 
 import static com.nustfruta.utility.Constants.DELIVERY_FEES;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,7 +29,9 @@ import com.nustfruta.utility.DateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
 
-public class OrderTrackingActivity extends AppCompatActivity implements HeightListener{
+public class OrderTrackingActivity extends AppCompatActivity implements HeightListener {
+
+    Intent intent;
 
     // dummies, provide from Your Orders activity later
     Order order;
@@ -52,13 +56,15 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
             return insets;
         });
 
+        intent = getIntent();
+
         // dummy values, will be provided from database later
         productList = new ArrayList<>();
         productList.add(new Product(1234, 299, "Oranges", 3, 0));
         productList.add(new Product(1314, 199, "Apples", 1,0));
         productList.add(new Product(619, 169, "Bananas", 11,0));
         productList.add(new Product(0, 9999, "sabih", 1,0));
-        order = new Order(12345678, Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
+        order = new Order("12345678", Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
 
         initializeViews();
         initializeColors();
@@ -66,6 +72,8 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
 
         updateFruits();
         setViewTexts();
+
+        Toast.makeText(this, intent.getStringExtra("ID"), Toast.LENGTH_SHORT).show();
     }
 
     private void initializeViews() {
@@ -110,7 +118,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
     private void setViewTexts() {
         tvOrderStatus.setText(getOrderStatus());
 
-        tvOrderID.setText(Integer.toString(order.getOrderID()));
+        tvOrderID.setText(order.getOrderID());
 
         tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
         tvEstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));

@@ -7,6 +7,7 @@
     android:layout_height="120dp">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cMainCard"
         android:layout_width="370dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
