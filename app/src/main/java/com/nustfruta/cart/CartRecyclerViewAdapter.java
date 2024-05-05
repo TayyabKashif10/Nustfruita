@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.LegacyProduct;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     CartActivity parent;
 
-    ArrayList<Product> productList;
+    ArrayList<LegacyProduct> productList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, price, quantity, subtotalPrice;
@@ -47,7 +47,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     }
 
 
-    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<Product> productList) {
+    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<LegacyProduct> productList) {
 
         this.parent = parent;
         this.productList = productList;
@@ -73,7 +73,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.ViewHolder holder, int position) {
 
         if (getItemViewType(position) == 0) {
-            Product product = productList.get(position);
+            LegacyProduct product = productList.get(position);
             holder.productName.setText(product.getName());
             holder.price.setText("PKR " + Integer.toString(product.getQuantity() * product.getUnitPrice()));
             holder.quantity.setText(Integer.toString(product.getQuantity()));

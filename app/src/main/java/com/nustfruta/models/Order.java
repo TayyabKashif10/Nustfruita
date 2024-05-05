@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 public class Order {
     private int orderID;
-    private ArrayList<Product> productList;
+    private ArrayList<LegacyProduct> productList;
     private Calendar dateTime, estDateTime;
     private User user;
     private OrderStatus status;
 
-    public Order(int orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<Product> productList) {
+    public Order(int orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<LegacyProduct> productList) {
         this.orderID = orderID;
         this.dateTime = dateTime;
         this.estDateTime = estDateTime;
@@ -63,11 +63,11 @@ public class Order {
         this.status = status;
     }
 
-    public ArrayList<Product> getProductList() {
+    public ArrayList<LegacyProduct> getProductList() {
         return productList;
     }
 
-    public void setProductList(ArrayList<Product> productList) {
+    public void setProductList(ArrayList<LegacyProduct> productList) {
         this.productList = productList;
     }
 }
