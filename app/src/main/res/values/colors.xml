@@ -28,5 +28,5 @@
 
     <color name="onBackground">#f2f3ff</color>
     <color name="background_color">#001512</color>
-    <color name="cartRowBackground">#CC000000</color>
+    <color name="rowBackground">#CC000000</color>
 </resources>

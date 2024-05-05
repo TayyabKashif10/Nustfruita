@@ -18,6 +18,10 @@ abstract public class Constants {
 
     public static final int FACT_CHANGE_DELAY = 5*1000; // in milliseconds
 
+
+    public static final int MENU_CATEGORIES = 3;
+
     public static final int DELIVERY_FEES = 99;
+
 
 }

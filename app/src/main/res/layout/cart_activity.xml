@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:elevation="16dp"
     android:outlineProvider="background"
-    tools:context=".CartAndCheckout.CartActivity">
+    tools:context=".cart.CartActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

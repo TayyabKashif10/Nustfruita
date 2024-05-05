@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/orange"
-    tools:context=".CartAndCheckout.CartActivity">
+    tools:context=".cart.CartActivity">
 
     <ImageView
         android:id="@+id/imageView"

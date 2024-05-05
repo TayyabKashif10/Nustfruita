@@ -1,24 +1,19 @@
-package com.nustfruta.CartAndCheckout;
+package com.nustfruta.cart;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.LegacyProduct;
 
 import java.util.ArrayList;
 
@@ -26,7 +21,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
     int[] productImages = {}; //TODO: INITIALIZE WITH R.drawable.
 
-    public ArrayList<Product> productArrayList;
+    public ArrayList<LegacyProduct> productArrayList;
     public  CartRecyclerViewAdapter cartRecyclerViewAdapter;
 
     public Button checkoutButton;
@@ -99,11 +94,11 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
     // to avoid memory leak
 
     private void initProductArrayList() {
-        productArrayList.add(new Product(1, 200, "Banana", 2, R.drawable.banana));
-        productArrayList.add(new Product(2, 500, "Strawberry", 2, R.drawable.banana));
-        productArrayList.add(new Product(3, 300, "Guava", 5, R.drawable.banana));
-        productArrayList.add(new Product(4, 100, "Pear", 2, R.drawable.banana));
-        productArrayList.add(new Product(5, 50, "Apple", 2, R.drawable.banana));
+        productArrayList.add(new LegacyProduct(1, 200, "Banana", 2, R.drawable.banana));
+        productArrayList.add(new LegacyProduct(2, 500, "Strawberry", 2, R.drawable.banana));
+        productArrayList.add(new LegacyProduct(3, 300, "Guava", 5, R.drawable.banana));
+        productArrayList.add(new LegacyProduct(4, 100, "Pear", 2, R.drawable.banana));
+        productArrayList.add(new LegacyProduct(5, 50, "Apple", 2, R.drawable.banana));
     }
 
 

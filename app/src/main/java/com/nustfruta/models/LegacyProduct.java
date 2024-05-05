@@ -1,12 +1,11 @@
 package com.nustfruta.models;
 
-public class Product {
+public class LegacyProduct {
     private int productID, unitPrice, quantity;
     private String name;
-
     private int image;
 
-    public Product(int productID, int unitPrice, String name, int quantity, int image) {
+    public LegacyProduct(int productID, int unitPrice, String name, int quantity, int image) {
         this.productID = productID;
         this.unitPrice = unitPrice;
         this.name = name;
@@ -14,7 +13,7 @@ public class Product {
         this.image = image;
     }
 
-    public Product() {
+    public LegacyProduct() {
     }
 
     public int getProductID() {

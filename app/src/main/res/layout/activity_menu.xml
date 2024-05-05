@@ -8,110 +8,133 @@
     tools:context=".dashboard.MenuActivity"
     >
 
-   <androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent">
 
-       <include
-           android:id="@+id/toolBar"
-           layout="@layout/main_toolbar_layout"
-           />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-       <com.google.android.material.card.MaterialCardView
-           android:id="@+id/cardA"
-           android:layout_width="match_parent"
-           android:layout_height="130dp"
-           android:layout_marginHorizontal="20dp"
-           android:layout_marginTop="40dp"
-           app:cardCornerRadius="30dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/toolBar"
-           app:cardElevation="0dp">
+        <include
+            android:id="@+id/toolBar"
+            layout="@layout/main_toolbar_layout" />
 
-
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:background="@drawable/secondary_gradient">
-
-               <TextView
-                   android:id="@+id/titleCardA"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_centerHorizontal="true"
-                   android:gravity="center_horizontal"
-                   android:text="@string/fruitfact"
-                   android:textSize="23sp"
-                   android:textStyle="bold"
-                   android:layout_marginTop="15dp"
-                   />
-               <TextView
-                   android:id="@+id/textA"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_centerHorizontal="true"
-                   android:layout_below="@id/titleCardA"
-                   android:gravity="center_horizontal"
-                   android:text="@string/sample_fact"
-                   android:layout_marginHorizontal="20dp"
-                   android:layout_marginVertical="10dp"
-                   android:textSize="22sp"
-                   android:textStyle="bold"
-                   android:textColor="@color/black"/>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardA"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolBar">
 
 
-           </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/secondary_gradient">
 
-       </com.google.android.material.card.MaterialCardView>
-       <com.google.android.material.card.MaterialCardView
-           android:id="@+id/cardB"
-           android:layout_width="match_parent"
-           android:layout_height="130dp"
-           android:layout_marginHorizontal="20dp"
-           android:layout_marginTop="40dp"
-           app:cardCornerRadius="30dp"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@id/toolBar"
-           android:visibility="invisible">
+                <TextView
+                    android:id="@+id/titleCardA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fruitfact"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
 
-           <RelativeLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:background="@drawable/secondary_gradient">
-
-               <TextView
-                   android:id="@+id/titleCardB"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_centerHorizontal="true"
-                   android:gravity="center_horizontal"
-                   android:text="@string/fruitfact"
-                   android:textSize="23sp"
-                   android:textStyle="bold"
-                   android:layout_marginTop="15dp"/>
-
-               <TextView
-                   android:id="@+id/textB"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_centerHorizontal="true"
-                   android:layout_below="@id/titleCardB"
-                   android:gravity="center_horizontal"
-                   android:text="@string/sample_fact"
-                   android:layout_marginHorizontal="20dp"
-                   android:layout_marginVertical="10dp"
-                   android:textSize="23sp"
-                   android:textStyle="bold"
-                   android:textColor="@color/onSecondary"/>
-           </RelativeLayout>
-
-       </com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/textA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleCardA"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/sample_fact"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
 
-   </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
 
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardB"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="30dp"
+            android:visibility="invisible"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/secondary_gradient">
+
+                <TextView
+                    android:id="@+id/titleCardB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fruitfact"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/titleCardB"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/sample_fact"
+                    android:textColor="@color/onSecondary"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardA"
+            />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <RelativeLayout
         android:layout_width="300dp"
