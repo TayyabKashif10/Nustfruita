@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Order {
 
-    private int orderID;
+    private String orderID;
     private ArrayList<LegacyProduct> productList;
 
     private Calendar dateTime, estDateTime;
@@ -15,7 +15,7 @@ public class Order {
     private OrderStatus status;
 
 
-    public Order(int orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<LegacyProduct> productList) {
+    public Order(String orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<LegacyProduct> productList) {
 
         this.orderID = orderID;
         this.dateTime = dateTime;
