@@ -1,4 +1,4 @@
-package com.nustfruta.postorder;
+package com.nustfruta.orders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
 
-    private ArrayList<Product> productList;
+    final private ArrayList<Product> productList;
 
 
     private HeightListener heightListener;

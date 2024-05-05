@@ -1,16 +1,18 @@
 package com.nustfruta.models;
 
+import static com.nustfruta.utility.Constants.DELIVERY_FEES;
+
 import java.util.Calendar;
 import java.util.ArrayList;
 
 public class Order {
-    private int orderID;
+    private String orderID;
     private ArrayList<Product> productList;
     private Calendar dateTime, estDateTime;
     private User user;
     private OrderStatus status;
 
-    public Order(int orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<Product> productList) {
+    public Order(String orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<Product> productList) {
         this.orderID = orderID;
         this.dateTime = dateTime;
         this.estDateTime = estDateTime;
@@ -23,11 +25,11 @@ public class Order {
     public Order() {
     }
 
-    public int getOrderID() {
+    public String getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
 
@@ -69,5 +71,12 @@ public class Order {
 
     public void setProductList(ArrayList<Product> productList) {
         this.productList = productList;
+    }
+
+    public int getTotal() {
+        int total = DELIVERY_FEES;
+        for (int i = 0; i < productList.size(); i++)
+            total += productList.get(i).getUnitPrice() * productList.get(i).getQuantity();
+        return total;
     }
 }

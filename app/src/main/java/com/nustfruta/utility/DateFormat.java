@@ -11,6 +11,13 @@ public class DateFormat {
                 date.get(Calendar.YEAR) % 100); // getting last two digits of year for YY
     }
 
+    public static String DDMMYY(Calendar date) {
+        return String.format("%02d/%02d/%02d",
+                date.get(Calendar.DAY_OF_MONTH),
+                date.get(Calendar.MONTH) + 1,
+                date.get(Calendar.YEAR) % 100);
+    }
+
     private static String dayToString(int day) {
         switch (day) {
             case 1:
