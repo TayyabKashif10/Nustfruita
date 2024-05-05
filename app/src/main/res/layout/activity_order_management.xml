@@ -6,17 +6,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".postorder.OrderTrackingActivity">
+    tools:context=".admin.OrderManagementActivity">
+
+
+    <ImageView
+        android:id="@+id/ivBackArrow"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/ivApplePending"
+        app:layout_constraintEnd_toStartOf="@+id/ivApplePending"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivApplePending"
+        app:srcCompat="@drawable/back_icon"
+        app:tint="@color/onBackground" />
+
+    <ImageView
+        android:id="@+id/ivForwardArrow"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="80dp"
+        android:clickable="true"
+        android:scaleX="-1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/ivPineappleDelivered"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/back_icon"
+        app:tint="@color/onBackground" />
 
     <ImageView
         android:id="@+id/ivApplePending"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/pending"
+
         app:layout_constraintBottom_toBottomOf="@+id/ivPearConfirmed"
         app:layout_constraintEnd_toStartOf="@+id/ivPearConfirmed"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivBackArrow"
         app:layout_constraintTop_toTopOf="@+id/ivPearConfirmed"
         app:srcCompat="@drawable/fruit_apple" />
 
@@ -25,6 +54,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/confirmed"
+
         app:layout_constraintBottom_toBottomOf="@+id/ivCherriesPacking"
         app:layout_constraintEnd_toStartOf="@+id/ivCherriesPacking"
         app:layout_constraintHorizontal_bias="0.5"
@@ -37,6 +67,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/packing"
+
         app:layout_constraintBottom_toBottomOf="@+id/ivWatermelonOnWay"
         app:layout_constraintEnd_toStartOf="@+id/ivWatermelonOnWay"
         app:layout_constraintHorizontal_bias="0.5"
@@ -49,6 +80,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/on_way"
+
         app:layout_constraintBottom_toBottomOf="@+id/ivPineappleDelivered"
         app:layout_constraintEnd_toStartOf="@+id/ivPineappleDelivered"
         app:layout_constraintHorizontal_bias="0.5"
@@ -60,12 +92,13 @@
         android:id="@+id/ivPineappleDelivered"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="64dp"
         android:contentDescription="@string/delivered"
-        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintBottom_toBottomOf="@+id/ivForwardArrow"
+        app:layout_constraintEnd_toStartOf="@+id/ivForwardArrow"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivWatermelonOnWay"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivForwardArrow"
         app:srcCompat="@drawable/fruit_pineapple" />
 
     <TextView
@@ -82,47 +115,44 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintBottom_toTopOf="@+id/vLine1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus"
-        android:layout_marginHorizontal="20dp"
-       >
+        app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus">
 
         <TextView
             android:id="@+id/tvOrderIDLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/order_id"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_alignParentStart="true"
+            android:text="@string/order_id"
             android:textColor="@color/onBackground"
-        />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvOrderID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvOrderIDLabel"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="188dp"
+            android:textColor="@color/onBackground"
             android:textSize="18sp"
-            tools:text="@tools:sample/us_phones"
-            android:layout_alignBaseline="@id/tvOrderIDLabel"
-            android:textColor="@color/onBackground"/>
+            tools:text="@tools:sample/us_phones" />
 
         <TextView
             android:id="@+id/tvOrderDateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvOrderIDLabel"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="16dp"
             android:text="@string/order_date"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/tvOrderIDLabel"
             android:textColor="@color/onBackground"
-             />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvOrderDate"
@@ -130,35 +160,34 @@
             android:layout_height="wrap_content"
 
             android:layout_below="@id/tvOrderID"
-            android:layout_alignParentEnd="true"
-            android:textSize="18sp"
-            tools:text="@tools:sample/date/mmddyy"
             android:layout_alignBaseline="@id/tvOrderDateLabel"
-            android:textColor="@color/onBackground"/>
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/onBackground"
+            android:textSize="18sp"
+            tools:text="@tools:sample/date/mmddyy" />
 
         <TextView
             android:id="@+id/tvEstimatedDateLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/tvOrderDateLabel"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="16dp"
             android:text="@string/estimated_arrival"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/tvOrderDateLabel"
             android:textColor="@color/onBackground"
-             />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvEstimatedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvOrderDate"
-            android:layout_alignParentEnd="true"
-            android:textSize="18sp"
-            tools:text="@tools:sample/date/ddmmyy"
             android:layout_alignBaseline="@id/tvEstimatedDateLabel"
-            android:textColor="@color/onBackground"/>
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/onBackground"
+            android:textSize="18sp"
+            tools:text="@tools:sample/date/ddmmyy" />
 
     </RelativeLayout>
 
@@ -166,107 +195,79 @@
         android:id="@+id/vLine1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="24dp"
         android:background="@color/primary_light"
         app:layout_constraintBottom_toTopOf="@+id/rvProductList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/vLine2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/vLine2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="24dp"
         android:background="@color/primary_light"
         app:layout_constraintBottom_toTopOf="@+id/tvCustomerNoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
         android:id="@+id/tvCustomerNoLabel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/subtotal"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/customer_phone"
+        android:textColor="@color/onBackground"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/tvDeliveryLabel"
+        app:layout_constraintBottom_toTopOf="@+id/vLine3"
         app:layout_constraintEnd_toStartOf="@+id/tvCustomerNumber"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvCustomerNumber"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:textAlignment="textEnd"
-        android:textSize="18sp"
         android:textColor="@color/onBackground"
+        android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvCustomerNoLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvCustomerNoLabel"
-        android:layout_marginEnd="20dp"/>
+        tools:text="+92 332 1929429"/>
 
-
-    <TextView
-        android:id="@+id/tvDeliveryLabel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/delivery"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/onBackground"
-        app:layout_constraintBottom_toTopOf="@+id/vLine3"
-        app:layout_constraintEnd_toStartOf="@+id/tvDelivery"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="20dp"/>
-
-    <TextView
-        android:id="@+id/tvDelivery"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/delivery_fees"
-        android:textAlignment="textEnd"
-        android:textSize="18sp"
-        android:textColor="@color/onBackground"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvDeliveryLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvDeliveryLabel"
-        android:layout_marginEnd="20dp"/>
 
     <View
         android:id="@+id/vLine3"
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="8dp"
         android:background="@color/primary_light"
         app:layout_constraintBottom_toTopOf="@+id/tvTotalLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tvTotalLabel"
@@ -287,14 +288,13 @@
         android:id="@+id/tvTotal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
         android:textAlignment="textEnd"
         android:textSize="18sp"
         app:layout_constraintBaseline_toBaselineOf="@+id/tvTotalLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tvTotalLabel"
-        android:layout_marginEnd="20dp"/>
-
+        app:layout_constraintStart_toEndOf="@+id/tvTotalLabel" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
