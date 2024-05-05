@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nustfruta.R;
 import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderStatus;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.LegacyProduct;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.DateFormat;
 
@@ -35,7 +35,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
 
     // dummies, provide from Your Orders activity later
     Order order;
-    ArrayList<Product> productList;
+    ArrayList<LegacyProduct> productList;
 
     final int maxItems = 3;
     RecyclerView rvProducts;
@@ -60,10 +60,10 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
 
         // dummy values, will be provided from database later
         productList = new ArrayList<>();
-        productList.add(new Product(1234, 299, "Oranges", 3, 0));
-        productList.add(new Product(1314, 199, "Apples", 1,0));
-        productList.add(new Product(619, 169, "Bananas", 11,0));
-        productList.add(new Product(0, 9999, "sabih", 1,0));
+        productList.add(new LegacyProduct(1234, 299, "Oranges", 3, 0));
+        productList.add(new LegacyProduct(1314, 199, "Apples", 1,0));
+        productList.add(new LegacyProduct(619, 169, "Bananas", 11,0));
+        productList.add(new LegacyProduct(0, 9999, "sabih", 1,0));
         order = new Order("12345678", Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
 
         initializeViews();

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.nustfruta.R;
 import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderStatus;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.LegacyProduct;
 import com.nustfruta.models.User;
 
 import java.util.ArrayList;
@@ -41,14 +41,14 @@ public class YourOrdersActivity extends AppCompatActivity implements OrderClickL
 
         orderList = new ArrayList<>();
 
-        ArrayList<Product> productList = new ArrayList<>();
-        productList.add(new Product(1234, 299, "Oranges", 3, 0));
-        productList.add(new Product(1314, 199, "Apples", 1,0));
+        ArrayList<LegacyProduct> productList = new ArrayList<>();
+        productList.add(new LegacyProduct(1234, 299, "Oranges", 3, 0));
+        productList.add(new LegacyProduct(1314, 199, "Apples", 1,0));
         orderList.add(new Order("firstOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.ON_WAY, productList));
 
         productList.clear();
-        productList.add(new Product(619, 169, "Bananas", 11,0));
-        productList.add(new Product(0, 9999, "sabih", 1,0));
+        productList.add(new LegacyProduct(619, 169, "Bananas", 11,0));
+        productList.add(new LegacyProduct(0, 9999, "sabih", 1,0));
         orderList.add(new Order("secondOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.DELIVERED, productList));
 
         initializeOrderList();

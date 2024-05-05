@@ -56,7 +56,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
         productList.add(new LegacyProduct(1314, 199, "Apples", 1,0));
         productList.add(new LegacyProduct(619, 169, "Bananas", 11,0));
         productList.add(new LegacyProduct(0, 9999, "sabih", 1,0));
-        order = new Order(12345678, Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
+        order = new Order("12345678", Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
 
         initializeViews();
         initializeColors();
@@ -110,7 +110,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
 
         tvOrderStatus.setText(getOrderStatus());
 
-        tvOrderID.setText(Integer.toString(order.getOrderID()));
+        tvOrderID.setText(order.getOrderID());
 
         tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
         tvEstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
