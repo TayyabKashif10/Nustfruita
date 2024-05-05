@@ -1,4 +1,4 @@
-package com.nustfruta.postorder;
+package com.nustfruta.post_order;
 
 import android.view.LayoutInflater;
 import android.view.View;

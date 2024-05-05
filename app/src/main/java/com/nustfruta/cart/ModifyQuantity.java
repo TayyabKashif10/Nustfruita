@@ -1,4 +1,4 @@
-package com.nustfruta.CartAndCheckout;
+package com.nustfruta.cart;
 
 public interface ModifyQuantity {
     void plusButton(CartRecyclerViewAdapter.ViewHolder holder, int position);

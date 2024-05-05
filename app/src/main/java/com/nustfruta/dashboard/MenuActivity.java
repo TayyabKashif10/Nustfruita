@@ -23,14 +23,18 @@ import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.R;
 import com.nustfruta.authentication.ProfileActivity;
+import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseUtil;
 
@@ -54,6 +58,11 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     DrawerLayout drawerLayout;
     LinearLayout orders, profile, about, logout;
+
+    TabLayout tabLayout;
+
+    ViewPager2 viewPager;
+    MenuFragmentAdapter fragmentAdapter;
 
     ImageView optionsIcon;
 
@@ -90,6 +99,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         fetchedFact = getString(R.string.sample_fact);
         initializeViews();
         attachListeners();
+        setupMenuFragments();
         syncFruitFactNumber();
         factChangeHandler = new Handler();
     }
@@ -139,7 +149,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
     public void attachListeners()
     {
         optionsIcon.setOnClickListener(this);
@@ -178,6 +187,34 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         textB = findViewById(R.id.textB);
         orders=findViewById(R.id.orderRow); profile=findViewById(R.id.profileRow);
         about=findViewById(R.id.aboutRow); logout=findViewById(R.id.logoutRow);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+    }
+
+    public void setupMenuFragments()
+    {
+        fragmentAdapter = new MenuFragmentAdapter(getSupportFragmentManager(), getLifecycle());
+        viewPager.setAdapter(fragmentAdapter);
+
+        new TabLayoutMediator(tabLayout, viewPager, (tab, position)->{
+
+           switch (position)
+           {
+               case 0:
+                   //fruit tab
+                   tab.setIcon(R.drawable.fruit_apple);
+                    break;
+               case 1:
+                   // salad tab
+                   tab.setIcon(R.drawable.fruit_bowl);
+                   break;
+               case 2:
+                   // bundle tab
+                   tab.setIcon(R.drawable.fruit_bundle);
+           }
+
+        }).attach();
+
     }
 
     public void setFruitFact(TextView v)

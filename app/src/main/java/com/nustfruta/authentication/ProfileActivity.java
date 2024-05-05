@@ -107,8 +107,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             skipText.setOnClickListener(this);
             profileText.setText(getString(R.string.complete_profile_prompt));
         }
-        //TODO: remove
-        profileText.setText("nigga");
     }
 
     public void initializeViews()

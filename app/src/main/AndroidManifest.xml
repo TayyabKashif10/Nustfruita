@@ -17,10 +17,10 @@
             android:name=".dashboard.MenuActivity"
             android:exported="false" />
 
-        <activity android:name=".CartAndCheckout.CartActivity"
+        <activity android:name=".cart.CartActivity"
             android:exported="true" />
         <activity
-            android:name=".postorder.OrderTrackingActivity"
+            android:name=".post_order.OrderTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".authentication.LoginOTPActivity"
