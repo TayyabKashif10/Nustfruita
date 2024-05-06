@@ -19,11 +19,7 @@ public class YourOrdersAdapter extends RecyclerView.Adapter<YourOrdersAdapter.Vi
 
     final private ArrayList<Order> orderList;
 
-    private OrderClickListener orderClickListener;
-
-    public void setOrderClickListener(OrderClickListener orderClickListener) {
-        this.orderClickListener = orderClickListener;
-    }
+    YourOrdersActivity parent;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvID, tvStatus, tvDate, tvTotal;
@@ -40,8 +36,9 @@ public class YourOrdersAdapter extends RecyclerView.Adapter<YourOrdersAdapter.Vi
         }
     }
 
-    public YourOrdersAdapter(ArrayList<Order> orderList) {
+    public YourOrdersAdapter(YourOrdersActivity parent, ArrayList<Order> orderList) {
         this.orderList = orderList;
+        this.parent = parent;
     }
 
     @NonNull
@@ -64,7 +61,8 @@ public class YourOrdersAdapter extends RecyclerView.Adapter<YourOrdersAdapter.Vi
         viewHolder.cMainCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orderClickListener.onClick(thisOrder.getOrderID());
+                parent.expandCard(thisOrder.getOrderID()
+                );
             }
         });
 

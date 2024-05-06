@@ -20,7 +20,7 @@ import com.nustfruta.models.User;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class YourOrdersActivity extends AppCompatActivity implements OrderClickListener {
+public class YourOrdersActivity extends AppCompatActivity {
 
     // dummy, provide from database later
     ArrayList<Order> orderList;
@@ -56,17 +56,18 @@ public class YourOrdersActivity extends AppCompatActivity implements OrderClickL
 
     private void initializeOrderList() {
         rvOrderList = findViewById(R.id.rvOrderList);
-        adapter = new YourOrdersAdapter(orderList);
-        adapter.setOrderClickListener(this);
+        adapter = new YourOrdersAdapter(this, orderList);
 
         rvOrderList.setLayoutManager(new LinearLayoutManager(this));
         rvOrderList.setAdapter(adapter);
     }
 
-    @Override
-    public void onClick(String orderID) {
+
+    public void expandCard(String orderID)
+    {
         Intent intent = new Intent(this, OrderTrackingActivity.class);
         intent.putExtra("ID", orderID);
         startActivity(intent);
+
     }
 }
