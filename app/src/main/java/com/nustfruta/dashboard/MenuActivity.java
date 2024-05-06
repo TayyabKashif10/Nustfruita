@@ -2,7 +2,6 @@ package com.nustfruta.dashboard;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
@@ -39,8 +37,13 @@ import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseUtil;
 
 import java.util.Random;
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageActivity;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
+
+
+
 
     @Override
     public void onClick(View v) {
