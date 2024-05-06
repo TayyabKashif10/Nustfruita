@@ -1,9 +1,10 @@
 
-
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
 }
+
+
 
 android {
     namespace = "com.nustfruta"
@@ -59,4 +60,6 @@ dependencies {
 
     // country code picker
     implementation("com.hbb20:ccp:2.7.3")
+
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
 }
