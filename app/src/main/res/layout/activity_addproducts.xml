@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:contentDescription="@string/banana">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/unitPriceLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:boxBackgroundColor="@color/primary_light"
+        app:boxBackgroundMode="filled"
+        app:boxCornerRadiusBottomEnd="40dp"
+        app:boxCornerRadiusBottomStart="40dp"
+        app:boxCornerRadiusTopEnd="40dp"
+        app:boxCornerRadiusTopStart="40dp"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/orange"
+        app:boxStrokeColor="@color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:boxStrokeErrorColor="@color/apple_red"
+        app:cursorErrorColor="@color/apple_red"
+        app:errorIconTint="@color/apple_red"
+        app:errorTextColor="@color/apple_red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productNameLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/unitPrice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/money_icon"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/orange"
+            android:hint="@string/unit_price"
+            style="@style/CustomTextInputLayout"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/addNewProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/add_new_product"
+        android:textColor="@color/orange"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/cherry_icon"
+        app:layout_constraintBottom_toTopOf="@+id/addNewProduct"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/blue_fruit_cherries" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4004825" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/productNameLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:boxBackgroundColor="@color/primary_light"
+        app:boxBackgroundMode="filled"
+        app:boxCornerRadiusBottomEnd="40dp"
+        app:boxCornerRadiusBottomStart="40dp"
+        app:boxCornerRadiusTopEnd="40dp"
+        app:boxCornerRadiusTopStart="40dp"
+        app:boxStrokeColor="@color/transparent"
+        app:boxStrokeErrorColor="@color/apple_red"
+        app:cursorErrorColor="@color/apple_red"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/orange"
+        app:errorIconTint="@color/apple_red"
+        app:errorTextColor="@color/apple_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/productName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/fruit_apple"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/orange"
+            android:hint="@string/product_name"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/productSaveBtn"
+        style="@style/AuthButtonStyle"
+        android:layout_marginTop="20dp"
+        android:text="@string/save"
+        android:textColor="@color/onPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSelectBtn" />
+
+    <Button
+        android:id="@+id/imgSelectBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/select_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/unitPriceLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
