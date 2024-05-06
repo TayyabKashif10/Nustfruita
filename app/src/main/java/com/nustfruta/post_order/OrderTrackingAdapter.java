@@ -1,4 +1,4 @@
-package com.nustfruta.postorder;
+package com.nustfruta.post_order;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.LegacyProduct;
 
 import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
 
-    private ArrayList<Product> productList;
+    private ArrayList<LegacyProduct> productList;
 
 
     private HeightListener heightListener;
@@ -38,7 +38,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         }
     }
 
-    public OrderTrackingAdapter(ArrayList<Product> productList) {
+    public OrderTrackingAdapter(ArrayList<LegacyProduct> productList) {
         this.productList = productList;
     }
 
@@ -63,7 +63,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Product thisProduct = productList.get(position);
+        LegacyProduct thisProduct = productList.get(position);
 
         viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
         viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getUnitPrice() * thisProduct.getQuantity()));

@@ -42,15 +42,18 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
     // switches to next activity once splash screen is closed
     @Override
     public void onSplashComplete() {
+
+        Intent intent;
         if (FirebaseUtil.getCurrentUserID() == null)
         {
-            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
-            startActivity(authenticate);
+            intent = new Intent(this, LoginPhoneNumberActivity.class);
+
         }
         else {
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, MenuActivity.class);
         }
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 
