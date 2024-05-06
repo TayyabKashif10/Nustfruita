@@ -20,7 +20,9 @@
             android:exported="false" />
 
 
+
         <activity android:name=".cart.CartActivity"
+
             android:exported="true" />
         <activity
             android:name=".post_order.OrderTrackingActivity"

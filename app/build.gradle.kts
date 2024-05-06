@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nustfruta"
-        minSdk = 31
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -53,6 +53,9 @@ dependencies {
 
     // Firebase database
     implementation("com.google.firebase:firebase-database")
+
+    // Firebase storage
+    implementation("com.google.firebase:firebase-storage")
 
     // Firebase authentication
     implementation("com.google.firebase:firebase-auth")

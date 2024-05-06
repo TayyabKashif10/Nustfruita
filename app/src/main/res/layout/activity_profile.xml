@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_begin="332dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/nameCard"
@@ -212,7 +212,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/roomCard"
-        app:layout_constraintBottom_toTopOf="@id/saveBtn"
+        app:layout_constraintBottom_toTopOf="@id/productSaveBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/skip_profile_completion_prompt"
@@ -222,7 +222,7 @@
         />
 
     <Button
-        android:id="@+id/saveBtn"
+        android:id="@+id/productSaveBtn"
         style="@style/AuthButtonStyle"
         android:layout_marginTop="40dp"
         android:text="@string/save"

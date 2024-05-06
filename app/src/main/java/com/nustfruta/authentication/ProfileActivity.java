@@ -115,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         email = findViewById(R.id.email);
         hostel = findViewById(R.id.hostelField);
         roomNumber = findViewById(R.id.room);
-        saveBtn = findViewById(R.id.saveBtn);
+        saveBtn = findViewById(R.id.productSaveBtn);
         hostelFieldContainer = findViewById(R.id.hostelFieldContainer);
         skipText = findViewById(R.id.skipText);
         profileText = findViewById(R.id.profileText);
