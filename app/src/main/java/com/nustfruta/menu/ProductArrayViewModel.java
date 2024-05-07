@@ -4,22 +4,23 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
 
 import java.util.ArrayList;
 
 public class ProductArrayViewModel extends ViewModel {
 
-    MutableLiveData<ArrayList<ProductDB>> liveProductArray = new MutableLiveData<>();
+    MutableLiveData<ArrayList<CartProduct>> liveProductArray = new MutableLiveData<>();
 
-    public void addProduct(ProductDB productDB)
+    public void addProduct(CartProduct product)
     {
-        if (getArray() != null && productDB != null)
+        if (getArray() != null && product != null)
         {
             // observer is only triggered if the reference to the observable object is reassigned, not if the internal items of an arraylist are changed
             // so to modify the array you have to reAssign the array.
-            ArrayList<ProductDB> currentSnapshot = getArray();
-            currentSnapshot.add(productDB);
+            ArrayList<CartProduct> currentSnapshot = getArray();
+            currentSnapshot.add(product);
             liveProductArray.setValue(currentSnapshot);
         }
     }
@@ -29,11 +30,16 @@ public class ProductArrayViewModel extends ViewModel {
         liveProductArray.setValue(new ArrayList<>());
     }
 
-    public LiveData<ArrayList<ProductDB>> getLiveArray() {
+    public LiveData<ArrayList<CartProduct>> getLiveArray() {
         return liveProductArray;
     }
 
-    public ArrayList<ProductDB> getArray() {
+    public ArrayList<CartProduct> getArray() {
         return liveProductArray.getValue();
     }
+
+    public void updateArray(ArrayList<CartProduct> updatedArray) {
+        liveProductArray.setValue(updatedArray);
+    }
+
 }

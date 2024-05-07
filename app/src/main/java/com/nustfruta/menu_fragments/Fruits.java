@@ -17,8 +17,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.nustfruta.R;
 import com.nustfruta.menu.ArrayModifier;
 import com.nustfruta.menu.ProductArrayViewModel;
+import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.FirebaseDBUtil;
+
+import org.checkerframework.checker.units.qual.C;
 
 public class Fruits extends Fragment {
 
@@ -28,7 +31,9 @@ public class Fruits extends Fragment {
     ArrayModifier arrayModifier = new ArrayModifier() {
         @Override
         public void addObject(ProductDB productDB) {
-            productArrayViewModel.addProduct(productDB);
+
+            // TODO: implement something to control quantity
+            productArrayViewModel.addProduct(new CartProduct(productDB, 1));
         }
     };
 
