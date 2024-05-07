@@ -16,7 +16,7 @@
             android:name=".orders.YourOrdersActivity"
             android:exported="false" />
         <activity
-            android:name=".dashboard.MenuActivity"
+            android:name=".menu.MenuActivity"
             android:exported="false" />
 
 
@@ -38,7 +38,7 @@
             android:name=".authentication.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".dashboard.SplashActivity"
+            android:name=".menu.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.SplashTheme"
             android:noHistory="true" >

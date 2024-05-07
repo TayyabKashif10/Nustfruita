@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.models.User;
 
-abstract public class FirebaseUtil {
+abstract public class FirebaseDBUtil {
 
     public static FirebaseDatabase database;
 
@@ -33,9 +32,15 @@ abstract public class FirebaseUtil {
         return database.getReference("users").child(getCurrentUserID());
     }
 
+
     public static DatabaseReference getFruitFactReference()
     {
         return database.getReference("fruit_facts");
+    }
+
+    public static DatabaseReference getProductsNodeRerefence()
+    {
+        return database.getReference("products");
     }
 
     // set the callBack listeners for the current user to keep it updated.

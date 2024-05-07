@@ -26,10 +26,6 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
     public Button checkoutButton;
 
-    public String deliveryNotesString;
-
-    public EditText deliveryNotes;
-
     public TextView checkoutPrice;
 
     public int subtotal = 0;

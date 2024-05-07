@@ -22,11 +22,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.nustfruta.dashboard.MenuActivity;
+import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
-import com.nustfruta.utility.FirebaseUtil;
+import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.VerifyCredentials;
 
 
@@ -132,7 +132,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         // this should never execute because the user should not be able to get to this activity without registering a phone number first.
         // if a guest acount is implemented, make him register a phone number first before getting to this activity.
 
-        if (FirebaseUtil.getCurrentUserID() == null)
+        if (FirebaseDBUtil.getCurrentUserID() == null)
         {
             Toast.makeText(getApplicationContext(), "You need to be registered with a Phone number to save a profile.", Toast.LENGTH_LONG).show();
             return;
@@ -211,7 +211,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         currentSignedUser.setRoomNumber(inputRoomNumber);
 
         //over-write the user with the new details.
-        FirebaseUtil.storeUser(currentSignedUser, FirebaseUtil.getCurrentUserID());
+        FirebaseDBUtil.storeUser(currentSignedUser, FirebaseDBUtil.getCurrentUserID());
 
         Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
 
@@ -229,7 +229,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void getUser()
     {
 
-        FirebaseUtil.getCurrentUserReference().addValueEventListener(
+        FirebaseDBUtil.getCurrentUserReference().addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
