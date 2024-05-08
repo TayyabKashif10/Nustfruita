@@ -3,6 +3,8 @@ package com.nustfruta.utility;
 // store static final objects, numbers etc in this class
 // string resources should be externalized to strings.xml because those are subject to language translation.
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,6 +24,10 @@ abstract public class Constants {
     public static final int MENU_CATEGORIES = 3;
 
     public static final int DELIVERY_FEES = 99;
+
+    public static final int CART_RESULT_CODE = 111;
+
+    public static final int COLOR_PRIMARY = Color.parseColor("#089C89");
 
 
 }

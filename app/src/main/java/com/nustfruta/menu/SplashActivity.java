@@ -1,4 +1,4 @@
-package com.nustfruta.dashboard;
+package com.nustfruta.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
-import com.nustfruta.utility.FirebaseUtil;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 public class SplashActivity extends AppCompatActivity implements SplashCompleteListener{
 
@@ -44,7 +44,7 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
     public void onSplashComplete() {
 
         Intent intent;
-        if (FirebaseUtil.getCurrentUserID() == null)
+        if (FirebaseDBUtil.getCurrentUserID() == null)
         {
             intent = new Intent(this, LoginPhoneNumberActivity.class);
 

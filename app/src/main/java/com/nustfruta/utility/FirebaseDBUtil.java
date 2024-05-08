@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,7 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.models.User;
 
-abstract public class FirebaseUtil {
+abstract public class FirebaseDBUtil {
 
     public static FirebaseDatabase database;
 
@@ -21,7 +20,6 @@ abstract public class FirebaseUtil {
 
     public static String getCurrentUserID()
     {
-
         /*this is NUll if there is no signed in user.
          once a user signs in the App with mAuth.signWithCredentials(), FirebaseAuth stores that user details
          somewhere in app memory, so this method will return currentUserID() as long as we dont clear data after signing in*/
@@ -36,6 +34,11 @@ abstract public class FirebaseUtil {
     public static DatabaseReference getFruitFactReference()
     {
         return database.getReference("fruit_facts");
+    }
+
+    public static DatabaseReference getProductsNodeRerefence()
+    {
+        return database.getReference("products");
     }
 
     // set the callBack listeners for the current user to keep it updated.

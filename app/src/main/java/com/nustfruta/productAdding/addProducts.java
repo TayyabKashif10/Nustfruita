@@ -19,12 +19,12 @@ import com.google.firebase.Firebase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.LegacyProduct;
 
 public class addProducts extends AppCompatActivity implements View.OnClickListener {
 
 
-    Product newProduct;
+    LegacyProduct newProduct;
 
 
     @Override

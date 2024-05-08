@@ -11,7 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
+import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.LegacyProduct;
+import com.nustfruta.utility.FirebaseStorageUtil;
 
 import java.util.ArrayList;
 
@@ -20,7 +22,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     CartActivity parent;
 
-    ArrayList<LegacyProduct> productList;
+    ArrayList<CartProduct> productList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, price, quantity, subtotalPrice;
@@ -47,7 +49,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     }
 
 
-    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<LegacyProduct> productList) {
+    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<CartProduct> productList) {
 
         this.parent = parent;
         this.productList = productList;
@@ -73,12 +75,12 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.ViewHolder holder, int position) {
 
         if (getItemViewType(position) == 0) {
-            LegacyProduct product = productList.get(position);
-            holder.productName.setText(product.getName());
-            holder.price.setText("PKR " + Integer.toString(product.getQuantity() * product.getUnitPrice()));
+            CartProduct product = productList.get(position);
+            holder.productName.setText(product.getProductName());
+            holder.price.setText("PKR " + product.getQuantity() * product.getUnitPrice());
             holder.quantity.setText(Integer.toString(product.getQuantity()));
-            holder.productIcon.setImageResource(productList.get(position).getImage());
 
+            FirebaseStorageUtil.BindImage(holder.productIcon, productList.get(position).getImageURL());
 
             // onClick listener of plus buttons
             holder.plusButton.setOnClickListener(new View.OnClickListener() {
@@ -99,8 +101,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
         else
             holder.subtotalPrice.setText("PKR " + parent.subtotal);
-
-
 
     }
 

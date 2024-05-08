@@ -65,4 +65,9 @@ dependencies {
     implementation("com.hbb20:ccp:2.7.3")
 
     implementation("com.vanniktech:android-image-cropper:4.5.0")
+
+    // FirebaseUI for Firebase Realtime Database
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
 }
