@@ -79,7 +79,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
         if (getItemViewType(position) == 0) {
             Product product = productList.get(position);
             holder.productName.setText(product.getName());
-            holder.price.setText("PKR " + Integer.toString(product.getQuantity() * product.getUnitPrice()));
+            holder.price.setText("PKR " + product.getQuantity() * product.getUnitPrice());
             holder.quantity.setText(Integer.toString(product.getQuantity()));
             holder.productIcon.setImageResource(productList.get(position).getImage());
 

@@ -81,4 +81,6 @@ abstract public class FirebaseUtil {
     }
 
 
+    public static void storeproduct(Product product, )
+
 }

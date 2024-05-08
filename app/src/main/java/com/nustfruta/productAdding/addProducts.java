@@ -1,30 +1,41 @@
 package com.nustfruta.productAdding;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.ColorStateList;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.core.widget.ImageViewCompat;
 
+import com.canhub.cropper.CropImageView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.Firebase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
 
-public class addProducts extends AppCompatActivity implements View.OnClickListener {
+import java.io.ByteArrayOutputStream;
+import java.util.Objects;
 
+public class addProducts extends AppCompatActivity implements View.OnClickListener, OnFailureListener, OnSuccessListener {
 
-    Product newProduct;
 
 
     @Override
@@ -40,16 +51,47 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
             selectImage();
         }
 
+        else if (v.getId() == cropBtn.getId())
+        {
+
+            croppedImgUri = bitmapToUri(getApplicationContext(), Objects.requireNonNull(cropImageView.getCroppedImage()));
+
+
+            if(croppedImgUri != null)
+            {
+
+                productAddLayout();
+
+                productImage.setImageURI(croppedImgUri);
+            }
+
+            else
+            {
+                Toast.makeText(this, "Image upload failed.", Toast.LENGTH_LONG).show();
+
+                productAddLayout();
+            }
+
+
+        }
+        
     }
 
 
     TextInputEditText productName, unitPrice;
 
-    Button productSaveBtn, imgSelectBtn;
+    AutoCompleteTextView category, unit;
+
+    Button productSaveBtn, imgSelectBtn, cropBtn;
 
     ImageView productImage;
 
-    Uri imageUri;
+    TextView addNewProduct;
+
+    CropImageView cropImageView;
+
+
+    Uri imageUri, croppedImgUri;
 
     StorageReference storageReference;
 
@@ -58,12 +100,15 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         setContentView(R.layout.activity_addproducts);
 
         initializeViews();
 
         productSaveBtn.setOnClickListener(this);
         imgSelectBtn.setOnClickListener(this);
+        cropBtn.setOnClickListener(this);
+
 
 
     }
@@ -76,6 +121,16 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         productImage = findViewById(R.id.productImage);
         imgSelectBtn = findViewById(R.id.imgSelectBtn);
         productSaveBtn = findViewById(R.id.productSaveBtn);
+        addNewProduct = findViewById(R.id.addNewProduct);
+        category = findViewById(R.id.category);
+        unit = findViewById(R.id.productUnit);
+
+        cropBtn = findViewById(R.id.cropDoneBtn);
+        cropImageView = findViewById(R.id.cropImageView);
+        cropImageView.setAspectRatio(1, 1);
+
+        cropBtn.setVisibility(View.GONE);
+        cropImageView.setVisibility(View.GONE);
 
     }
 
@@ -86,12 +141,25 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         String inputProductName = productName.getText().toString();
         String inputUnitPrice =  unitPrice.getText().toString();
+        String inputCategory = (category.getText().toString());
 
+        if (inputCategory.isEmpty())
+        {
+            isProductValid = false;
+            category.setError("Please select a category");
+        }
 
         if (inputProductName.isEmpty())
         {
            isProductValid = false;
            productName.setError("Please enter a product name");
+        }
+
+        if (croppedImgUri == null)
+        {
+            isProductValid = false;
+
+            imgSelectBtn.setError("Please select an image.");
         }
 
 
@@ -108,8 +176,6 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         uploadImage(inputProductName);
 
-        // TODO: Terminate the activity here
-
     }
 
 
@@ -122,22 +188,29 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
+
         if (requestCode == 100 && data != null && data.getData() != null) {
 
+            if (isImageValidSize(this, data.getData(), 1024 * 1024 * 5))
+            {
+                Toast.makeText(this, "Image size is too large, try again", Toast.LENGTH_LONG).show();
+
+                return;
+            }
             imageUri = data.getData();
 
-            productImage.clearColorFilter();
+            cropLayout();
 
-            productImage.setImageURI(imageUri);
+            cropImageView.setImageUriAsync(imageUri);
         }
 
     }
-
-
 
 
     public void uploadImage(String productName) {
@@ -145,11 +218,95 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         storageReference = FirebaseStorage.getInstance().getReference("images/" + productName);
 
-        storageReference.putFile(imageUri);
+        storageReference.putFile(imageUri).addOnFailureListener(this).addOnSuccessListener(this);
+
 
         // Option to use onSuccessListener and onFailureListener here but its so ugly.
 
-        productImage.setImageResource(R.drawable.blue_fruit_cherries);
+    }
+
+
+    @Override
+    public void onFailure(@NonNull Exception e) {
+
+        Toast.makeText(this, "Image upload failed.", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onSuccess(Object o) {
+        finish();
+    }
+
+    // Helper function to convert bitmap to uri.
+    public Uri bitmapToUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+
+    public void cropLayout() {
+
+        cropImageView.setVisibility(View.VISIBLE);
+        cropBtn.setVisibility(View.VISIBLE);
+
+
+        addNewProduct.setVisibility(View.GONE);
+        productName.setVisibility(View.GONE);
+        unitPrice.setVisibility(View.GONE);
+        productImage.setVisibility(View.GONE);
+        imgSelectBtn.setVisibility(View.GONE);
+        productSaveBtn.setVisibility(View.GONE);
+        category.setVisibility(View.GONE);
+        unit.setVisibility(View.GONE);
+    }
+
+
+    public void productAddLayout() {
+
+        productName.setVisibility(View.VISIBLE);
+        unitPrice.setVisibility(View.VISIBLE);
+        productImage.setVisibility(View.VISIBLE);
+        imgSelectBtn.setVisibility(View.VISIBLE);
+        productSaveBtn.setVisibility(View.VISIBLE);
+        addNewProduct.setVisibility(View.VISIBLE);
+        category.setVisibility(View.VISIBLE);
+        unit.setVisibility(View.VISIBLE);
+
+
+        cropImageView.setVisibility(View.GONE);
+        cropBtn.setVisibility(View.GONE);
 
     }
+
+
+    public boolean isImageValidSize(Context context, Uri imageUri, long maxSize) {
+
+
+        try {
+
+            Cursor cursor = context.getContentResolver().query(imageUri, new String[]{MediaStore.Images.Media.SIZE}, null, null, null);
+
+
+            if (cursor != null && cursor.moveToFirst()) {
+
+                long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.SIZE) + 1);
+                cursor.close();
+
+                if (size != 0)
+                    return size - 1 <= maxSize;
+
+                else
+                    Log.e("TAG", "Error: SIZE column not found in cursor");
+            }
+        }
+
+        catch (Exception e) {
+            Log.e("TAG", "Error getting image size:", e);
+        }
+
+        return false;
+    }
 }
+

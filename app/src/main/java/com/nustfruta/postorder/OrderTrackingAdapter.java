@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
 
-    private ArrayList<Product> productList;
+    private final ArrayList<Product> productList;
 
 
     private HeightListener heightListener;

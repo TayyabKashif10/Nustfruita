@@ -103,7 +103,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
         CountDownTimer cTimer = new CountDownTimer(30000, 1000) {
             String currentMessage;
             public void onTick(long millisUntilFinished) {
-                currentMessage = "Resend OTP after " +String.valueOf(millisUntilFinished/1000) + " seconds";
+                currentMessage = "Resend OTP after " + millisUntilFinished / 1000 + " seconds";
                 resendText.setText(currentMessage);
             }
             public void onFinish() {

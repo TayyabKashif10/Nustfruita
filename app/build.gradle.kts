@@ -1,9 +1,11 @@
 
 
+
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
 }
+
 
 android {
     namespace = "com.nustfruta"
@@ -11,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nustfruta"
-        minSdk = 26
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -62,4 +64,7 @@ dependencies {
 
     // country code picker
     implementation("com.hbb20:ccp:2.7.3")
+
+    // Image cropping library
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
 }
