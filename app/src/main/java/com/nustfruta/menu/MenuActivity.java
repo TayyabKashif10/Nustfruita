@@ -14,6 +14,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -37,15 +42,43 @@ import com.nustfruta.R;
 import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
+import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
 
     ProductArrayViewModel productArrayViewModel;
+
+    ActivityResultLauncher<Intent> cartLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+
+                    if (result.getResultCode() == Constants.CART_RESULT_CODE)
+                    {
+                        Intent intent = result.getData();
+                        if (intent != null)
+                        {
+                            ArrayList<CartProduct> updatedArray = (ArrayList<CartProduct>) intent.getExtras().get("productArray");
+                            if (updatedArray!=null)
+                            {
+                                // update view model, this will also trigger the observer which automatically updates the counter.
+                                productArrayViewModel.updateArray(updatedArray);
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
+    );
 
     TextView productCounter;
     @Override
@@ -59,7 +92,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (v.getId()==basketClickable.getId())
         {
-            navigateOut(CartActivity.class);
+            Intent intent = new Intent(this, CartActivity.class);
+            intent.putExtra("productArray", productArrayViewModel.getArray());
+            cartLauncher.launch(intent);
 
         }
         //TODO: navigate out for other buttons.
@@ -115,6 +150,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     protected void onResume() {
+        fragmentAdapter.notifyDataSetChanged();
 
         /*
         * the drawer is left open when user navigates to another activity (this activity is set to pause) so if its open when user comes back, close it.
@@ -176,12 +212,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         productArrayViewModel.initializeArray();
         productArrayViewModel.getLiveArray().observe(this, item->{
 
-            // observer is also called when array is first initialized, so to prevent snackbar from showing when that happens.
-            if (item.size() != 0)
-            {
-                Snackbar.make(findViewById(android.R.id.content),"Added to Cart.",Snackbar.LENGTH_SHORT).setBackgroundTint(getResources().getColor(R.color.primary_color)).show();
-                productCounter.setText(String.valueOf(item.size()));
-            }
+        // update product Counter
+        productCounter.setText(String.valueOf(item.size()));
 
         });
     }

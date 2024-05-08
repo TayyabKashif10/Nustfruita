@@ -1,13 +1,13 @@
 package com.nustfruta.menu_fragments;
 
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,16 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.nustfruta.R;
 import com.nustfruta.menu.ArrayModifier;
 import com.nustfruta.models.ProductDB;
+import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseStorageUtil;
-
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.Instant;
-
-import kotlin.random.URandomKt;
 
 public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAdapter.ProductHolder> {
 
@@ -62,6 +58,7 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
             @Override
             public void onClick(View v) {
                 arrayModifier.addObject(productDB);
+                Snackbar.make(v,"Added to Cart.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();
             }
         });
 

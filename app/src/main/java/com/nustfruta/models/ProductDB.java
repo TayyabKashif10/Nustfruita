@@ -6,12 +6,12 @@ public class ProductDB {
 
     private String productUnit;
 
-    private String unitPrice;
+    private int unitPrice;
 
     private String imageURL;
 
 
-    public ProductDB(String productName, String productUnit, String unitPrice, String imageURL) {
+    public ProductDB(String productName, String productUnit, int unitPrice, String imageURL) {
         this.productName = productName;
         this.productUnit = productUnit;
         this.unitPrice = unitPrice;
@@ -37,11 +37,11 @@ public class ProductDB {
         this.productUnit = productUnit;
     }
 
-    public String getUnitPrice() {
+    public int getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(String unitPrice) {
+    public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
 

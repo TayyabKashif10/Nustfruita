@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,6 @@ public class Fruits extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fruits, container, false);
-
     }
 
     @Override
@@ -61,7 +61,7 @@ public class Fruits extends Fragment {
         recyclerView = view.findViewById(R.id.fruitsRecylerView);
 
         // to configure the adapter to parse and use Product objects from the database, basically binds them without adding ChildEventListeners
-        options = new FirebaseRecyclerOptions.Builder<ProductDB>().setQuery(FirebaseDBUtil.getProductsNodeRerefence().child("fruits"), ProductDB.class).build();
+        options = new FirebaseRecyclerOptions.Builder<ProductDB>().setQuery(FirebaseDBUtil.getProductsNodeRerefence().child("fruits"), ProductDB.class).setLifecycleOwner(this).build();
         adapter = new ProductAdapter(options, arrayModifier);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -71,14 +71,9 @@ public class Fruits extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        adapter.stopListening();
+        // necessary to reconfigure the recycle view on returning from cart activity.
+        adapter.notifyDataSetChanged();
     }
-
 
 }

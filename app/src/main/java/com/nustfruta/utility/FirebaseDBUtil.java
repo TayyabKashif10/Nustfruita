@@ -20,7 +20,6 @@ abstract public class FirebaseDBUtil {
 
     public static String getCurrentUserID()
     {
-
         /*this is NUll if there is no signed in user.
          once a user signs in the App with mAuth.signWithCredentials(), FirebaseAuth stores that user details
          somewhere in app memory, so this method will return currentUserID() as long as we dont clear data after signing in*/
@@ -31,7 +30,6 @@ abstract public class FirebaseDBUtil {
     {
         return database.getReference("users").child(getCurrentUserID());
     }
-
 
     public static DatabaseReference getFruitFactReference()
     {

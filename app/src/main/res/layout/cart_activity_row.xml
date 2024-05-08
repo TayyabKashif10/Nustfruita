@@ -97,7 +97,7 @@
                 android:elevation="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/quantity"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/banana_icon" />
+                app:srcCompat="@drawable/fruit_apple" />
 
             <ImageButton
                 android:id="@+id/plusButton"

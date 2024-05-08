@@ -12,28 +12,36 @@ import androidx.annotation.NonNull;
 // update the viewmodel according to the result from cart activity
 // instead of extending productDB, give same fields, but make unitPrice integer and shit.
 
-
-public class CartProduct extends ProductDB implements Parcelable
+public class CartProduct implements Parcelable
 {
 
     private int quantity;
 
+    private String productName;
+
+    private String productUnit;
+
+    private int unitPrice;
+
+    private String imageURL;
+
     public CartProduct() {
     }
 
-    public CartProduct(String productName, String productUnit, String unitPrice, String imageURL, int quantity) {
-        super(productName, productUnit, unitPrice, imageURL);
+    public CartProduct(int quantity, String productName, String productUnit, int unitPrice, String imageURL) {
         this.quantity = quantity;
+        this.productName = productName;
+        this.productUnit = productUnit;
+        this.unitPrice = unitPrice;
+        this.imageURL = imageURL;
     }
 
     public CartProduct(ProductDB productDB, int quantity) {
-        super(productDB.getProductName(), productDB.getProductUnit(), productDB.getUnitPrice(), productDB.getImageURL());
+        this.productName = productDB.getProductName();
+        this.productUnit = productDB.getProductUnit();
+        this.unitPrice = productDB.getUnitPrice();
+        this.imageURL = productDB.getImageURL();
         this.quantity = quantity;
-    }
-
-
-    protected CartProduct(Parcel in) {
-        quantity = in.readInt();
     }
 
 
@@ -45,44 +53,41 @@ public class CartProduct extends ProductDB implements Parcelable
         this.quantity = quantity;
     }
 
-    @Override
+    
     public String getProductName() {
-        return super.getProductName();
+        return productName;
     }
 
-    @Override
     public void setProductName(String productName) {
-        super.setProductName(productName);
+        this.productName = productName;
     }
 
-    @Override
     public String getProductUnit() {
-        return super.getProductUnit();
+        return productUnit;
     }
 
-    @Override
     public void setProductUnit(String productUnit) {
-        super.setProductUnit(productUnit);
+        this.productUnit = productUnit;
     }
 
-    @Override
-    public String getUnitPrice() {
-        return super.getUnitPrice();
+    
+    public int getUnitPrice() {
+        return unitPrice;
     }
 
-    @Override
-    public void setUnitPrice(String unitPrice) {
-        super.setUnitPrice(unitPrice);
+    
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
     }
 
-    @Override
+    
     public String getImageURL() {
-        return super.getImageURL();
+        return imageURL;
     }
 
-    @Override
+    
     public void setImageURL(String imageURL) {
-        super.setImageURL(imageURL);
+        this.imageURL = imageURL;
     }
 
 
@@ -96,7 +101,6 @@ public class CartProduct extends ProductDB implements Parcelable
         quantity--;
     }
 
-
     @Override
     public int describeContents() {
         return 0;
@@ -105,6 +109,10 @@ public class CartProduct extends ProductDB implements Parcelable
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(quantity);
+        dest.writeString(productName);
+        dest.writeString(productUnit);
+        dest.writeInt(unitPrice);
+        dest.writeString(imageURL);
     }
 
 
@@ -120,5 +128,14 @@ public class CartProduct extends ProductDB implements Parcelable
         }
     };
 
+    protected CartProduct(Parcel in) {
+
+        this.quantity = in.readInt();
+        this.productName = in.readString();
+        this.productUnit = in.readString();
+        this.unitPrice = in.readInt();
+        this.imageURL = in.readString();
+
+    }
 
 }
