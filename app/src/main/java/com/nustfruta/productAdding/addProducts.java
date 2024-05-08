@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +31,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
+import com.nustfruta.models.Product;
+import com.nustfruta.utility.Constants;
+import com.nustfruta.utility.FirebaseUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
@@ -55,22 +59,14 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         {
 
             croppedImgUri = bitmapToUri(getApplicationContext(), Objects.requireNonNull(cropImageView.getCroppedImage()));
-
+            productAddLayout();
 
             if(croppedImgUri != null)
-            {
-
-                productAddLayout();
-
                 productImage.setImageURI(croppedImgUri);
-            }
+
 
             else
-            {
                 Toast.makeText(this, "Image upload failed.", Toast.LENGTH_LONG).show();
-
-                productAddLayout();
-            }
 
 
         }
@@ -78,6 +74,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     }
 
 
+//    Product newProduct;
     TextInputEditText productName, unitPrice;
 
     AutoCompleteTextView category, unit;
@@ -109,7 +106,8 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
 
-
+        category.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, new String[]{"Fruits", "Salads"}));
+        unit.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, new String[]{"Kilogram", "Dozen", "Piece"}));
 
     }
 
@@ -139,11 +137,23 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         boolean isProductValid = true;
 
-        String inputProductName = productName.getText().toString();
+        String inputProductName = productName.getText().toString().toLowerCase();
         String inputUnitPrice =  unitPrice.getText().toString();
         String inputCategory = (category.getText().toString());
+        String inputUnit = (unit.getText().toString());
 
-        if (inputCategory.isEmpty())
+        // Option to add OnSuccess listener but i dont see a need
+        String inputImageUrl = storageReference.getDownloadUrl().toString();
+
+
+        if (!unit.getHint().toString().isEmpty())
+        {
+            isProductValid = false;
+            category.setError("Please select a unit");
+        }
+
+
+        if (!category.getHint().toString().isEmpty())
         {
             isProductValid = false;
             category.setError("Please select a category");
@@ -155,7 +165,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
            productName.setError("Please enter a product name");
         }
 
-        if (croppedImgUri == null)
+        if (inputImageUrl.isEmpty())
         {
             isProductValid = false;
 
@@ -166,6 +176,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         if (inputUnitPrice.isEmpty() || Integer.parseInt(inputUnitPrice) <= 0)
         {
             isProductValid = false;
+
             unitPrice.setError("Please enter a valid price");
         }
 
@@ -175,6 +186,11 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         }
 
         uploadImage(inputProductName);
+
+
+//        newProduct = new Product(inputProductName, inputUnitPrice, inputUnit, inputCategory, inputImageUrl);
+
+//        FirebaseUtil.storeProduct(newProduct);
 
     }
 
@@ -194,15 +210,15 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         super.onActivityResult(requestCode, resultCode, data);
 
 
-
         if (requestCode == 100 && data != null && data.getData() != null) {
 
-            if (isImageValidSize(this, data.getData(), 1024 * 1024 * 5))
+            if (!isImageValidSize(this, data.getData(), 1024 * 50))
             {
                 Toast.makeText(this, "Image size is too large, try again", Toast.LENGTH_LONG).show();
 
                 return;
             }
+
             imageUri = data.getData();
 
             cropLayout();
@@ -215,14 +231,15 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
     public void uploadImage(String productName) {
 
+        // TODO: CONFIRM IF IT WORKS
 
-        storageReference = FirebaseStorage.getInstance().getReference("images/" + productName);
+        if ((category.getText().toString()).equals("Fruits"))
+            storageReference = FirebaseStorage.getInstance().getReference("fruits/" + productName);
+
+        else if ((category.getText().toString()).equals("Salads"))
+            storageReference = FirebaseStorage.getInstance().getReference("salads/" + productName);
 
         storageReference.putFile(imageUri).addOnFailureListener(this).addOnSuccessListener(this);
-
-
-        // Option to use onSuccessListener and onFailureListener here but its so ugly.
-
     }
 
 
@@ -236,6 +253,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     public void onSuccess(Object o) {
         finish();
     }
+
 
     // Helper function to convert bitmap to uri.
     public Uri bitmapToUri(Context inContext, Bitmap inImage) {
