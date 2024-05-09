@@ -16,15 +16,8 @@ import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
-
+    OrderTrackingActivity parent;
     final private ArrayList<LegacyProduct> productList;
-
-
-    private HeightListener heightListener;
-
-    public void setHeightListener(HeightListener heightListener) {
-        this.heightListener = heightListener;
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvProductName;
@@ -38,7 +31,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         }
     }
 
-    public OrderTrackingAdapter(ArrayList<LegacyProduct> productList) {
+    public OrderTrackingAdapter(OrderTrackingActivity parent, ArrayList<LegacyProduct> productList) {
         this.productList = productList;
     }
 
@@ -53,8 +46,7 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
             @Override
             public void onGlobalLayout() {
                 llProductRow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                if (heightListener != null)
-                    heightListener.onHeightObtained(llProductRow.getHeight());
+                parent.setRowHeight(llProductRow.getHeight());
             }
         });
 

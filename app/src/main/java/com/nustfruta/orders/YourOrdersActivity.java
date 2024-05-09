@@ -11,20 +11,22 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.nustfruta.R;
 import com.nustfruta.models.Order;
+import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
 import com.nustfruta.models.LegacyProduct;
+import com.nustfruta.models.ProductDB;
 import com.nustfruta.models.User;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 public class YourOrdersActivity extends AppCompatActivity {
 
-    // dummy, provide from database later
-    ArrayList<Order> orderList;
-
+    FirebaseRecyclerOptions options;
     RecyclerView rvOrderList;
     YourOrdersAdapter adapter;
 
@@ -39,24 +41,14 @@ public class YourOrdersActivity extends AppCompatActivity {
             return insets;
         });
 
-        orderList = new ArrayList<>();
-
-        ArrayList<LegacyProduct> productList = new ArrayList<>();
-        productList.add(new LegacyProduct(1234, 299, "Oranges", 3, 0));
-        productList.add(new LegacyProduct(1314, 199, "Apples", 1,0));
-        orderList.add(new Order("firstOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.ON_WAY, productList));
-
-        productList.clear();
-        productList.add(new LegacyProduct(619, 169, "Bananas", 11,0));
-        productList.add(new LegacyProduct(0, 9999, "sabih", 1,0));
-        orderList.add(new Order("secondOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.DELIVERED, productList));
-
         initializeOrderList();
     }
 
     private void initializeOrderList() {
         rvOrderList = findViewById(R.id.rvOrderList);
-        adapter = new YourOrdersAdapter(this, orderList);
+        options = new FirebaseRecyclerOptions.Builder<OrderDB>().setQuery(FirebaseDBUtil.getOrdersNodeReference(), OrderDB.class).setLifecycleOwner(this).build();
+
+        adapter = new YourOrdersAdapter(this, options);
 
         rvOrderList.setLayoutManager(new LinearLayoutManager(this));
         rvOrderList.setAdapter(adapter);

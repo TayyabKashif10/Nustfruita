@@ -29,7 +29,7 @@ import com.nustfruta.utility.DateFormat;
 import java.util.Calendar;
 import java.util.ArrayList;
 
-public class OrderTrackingActivity extends AppCompatActivity implements HeightListener {
+public class OrderTrackingActivity extends AppCompatActivity {
 
     Intent intent;
 
@@ -100,9 +100,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
 
     private void initializeProductsList() {
         rvProducts = findViewById(R.id.rvProductList);
-        adapter = new OrderTrackingAdapter(productList);
-
-        adapter.setHeightListener(this);
+        adapter = new OrderTrackingAdapter(this, productList);
 
         rvProducts.setLayoutManager(new LinearLayoutManager(this));
         rvProducts.setAdapter(adapter);
@@ -144,8 +142,7 @@ public class OrderTrackingActivity extends AppCompatActivity implements HeightLi
         }
     }
 
-    @Override
-    public void onHeightObtained(int height) {
+    public void setRowHeight(int height) {
         ViewGroup.LayoutParams rvLayoutParams = rvProducts.getLayoutParams();
         rvLayoutParams.height = height * Math.min(productList.size(), maxItems);
         rvProducts.setLayoutParams(rvLayoutParams);
