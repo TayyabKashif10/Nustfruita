@@ -50,7 +50,6 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
         productHolder.productPrice.setText( "PKR " + productDB.getUnitPrice());
         productHolder.productName.setText(productDB.getProductName());
 
-        //Glide.with(productHolder.productImage.getContext()).load(productDB.getImageURL()).placeholder(R.drawable.fruit_apple).error(R.drawable.fruit_pear).into(productHolder.productImage);
 
         FirebaseStorageUtil.BindImage(productHolder.productImage, productDB.getImageURL());
 
@@ -58,7 +57,6 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
             @Override
             public void onClick(View v) {
                 arrayModifier.addObject(productDB);
-                Snackbar.make(v,"Added to Cart.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();
             }
         });
 

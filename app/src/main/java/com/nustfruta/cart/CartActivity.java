@@ -13,9 +13,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
 import com.nustfruta.models.CartProduct;
+import com.nustfruta.models.Order;
+import com.nustfruta.models.OrderDB;
+import com.nustfruta.models.OrderStatus;
 import com.nustfruta.utility.Constants;
+import com.nustfruta.utility.FirebaseDBUtil;
+import com.nustfruta.utility.OrderParser;
 
 import java.util.ArrayList;
 
@@ -85,7 +91,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: Place order, send order to database
+                    checkout();
                 }
             });
         }
@@ -163,6 +169,25 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         setResult(Constants.CART_RESULT_CODE, backIntent);
     }
 
+    public void checkout()
+    {
+        String orderID = FirebaseDBUtil.getOrdersNodeReference().push().getKey();
+        DatabaseReference orderReference = FirebaseDBUtil.getOrdersNodeReference().child(orderID);
+        OrderDB currentOrder = new OrderDB();
+        currentOrder.setProductData(OrderParser.getProductDataString(productArrayList));
+        currentOrder.setOrderID(orderID);
+        currentOrder.setStatus(OrderStatus.PENDING);
+        orderReference.setValue(currentOrder);
+
+        // store ID in user's orders node.
+        FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID);
+
+        //TODO: navigate to order tracking.
+
+        // return to menu, clear basket.
+        productArrayList.clear();
+        finish();
+    }
 }
 
 

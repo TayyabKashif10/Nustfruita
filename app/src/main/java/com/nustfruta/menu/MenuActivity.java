@@ -2,22 +2,27 @@ package com.nustfruta.menu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
+import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +51,7 @@ import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
+import com.nustfruta.utility.FirebaseStorageUtil;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -90,7 +96,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v.getId()==profile.getId()) {
             navigateOut(ProfileActivity.class);
         }
-        else if (v.getId()==basketClickable.getId())
+        else if (v.getId()== basketButton.getId())
         {
             Intent intent = new Intent(this, CartActivity.class);
             intent.putExtra("productArray", productArrayViewModel.getArray());
@@ -102,7 +108,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     DrawerLayout drawerLayout;
 
-    View basketClickable;
+    ImageButton basketButton;
     LinearLayout orders, profile, about, logout;
 
     TabLayout tabLayout;
@@ -147,6 +153,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         setupMenuFragments();
         syncFruitFactNumber();
         factChangeHandler = new Handler();
+
     }
     @Override
     protected void onResume() {
@@ -203,7 +210,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         profile.setOnClickListener(this);
         about.setOnClickListener(this);
         logout.setOnClickListener(this);
-        basketClickable.setOnClickListener(this);
+        basketButton.setOnClickListener(this);
     }
 
     public void setUpProductArrayModel()
@@ -220,7 +227,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     public void syncFruitFactNumber()
     {
-        FirebaseDBUtil.getFruitFactReference().addValueEventListener(new ValueEventListener() {
+        FirebaseDBUtil.getFruitFactNodeReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -250,7 +257,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         productCounter = findViewById(R.id.productCounter);
-        basketClickable = findViewById(R.id.basketClickable);
+        basketButton = findViewById(R.id.basketButton);
     }
 
     public void setupMenuFragments()
@@ -287,7 +294,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         int randomPos = random.nextInt(fruitFactNumber);
-        FirebaseDBUtil.getFruitFactReference().child(String.valueOf(randomPos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        FirebaseDBUtil.getFruitFactNodeReference().child(String.valueOf(randomPos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 v.setText(task.getResult().getValue(String.class));
@@ -352,4 +359,69 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 .setDuration(500)
                 .setListener(null);
     }
+
+
+    public void displayBottomSheet(CartProduct product)
+    {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottomsheet_layout);
+
+        ImageView productImage = dialog.findViewById(R.id.bottomSheetProductImage);
+        ImageButton plusButton = dialog.findViewById(R.id.bottomSheetPlusButton);
+        ImageButton minusButton = dialog.findViewById(R.id.bottomSheetMinusButton);
+        CardView addCard = dialog.findViewById(R.id.addCard);
+        TextView productPrice = addCard.findViewById(R.id.bottomSheetProductPrice);
+        TextView quantity = dialog.findViewById(R.id.bottomSheetQuantity);
+        TextView productName = dialog.findViewById(R.id.bottomSheetProductName);
+        FirebaseStorageUtil.BindImage(productImage, product.getImageURL());
+
+        productName.setText(product.getProductName());
+        quantity.setText(String.valueOf(product.getQuantity()));
+        productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                product.setQuantity(product.getQuantity() + 1);
+                quantity.setText(String.valueOf(product.getQuantity()));
+                productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+            }
+        });
+
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (product.getQuantity() == 1)
+                {
+                    dialog.dismiss();
+                }
+                else
+                {
+                    product.setQuantity(product.getQuantity() - 1);
+                    quantity.setText(String.valueOf(product.getQuantity()));
+                    productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+                }
+            }
+        });
+
+        addCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(findViewById(android.R.id.content),"Added to Cart.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();
+                productArrayViewModel.addProduct(product);
+                dialog.dismiss();
+            }
+        });
+
+        // display the dialog/bottom sheet
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT );
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+    }
+
 }
