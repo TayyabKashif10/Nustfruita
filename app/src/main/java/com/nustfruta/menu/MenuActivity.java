@@ -2,12 +2,18 @@ package com.nustfruta.menu;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +37,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -41,8 +48,10 @@ import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.models.CartProduct;
+import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
+import com.nustfruta.utility.FirebaseStorageUtil;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -144,6 +153,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         setupMenuFragments();
         syncFruitFactNumber();
         factChangeHandler = new Handler();
+
     }
     @Override
     protected void onResume() {
@@ -349,4 +359,69 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 .setDuration(500)
                 .setListener(null);
     }
+
+
+    public void displayBottomSheet(CartProduct product)
+    {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottomsheet_layout);
+
+        ImageView productImage = dialog.findViewById(R.id.bottomSheetProductImage);
+        ImageButton plusButton = dialog.findViewById(R.id.bottomSheetPlusButton);
+        ImageButton minusButton = dialog.findViewById(R.id.bottomSheetMinusButton);
+        CardView addCard = dialog.findViewById(R.id.addCard);
+        TextView productPrice = addCard.findViewById(R.id.bottomSheetProductPrice);
+        TextView quantity = dialog.findViewById(R.id.bottomSheetQuantity);
+        TextView productName = dialog.findViewById(R.id.bottomSheetProductName);
+        FirebaseStorageUtil.BindImage(productImage, product.getImageURL());
+
+        productName.setText(product.getProductName());
+        quantity.setText(String.valueOf(product.getQuantity()));
+        productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                product.setQuantity(product.getQuantity() + 1);
+                quantity.setText(String.valueOf(product.getQuantity()));
+                productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+            }
+        });
+
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (product.getQuantity() == 1)
+                {
+                    dialog.dismiss();
+                }
+                else
+                {
+                    product.setQuantity(product.getQuantity() - 1);
+                    quantity.setText(String.valueOf(product.getQuantity()));
+                    productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+                }
+            }
+        });
+
+        addCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(findViewById(android.R.id.content),"Added to Cart.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();
+                productArrayViewModel.addProduct(product);
+                dialog.dismiss();
+            }
+        });
+
+        // display the dialog/bottom sheet
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT );
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.BottomSheetAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
+    }
+
 }

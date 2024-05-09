@@ -182,7 +182,6 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         // store ID in user's orders node.
         FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID);
 
-
         //TODO: navigate to order tracking.
 
         // return to menu, clear basket.

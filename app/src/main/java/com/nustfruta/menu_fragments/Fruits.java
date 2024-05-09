@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.nustfruta.R;
 import com.nustfruta.menu.ArrayModifier;
+import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.menu.ProductArrayViewModel;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
@@ -33,8 +34,7 @@ public class Fruits extends Fragment {
         @Override
         public void addObject(ProductDB productDB) {
 
-            // TODO: implement something to control quantity
-            productArrayViewModel.addProduct(new CartProduct(productDB, 1));
+            ((MenuActivity)getActivity()).displayBottomSheet(new CartProduct(productDB,1));
         }
     };
 
