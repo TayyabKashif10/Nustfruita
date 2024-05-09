@@ -1,10 +1,9 @@
 
+
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
 }
-
-
 
 android {
     namespace = "com.nustfruta"
@@ -12,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.nustfruta"
-        minSdk = 26
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -70,4 +69,7 @@ dependencies {
     implementation("com.firebaseui:firebase-ui-database:8.0.2")
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    // Image cropping library
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
 }
