@@ -6,10 +6,112 @@
     android:layout_height="match_parent"
     android:contentDescription="@string/banana">
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/categoryLayout"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary_light"
+        app:boxBackgroundColor="@color/primary_light"
+        app:boxCornerRadiusBottomEnd="40dp"
+        app:boxCornerRadiusBottomStart="40dp"
+        app:boxCornerRadiusTopEnd="40dp"
+        app:boxCornerRadiusTopStart="40dp"
+        app:boxStrokeColor="@color/transparent"
+        app:boxStrokeErrorColor="@color/apple_red"
+        app:counterOverflowTextColor="@color/apple_red"
+        app:cursorErrorColor="@color/apple_red"
+        app:endIconMode="dropdown_menu"
+        app:errorIconTint="@color/apple_red"
+        app:errorTextColor="@color/apple_red"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productNameLayout"
+        app:startIconDrawable="@drawable/cart_icon"
+        app:startIconTint="@color/orange">
+
+        <AutoCompleteTextView
+            android:id="@+id/category"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:drawablePadding="10dp"
+            android:hint="@string/product_category"
+            android:inputType="none"
+            android:padding="15dp"
+            android:paddingStart="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/productUnitLayout"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary_light"
+        app:boxBackgroundColor="@color/primary_light"
+        app:boxCornerRadiusBottomEnd="40dp"
+        app:boxCornerRadiusBottomStart="40dp"
+        app:boxCornerRadiusTopEnd="40dp"
+        app:boxCornerRadiusTopStart="40dp"
+        app:boxStrokeColor="@color/transparent"
+        app:boxStrokeErrorColor="@color/apple_red"
+        app:counterOverflowTextColor="@color/apple_red"
+        app:cursorErrorColor="@color/apple_red"
+        app:endIconMode="dropdown_menu"
+        app:errorIconTint="@color/apple_red"
+        app:errorTextColor="@color/apple_red"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/categoryLayout"
+        app:startIconDrawable="@drawable/balance_icon"
+        app:startIconTint="@color/orange">
+
+        <AutoCompleteTextView
+            android:id="@+id/productUnit"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:drawablePadding="10dp"
+            android:hint="@string/product_unit"
+            android:inputType="none"
+            android:padding="15dp"
+            android:paddingStart="50dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.canhub.cropper.CropImageView
+        android:id="@+id/cropImageView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:layout_weight="1"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cropDoneBtn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:text="Done"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/unitPriceLayout"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         app:boxBackgroundColor="@color/primary_light"
         app:boxBackgroundMode="filled"
@@ -17,27 +119,33 @@
         app:boxCornerRadiusBottomStart="40dp"
         app:boxCornerRadiusTopEnd="40dp"
         app:boxCornerRadiusTopStart="40dp"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/orange"
         app:boxStrokeColor="@color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:boxStrokeErrorColor="@color/apple_red"
         app:cursorErrorColor="@color/apple_red"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/orange"
         app:errorIconTint="@color/apple_red"
         app:errorTextColor="@color/apple_red"
+        app:expandedHintEnabled="true"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameLayout">
+        app:layout_constraintTop_toBottomOf="@id/productUnitLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/unitPrice"
+            style="@style/CustomTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:drawableStart="@drawable/money_icon"
             android:drawablePadding="10dp"
             android:drawableTint="@color/orange"
             android:hint="@string/unit_price"
-            style="@style/CustomTextInputLayout"
-            android:inputType="number" />
+            android:inputType="number"
+            android:paddingVertical="10dp"
+            android:textColorHint="@color/m3_hint_foreground"
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -74,7 +182,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/productNameLayout"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
         app:boxBackgroundColor="@color/primary_light"
         app:boxBackgroundMode="filled"
@@ -89,6 +197,7 @@
         app:endIconTint="@color/orange"
         app:errorIconTint="@color/apple_red"
         app:errorTextColor="@color/apple_red"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline2">
@@ -101,8 +210,10 @@
             android:drawablePadding="10dp"
             android:drawableTint="@color/orange"
             android:hint="@string/product_name"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:paddingVertical="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/productSaveBtn"
