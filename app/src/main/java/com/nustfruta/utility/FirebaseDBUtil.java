@@ -31,9 +31,14 @@ abstract public class FirebaseDBUtil {
         return database.getReference("users").child(getCurrentUserID());
     }
 
-    public static DatabaseReference getFruitFactReference()
+    public static DatabaseReference getFruitFactNodeReference()
     {
         return database.getReference("fruit_facts");
+    }
+
+    public static DatabaseReference getOrdersNodeReference()
+    {
+        return database.getReference("orders");
     }
 
     public static DatabaseReference getProductsNodeRerefence()

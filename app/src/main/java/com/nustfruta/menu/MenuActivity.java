@@ -217,7 +217,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     public void syncFruitFactNumber()
     {
-        FirebaseDBUtil.getFruitFactReference().addValueEventListener(new ValueEventListener() {
+        FirebaseDBUtil.getFruitFactNodeReference().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -284,7 +284,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         int randomPos = random.nextInt(fruitFactNumber);
-        FirebaseDBUtil.getFruitFactReference().child(String.valueOf(randomPos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        FirebaseDBUtil.getFruitFactNodeReference().child(String.valueOf(randomPos)).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 v.setText(task.getResult().getValue(String.class));
