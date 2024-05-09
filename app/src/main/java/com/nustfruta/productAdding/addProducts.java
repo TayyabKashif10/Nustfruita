@@ -31,9 +31,6 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
-import com.nustfruta.utility.Constants;
-import com.nustfruta.utility.FirebaseUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
