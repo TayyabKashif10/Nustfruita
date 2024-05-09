@@ -162,7 +162,6 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         backIntent.putExtra("productArray", productArrayList);
         setResult(Constants.CART_RESULT_CODE, backIntent);
     }
-
 }
 
 

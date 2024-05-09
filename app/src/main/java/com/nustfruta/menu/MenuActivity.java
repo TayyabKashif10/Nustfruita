@@ -8,16 +8,15 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewPropertyAnimator;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +31,6 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.database.DataSnapshot;
@@ -43,7 +41,6 @@ import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.models.CartProduct;
-import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 
@@ -90,7 +87,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         } else if (v.getId()==profile.getId()) {
             navigateOut(ProfileActivity.class);
         }
-        else if (v.getId()==basketClickable.getId())
+        else if (v.getId()== basketButton.getId())
         {
             Intent intent = new Intent(this, CartActivity.class);
             intent.putExtra("productArray", productArrayViewModel.getArray());
@@ -102,7 +99,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
     DrawerLayout drawerLayout;
 
-    View basketClickable;
+    ImageButton basketButton;
     LinearLayout orders, profile, about, logout;
 
     TabLayout tabLayout;
@@ -203,7 +200,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         profile.setOnClickListener(this);
         about.setOnClickListener(this);
         logout.setOnClickListener(this);
-        basketClickable.setOnClickListener(this);
+        basketButton.setOnClickListener(this);
     }
 
     public void setUpProductArrayModel()
@@ -250,7 +247,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         productCounter = findViewById(R.id.productCounter);
-        basketClickable = findViewById(R.id.basketClickable);
+        basketButton = findViewById(R.id.basketButton);
     }
 
     public void setupMenuFragments()
