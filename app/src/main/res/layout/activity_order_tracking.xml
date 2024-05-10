@@ -9,7 +9,7 @@
     tools:context=".orders.OrderTrackingActivity">
 
     <include
-        android:id="@+id/backButton"
+        android:id="@+id/subToolbar"
         layout="@layout/sub_toolbar_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivWatermelonOnWay"
-        app:layout_constraintTop_toBottomOf="@+id/backButton"
+        app:layout_constraintTop_toBottomOf="@+id/subToolbar"
         app:srcCompat="@drawable/fruit_pineapple" />
 
     <TextView

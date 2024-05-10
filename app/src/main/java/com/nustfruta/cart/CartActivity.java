@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
 import com.nustfruta.models.CartProduct;
-import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
 import com.nustfruta.utility.Constants;
@@ -37,6 +36,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
     public int subtotal = 0;
 
     public Context context;
+
+    ImageView ivBackButton;
 
     Intent backIntent = new Intent();
 
@@ -94,6 +95,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
                     checkout();
                 }
             });
+
+            initializeBackButton();
         }
     }
 
@@ -108,6 +111,16 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             setContentView(R.layout.empty_basket);
         backToMenuButton = findViewById(R.id.backToMenuButton);
         backToMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initializeBackButton() {
+        ivBackButton = findViewById(R.id.backIcon);
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -189,8 +202,4 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         finish();
     }
 }
-
-
-
-
 

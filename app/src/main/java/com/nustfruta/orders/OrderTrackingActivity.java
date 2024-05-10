@@ -4,6 +4,7 @@
     import android.graphics.PorterDuff;
     import android.os.Bundle;
     import android.util.Log;
+    import android.view.View;
     import android.view.ViewGroup;
     import android.widget.ImageView;
     import android.widget.TextView;
@@ -42,6 +43,7 @@
 
         int[] tintColors = new int[5];
         ImageView[] fruits = new ImageView[5];
+        ImageView ivBackButton;
         TextView tvOrderStatus, tvOrderID, tvOrderDate, tvEstimatedDate, tvSubtotal, tvTotal;
 
         @Override
@@ -77,9 +79,11 @@
 
             initializeViews();
             initializeColors();
+            initializeBackButton();
         }
 
         private void initializeViews() {
+            ivBackButton = findViewById(R.id.backIcon);
             fruits[0] = findViewById(R.id.ivApplePending);
             fruits[1] = findViewById(R.id.ivPearConfirmed);
             fruits[2] = findViewById(R.id.ivCherriesPacking);
@@ -107,6 +111,16 @@
 
             rvProducts.setLayoutManager(new LinearLayoutManager(this));
             rvProducts.setAdapter(adapter);
+        }
+
+        private void initializeBackButton() {
+            ivBackButton = findViewById(R.id.backIcon);
+            ivBackButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
 
         private void updateFruits() {

@@ -2,6 +2,9 @@ package com.nustfruta.orders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,20 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.nustfruta.R;
-import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderDB;
-import com.nustfruta.models.OrderStatus;
-import com.nustfruta.models.LegacyProduct;
-import com.nustfruta.models.ProductDB;
-import com.nustfruta.models.User;
 import com.nustfruta.utility.FirebaseDBUtil;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
 public class YourOrdersActivity extends AppCompatActivity {
+
+    ImageView ivBackButton;
 
     FirebaseRecyclerOptions options;
     RecyclerView rvOrderList;
@@ -43,11 +40,14 @@ public class YourOrdersActivity extends AppCompatActivity {
         });
 
         initializeOrderList();
+        initializeBackButton();
     }
 
     private void initializeOrderList() {
         rvOrderList = findViewById(R.id.rvOrderList);
-        options = new FirebaseRecyclerOptions.Builder<OrderDB>().setQuery(FirebaseDatabase.getInstance().getReference().child("orders"), OrderDB.class).build();
+        Log.d("bruh", FirebaseDBUtil.getCurrentUserID());
+        Query query =  FirebaseDBUtil.getOrdersNodeReference().orderByChild("userID").equalTo(FirebaseDBUtil.getCurrentUserID());
+        options = new FirebaseRecyclerOptions.Builder<OrderDB>().setQuery(query, OrderDB.class).build();
 
         adapter = new YourOrdersAdapter(this, options);
 
@@ -55,6 +55,15 @@ public class YourOrdersActivity extends AppCompatActivity {
         rvOrderList.setAdapter(adapter);
     }
 
+    private void initializeBackButton() {
+        ivBackButton = findViewById(R.id.backIcon);
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     public void expandCard(String orderID)
     {
@@ -67,6 +76,7 @@ public class YourOrdersActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         adapter.startListening();
+        adapter.notifyDataSetChanged();
     }
 
     @Override

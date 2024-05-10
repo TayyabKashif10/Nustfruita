@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
-import com.nustfruta.models.LegacyProduct;
-
-import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
@@ -36,11 +33,9 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         this.parent = parent;
     }
 
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View llProductRow = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_text_row, viewGroup, false);
 
         llProductRow.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
