@@ -18,6 +18,7 @@ import com.nustfruta.R;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
+import com.nustfruta.orders.OrderTrackingActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.OrderParser;
@@ -86,7 +87,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
                 subtotal += productArrayList.get(i).getQuantity() * productArrayList.get(i).getUnitPrice();
 
             // Displaying initial subtotal price, total price, checkout price.
-            checkoutPrice.setText("PKR " + (subtotal + 50));
+            checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
 
             checkoutButton.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +153,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
 
         // Updating the displayed prices on static card view
-        checkoutPrice.setText("PKR " + (subtotal + 50));
+        checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
         cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
 
@@ -168,7 +169,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         subtotal += productArrayList.get(position).getUnitPrice();
 
         // Updating the displayed checkout price
-        checkoutPrice.setText("PKR " + (subtotal + 50));
+        checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
         cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
         cartRecyclerViewAdapter.notifyItemChanged(position);
@@ -195,11 +196,14 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         // store ID in user's orders node.
         FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID);
 
-        //TODO: navigate to order tracking.
-
-        // return to menu, clear basket.
         productArrayList.clear();
-        finish();
+
+        // navigate to order tracking
+        Intent intent = new Intent(this, OrderTrackingActivity.class);
+        intent.putExtra("ID", orderID);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);    // prevent user from navigating back to checkout
+
+        startActivity(intent);
     }
 }
 

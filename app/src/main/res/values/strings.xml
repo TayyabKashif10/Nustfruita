@@ -103,6 +103,7 @@
     <string name="items_label">Items:</string>
     <string name="ordered_on">Ordered on</string>
     <string name="forward_arrow">Forward Arrow</string>
+    <string name="delivery_fees_pkr">PKR 99</string>
 
 
 </resources>

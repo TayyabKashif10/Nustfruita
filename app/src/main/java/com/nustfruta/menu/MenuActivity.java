@@ -49,6 +49,7 @@ import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
+import com.nustfruta.orders.YourOrdersActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.FirebaseStorageUtil;
@@ -102,6 +103,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("productArray", productArrayViewModel.getArray());
             cartLauncher.launch(intent);
 
+        }
+        else if (v.getId() == orders.getId()) {
+            navigateOut(YourOrdersActivity.class);
         }
         //TODO: navigate out for other buttons.
     }
