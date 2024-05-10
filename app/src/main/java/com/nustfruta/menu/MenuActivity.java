@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,15 +36,18 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.R;
+import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
@@ -102,7 +106,16 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra("productArray", productArrayViewModel.getArray());
             cartLauncher.launch(intent);
 
+        } else if (v.getId() == logout.getId()) {
+            AuthUI.getInstance().signOut(this).addOnCompleteListener(task -> {
+
+                    // clear backstack and send user to sign in page.
+                    Intent intent = new Intent(MenuActivity.this, LoginPhoneNumberActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+            });
         }
+
         //TODO: navigate out for other buttons.
     }
 
@@ -141,11 +154,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawerLayout), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
         fetchedFact = getString(R.string.sample_fact);
         initializeViews();
         attachListeners();
@@ -254,6 +263,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         textB = findViewById(R.id.textB);
         orders=findViewById(R.id.orderRow); profile=findViewById(R.id.profileRow);
         about=findViewById(R.id.aboutRow); logout=findViewById(R.id.logoutRow);
+        logout = findViewById(R.id.logoutRow);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         productCounter = findViewById(R.id.productCounter);
