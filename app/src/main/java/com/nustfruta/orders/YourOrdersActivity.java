@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 import com.nustfruta.R;
 import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderDB;
@@ -46,7 +47,7 @@ public class YourOrdersActivity extends AppCompatActivity {
 
     private void initializeOrderList() {
         rvOrderList = findViewById(R.id.rvOrderList);
-        options = new FirebaseRecyclerOptions.Builder<OrderDB>().setQuery(FirebaseDBUtil.getOrdersNodeReference(), OrderDB.class).setLifecycleOwner(this).build();
+        options = new FirebaseRecyclerOptions.Builder<OrderDB>().setQuery(FirebaseDatabase.getInstance().getReference().child("orders"), OrderDB.class).build();
 
         adapter = new YourOrdersAdapter(this, options);
 
@@ -60,6 +61,17 @@ public class YourOrdersActivity extends AppCompatActivity {
         Intent intent = new Intent(this, OrderTrackingActivity.class);
         intent.putExtra("ID", orderID);
         startActivity(intent);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

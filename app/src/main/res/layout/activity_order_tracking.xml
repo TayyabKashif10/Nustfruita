@@ -68,12 +68,11 @@
         android:id="@+id/ivPineappleDelivered"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="72dp"
         android:contentDescription="@string/delivered"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/ivWatermelonOnWay"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backButton"
         app:srcCompat="@drawable/fruit_pineapple" />
 
     <TextView
@@ -83,12 +82,12 @@
         android:layout_marginTop="56dp"
         android:text="@string/total"
         android:textColor="@color/onBackground"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivCherriesPacking"
-        tools:text="@string/order_status_on_way" />
+        tools:text="@string/order_status_confirmed" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -113,12 +112,14 @@
             android:id="@+id/tvOrderID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
             android:layout_alignBaseline="@id/tvOrderIDLabel"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="188dp"
             android:textColor="@color/onBackground"
             android:textSize="18sp"
-            tools:text="@tools:sample/us_phones" />
+            tools:text="-NxS3nE-PlivKonN-pJA" />
 
         <TextView
             android:id="@+id/tvOrderDateLabel"

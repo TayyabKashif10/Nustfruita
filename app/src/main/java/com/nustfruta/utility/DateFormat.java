@@ -1,6 +1,11 @@
 package com.nustfruta.utility;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DateFormat {
     public static String EEE_DDMMYY(Calendar date) {
@@ -16,6 +21,18 @@ public class DateFormat {
                 date.get(Calendar.DAY_OF_MONTH),
                 date.get(Calendar.MONTH) + 1,
                 date.get(Calendar.YEAR) % 100);
+    }
+
+    public static Calendar addOneDay(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd/MM/yy");
+        Calendar calendar = Calendar.getInstance();
+        try {
+            Date dateObj = sdf.parse(date);
+            calendar.setTime(dateObj);
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        catch (ParseException e) {Log.d("DateFormat", e.toString());}
+        return calendar;
     }
 
     private static String dayToString(int day) {
