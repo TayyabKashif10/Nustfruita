@@ -18,6 +18,8 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
 
     //TODO: Remove ALL toasts.
 
+    //TODO: either link splash activity to data fetching, or add a custom delay.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

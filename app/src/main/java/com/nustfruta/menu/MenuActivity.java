@@ -58,6 +58,8 @@ import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.FirebaseStorageUtil;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -389,11 +391,15 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         TextView productPrice = addCard.findViewById(R.id.bottomSheetProductPrice);
         TextView quantity = dialog.findViewById(R.id.bottomSheetQuantity);
         TextView productName = dialog.findViewById(R.id.bottomSheetProductName);
+        TextView unitPrice = dialog.findViewById(R.id.bottomSheetUnitPrice);
+        TextView productUnit = dialog.findViewById(R.id.bottomSheetProductUnit);
         FirebaseStorageUtil.BindImage(productImage, product.getImageURL());
 
         productName.setText(product.getProductName());
         quantity.setText(String.valueOf(product.getQuantity()));
         productPrice.setText(String.valueOf(product.getQuantity()*product.getUnitPrice()));
+        unitPrice.setText("Rs " + product.getUnitPrice());
+        productUnit.setText(product.getProductUnit());
 
         plusButton.setOnClickListener(new View.OnClickListener() {
             @Override
