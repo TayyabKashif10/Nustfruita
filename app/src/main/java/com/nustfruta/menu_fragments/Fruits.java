@@ -25,27 +25,10 @@ import com.nustfruta.utility.FirebaseDBUtil;
 
 import org.checkerframework.checker.units.qual.C;
 
-public class Fruits extends Fragment {
-
-    FirebaseRecyclerOptions<ProductDB> options;
-    ProductAdapter adapter;
-
-    ArrayModifier arrayModifier = new ArrayModifier() {
-        @Override
-        public void addObject(ProductDB productDB) {
-
-            ((MenuActivity)getActivity()).displayBottomSheet(new CartProduct(productDB,1));
-        }
-    };
-
-    RecyclerView recyclerView;
-
-    ProductArrayViewModel productArrayViewModel;
+public class Fruits extends MenuFragment {
 
     public Fruits() {
-        // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,14 +49,6 @@ public class Fruits extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         productArrayViewModel = new ViewModelProvider(requireActivity()).get(ProductArrayViewModel.class);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        // necessary to reconfigure the recycle view on returning from cart activity.
-        adapter.notifyDataSetChanged();
     }
 
 }

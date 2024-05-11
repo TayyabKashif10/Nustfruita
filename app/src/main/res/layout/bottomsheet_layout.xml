@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/bottomsheet_background">
 
     <ImageView
@@ -32,20 +32,59 @@
         app:layout_constraintStart_toStartOf="@id/bottomSheetProductImage"
         app:layout_constraintTop_toBottomOf="@id/bottomSheetProductImage" />
 
+    <TextView
+        android:id="@+id/bottomSheetUnitPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:text="@string/product_price_placeholder"
+        android:textColor="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@id/perText"
+        app:layout_constraintEnd_toStartOf="@id/perText"
+        android:textStyle="bold"
+
+        />
+
+    <TextView
+        android:id="@+id/perText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+        android:text="per"
+        android:textColor="@color/primary_light"
+        app:layout_constraintEnd_toEndOf="@id/bottomSheetProductName"
+        app:layout_constraintStart_toStartOf="@id/bottomSheetProductName"
+
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/bottomSheetProductName" />
+
+    <TextView
+        android:id="@+id/bottomSheetProductUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/placeholder_unit"
+        android:textColor="@color/white"
+        app:layout_constraintBaseline_toBaselineOf="@id/perText"
+        app:layout_constraintStart_toEndOf="@id/perText"
+        android:textStyle="bold"
+        />
+
+
     <ImageButton
         android:id="@+id/bottomSheetMinusButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="25dp"
         android:backgroundTint="@color/primary_light"
         android:contentDescription='@string/minus_button_description'
         android:scaleType="center"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomSheetProductName"
+        app:layout_constraintTop_toBottomOf="@+id/perText"
         app:srcCompat="@drawable/minus_icon"
-        app:tint="@color/white"
-        android:layout_marginStart="10dp"/>
-
+        app:tint="@color/white" />
 
 
     <TextView
@@ -54,38 +93,36 @@
         android:layout_height="wrap_content"
         android:text="@string/_1"
         android:textColor="@color/white"
-        app:layout_constraintStart_toEndOf="@id/bottomSheetMinusButton"
-        app:layout_constraintEnd_toStartOf="@id/bottomSheetPlusButton"
-        app:layout_constraintTop_toTopOf="@id/bottomSheetMinusButton"
-        app:layout_constraintBottom_toBottomOf="@id/bottomSheetMinusButton"
         android:textSize="25sp"
-         />
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetMinusButton"
+        app:layout_constraintEnd_toStartOf="@id/bottomSheetPlusButton"
+        app:layout_constraintStart_toEndOf="@id/bottomSheetMinusButton"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetMinusButton" />
 
 
     <ImageButton
         android:id="@+id/bottomSheetPlusButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="25dp"
         android:backgroundTint="@color/primary_light"
         android:contentDescription='@string/minus_button_description'
         android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomSheetMinusButton"
         app:layout_constraintStart_toEndOf="@id/bottomSheetMinusButton"
         app:layout_constraintTop_toTopOf="@+id/bottomSheetMinusButton"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomSheetMinusButton"
         app:srcCompat="@drawable/add_icon"
-        app:tint="@color/white"
-        android:layout_marginStart="25dp"/>
+        app:tint="@color/white" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/addCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/bottomSheetPlusButton"
-        app:layout_constraintBottom_toBottomOf="@id/bottomSheetPlusButton"
         app:cardBackgroundColor="@color/primary_light"
         app:cardCornerRadius="15dp"
-        >
+        app:layout_constraintBottom_toBottomOf="@id/bottomSheetPlusButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/bottomSheetPlusButton">
 
         <LinearLayout
             android:layout_width="150dp"
@@ -109,15 +146,12 @@
                 android:text="@string/add_to_cart"
                 android:textAlignment="textEnd"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
