@@ -25,13 +25,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.canhub.cropper.CropImageView;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
-import com.nustfruta.utility.FirebaseUtil;
+import com.nustfruta.models.ProductDB;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
@@ -70,11 +70,11 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
 
         }
-        
+
     }
 
 
-//    Product newProduct;
+    //    Product newProduct;
     TextInputEditText productName, unitPrice;
 
     TextInputLayout categoryLayout, unitLayout, nameLayout, priceLayout;
@@ -111,8 +111,8 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         unit.setOnItemSelectedListener(this);
 
 
-        category.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
-        unit.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
+        unit.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
 
     }
 
@@ -135,9 +135,6 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         cropBtn = findViewById(R.id.cropDoneBtn);
         cropImageView = findViewById(R.id.cropImageView);
         cropImageView.setAspectRatio(1, 1);
-
-//        cropBtn.setVisibility(View.GONE);
-//        cropImageView.setVisibility(View.GONE);
 
     }
 
@@ -180,8 +177,8 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         if (inputProductName.isEmpty())
         {
-           isProductValid = false;
-           productName.setError("Please enter a product name");
+            isProductValid = false;
+            productName.setError("Please enter a product name");
         }
         else
             productName.setError(null);
@@ -205,14 +202,11 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         String inputImageUrl = storageReference.getDownloadUrl().toString();
 
+        ProductDB newProduct = new ProductDB(inputProductName, inputUnit, Integer.parseInt(inputUnitPrice), inputImageUrl);
 
+        FirebaseDBUtil.storeProductDB(newProduct, inputCategory);
 
-//        newProduct = new Product(inputProductName, inputUnitPrice, inputUnit, inputCategory, inputImageUrl);
-
-//        FirebaseUtil.storeProduct(newProduct);
-
-
-
+        finish();
     }
 
 
@@ -266,7 +260,6 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onFailure(@NonNull Exception e) {
-        Log.e("Nigga", e.getMessage());
         Toast.makeText(this, "Image upload failed.", Toast.LENGTH_LONG).show();
     }
 
@@ -300,6 +293,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         categoryLayout.setVisibility(View.GONE);
     }
 
+    // TODO: TEST
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -352,9 +346,6 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
                 if (size != 0)
                     return size <= maxSize;
-
-                else
-                    Log.e("TAG", "Error: SIZE column not found in cursor");
             }
         }
 
