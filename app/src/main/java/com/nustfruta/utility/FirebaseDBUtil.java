@@ -10,9 +10,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nustfruta.models.ProductDB;
 import com.nustfruta.models.User;
 
-abstract public class FirebaseUtil {
+abstract public class FirebaseDBUtil {
 
     public static FirebaseDatabase database;
 
@@ -20,7 +21,6 @@ abstract public class FirebaseUtil {
 
     public static String getCurrentUserID()
     {
-
         /*this is NUll if there is no signed in user.
          once a user signs in the App with mAuth.signWithCredentials(), FirebaseAuth stores that user details
          somewhere in app memory, so this method will return currentUserID() as long as we dont clear data after signing in*/
@@ -32,9 +32,19 @@ abstract public class FirebaseUtil {
         return database.getReference("users").child(getCurrentUserID());
     }
 
-    public static DatabaseReference getFruitFactReference()
+    public static DatabaseReference getFruitFactNodeReference()
     {
         return database.getReference("fruit_facts");
+    }
+
+    public static DatabaseReference getOrdersNodeReference()
+    {
+        return database.getReference("orders");
+    }
+
+    public static DatabaseReference getProductsNodeRerefence()
+    {
+        return database.getReference("products");
     }
 
     // set the callBack listeners for the current user to keep it updated.
@@ -79,14 +89,14 @@ abstract public class FirebaseUtil {
         });
     }
 
-// TODO: UPDATE THE IDENTIFIERS ACCORDING TO NEW PRODUCT CLASS
-//    public static void storeProduct(Product product) {
-//
-//        if (product.getCategory() == "Fruits")
-//            database.getReference("products/fruits").child(getProductName()).setValue(product);
-//
-//        else
-//            database.getReference("products/salads").child(getProductName()).setValue(product);
-//    }
+
+    public static void storeProductDB (ProductDB product, String category) {
+
+        if (category.equals("Fruit"))
+            database.getReference("products/fruits").child(product.getProductName()).setValue(product);
+
+        else
+            database.getReference("products/salads").child(product.getProductName()).setValue(product);
+    }
 
 }
