@@ -44,8 +44,11 @@ abstract public class FirebaseStorageUtil {
         } catch (IOException e) {
             Log.e("DBError" , "Failed to download image" , e);
         }
+    }
 
-
+    public static void deleteImage(String completeImageURL)
+    {
+        FirebaseStorage.getInstance().getReference(completeImageURL).delete();
     }
 
 }

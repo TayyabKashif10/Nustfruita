@@ -1,10 +1,11 @@
 package com.nustfruta.menu_fragments;
 
-import android.graphics.Color;
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,19 +15,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.material.snackbar.Snackbar;
 import com.nustfruta.R;
-import com.nustfruta.menu.ArrayModifier;
+import com.nustfruta.menu.ProductCardButtonListener;
 import com.nustfruta.models.ProductDB;
-import com.nustfruta.utility.Constants;
+import com.nustfruta.models.UserType;
 import com.nustfruta.utility.FirebaseStorageUtil;
 
 public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAdapter.ProductHolder> {
 
-    public ArrayModifier arrayModifier;
-    public ProductAdapter(@NonNull FirebaseRecyclerOptions<ProductDB> options, ArrayModifier modifier) {
+    UserType context;
+    public ProductCardButtonListener productCardButtonListener;
+    public ProductAdapter(@NonNull FirebaseRecyclerOptions<ProductDB> options, ProductCardButtonListener modifier, UserType content) {
         super(options);
-        this.arrayModifier = modifier;
+        this.productCardButtonListener = modifier;
+        this.context = content;
     }
 
      public static class ProductHolder extends RecyclerView.ViewHolder {
@@ -34,12 +36,14 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
         TextView productName, productPrice;
         ImageView productImage;
         Button addButton;
+        ImageButton deleteButton;
         public ProductHolder(View view) {
             super(view);
             productName = view.findViewById(R.id.product_name);
             productPrice = view.findViewById(R.id.product_price);
             productImage = view.findViewById(R.id.product_image);
             addButton = view.findViewById(R.id.addButton);
+            deleteButton = view.findViewById(R.id.deleteButton);
         }
     }
 
@@ -48,14 +52,29 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
     {
         productHolder.productPrice.setText( "PKR " + productDB.getUnitPrice());
         productHolder.productName.setText(productDB.getProductName());
-
-
         FirebaseStorageUtil.BindImage(productHolder.productImage, productDB.getImageURL());
 
+        if (context == UserType.CUSTOMER)
+        {
+            productHolder.addButton.setVisibility(View.VISIBLE);
+            productHolder.deleteButton.setVisibility(View.INVISIBLE);
+        }
+        else
+        {
+            productHolder.addButton.setVisibility(View.INVISIBLE);
+            productHolder.deleteButton.setVisibility(View.VISIBLE);
+        }
         productHolder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                arrayModifier.addObject(productDB);
+                productCardButtonListener.addObject(productDB);
+            }
+        });
+
+        productHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productCardButtonListener.deleteObject(i, productDB.getImageURL());
             }
         });
 

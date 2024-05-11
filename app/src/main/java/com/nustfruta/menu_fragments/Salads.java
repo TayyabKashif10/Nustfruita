@@ -37,11 +37,12 @@ public class Salads extends MenuFragment {
 
         // to configure the adapter to parse and use Product objects from the database, basically binds them without adding ChildEventListeners
         options = new FirebaseRecyclerOptions.Builder<ProductDB>().setQuery(FirebaseDBUtil.getProductsNodeRerefence().child("salads"), ProductDB.class).setLifecycleOwner(this).build();
-        adapter = new ProductAdapter(options, arrayModifier);
+        adapter = new ProductAdapter(options, productCardButtonListener,FirebaseDBUtil.currentUserType);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setAdapter(adapter);
 
         productArrayViewModel = new ViewModelProvider(requireActivity()).get(ProductArrayViewModel.class);
+        setUpDeleteProductDialog();
     }
 }

@@ -74,6 +74,20 @@
 
                 />
 
+            <ImageButton
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/delete_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/product_price"
+                android:layout_marginBottom="2dp"
+                android:layout_marginStart="-5dp"
+                android:backgroundTint="@color/primary_light"
+                app:tint="@color/white"
+                android:visibility="invisible"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>

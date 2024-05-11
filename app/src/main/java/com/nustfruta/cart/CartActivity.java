@@ -25,7 +25,7 @@ import com.nustfruta.utility.OrderParser;
 
 import java.util.ArrayList;
 
-public class CartActivity extends AppCompatActivity implements ModifyQuantity {
+public class CartActivity extends AppCompatActivity implements CartCardButtonListener {
 
     public ArrayList<CartProduct> productArrayList;
     public  CartRecyclerViewAdapter cartRecyclerViewAdapter;

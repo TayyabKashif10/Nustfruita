@@ -64,9 +64,9 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
             FirebaseDBUtil.getCurrentUserReference().child("userType").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
-
+                  FirebaseDBUtil.currentUserType =  task.getResult().getValue(UserType.class);
                   Intent intent;
-                  if (task.getResult().getValue(UserType.class) == UserType.ADMIN)
+                  if (FirebaseDBUtil.currentUserType == UserType.ADMIN)
                   {
 
                         intent = new Intent(SplashActivity.this, AdminMenuActivity.class);

@@ -12,8 +12,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.models.User;
+import com.nustfruta.models.UserType;
 
 abstract public class FirebaseDBUtil {
+
+    // this is loaded at the start of the activity, and can never change, so it is loaded once and then persists throughout
+    // the app.
+    public static UserType currentUserType;
 
     public static FirebaseDatabase database;
 

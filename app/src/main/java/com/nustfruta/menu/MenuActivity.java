@@ -65,6 +65,9 @@ import java.util.Random;
 
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
 
+
+    //TODO: add progress loaders for fetching operations, such as the categorizatin of user in loginOTP, and loading of items etc.
+
     ProductArrayViewModel productArrayViewModel;
 
     ActivityResultLauncher<Intent> cartLauncher = registerForActivityResult(

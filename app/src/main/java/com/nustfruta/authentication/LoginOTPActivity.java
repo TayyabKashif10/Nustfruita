@@ -24,7 +24,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.nustfruta.menu.AdminMenuActivity;
 import com.nustfruta.menu.MenuActivity;
+import com.nustfruta.menu.SplashActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
@@ -51,6 +54,11 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
             // use the actual required OTP data and use entered OTP to generate a credential that can be used to log the user
             // in the database (i.e sign in) the credential could be valid or invalid at this point
+            if (inputOTP.isEmpty())
+            {
+                otpField.setError("Invalid OTP");
+                return;
+            }
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationOTP, inputOTP);
             signIn(credential);
         }
@@ -87,6 +95,9 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
         resendText.setOnClickListener(this);
         resetResendText();
         sendOTP(phoneNumber, false);
+
+        // enable OTP button once OTP is sent.
+        verifyOTPBtn.setClickable(false);
     }
 
     public void initializeViews()
@@ -137,7 +148,8 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                         super.onCodeSent(s, forceResendingToken);
                         resendingToken = forceResendingToken;
                         verificationOTP = s;
-                        Snackbar.make(verifyOTPBtn, "OTP sent", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(verifyOTPBtn, "OTP sent", Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();
+                        verifyOTPBtn.setClickable(true);
                     }
                 });
 
@@ -171,14 +183,35 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                         FirebaseDBUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
                         intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
                         intent.putExtra("caller", "LoginOTPActivity");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
                     }
                     else
                     {
-                        intent = new Intent(LoginOTPActivity.this, MenuActivity.class);
+                        // this triggers if the user has signed in before, decide whether the user is an admin or customer.
+                        FirebaseDBUtil.getCurrentUserReference().child("userType").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+                                FirebaseDBUtil.currentUserType = task.getResult().getValue(UserType.class);
+
+                                Intent intent;
+                                if (FirebaseDBUtil.currentUserType == UserType.ADMIN)
+                                {
+
+                                    intent = new Intent(LoginOTPActivity.this, AdminMenuActivity.class);
+                                }
+                                else
+                                {
+                                    intent = new Intent(LoginOTPActivity.this, MenuActivity.class);
+                                }
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+
+                        });
                     }
 
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
 
                 }
 
