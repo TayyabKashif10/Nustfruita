@@ -31,9 +31,7 @@ import com.nustfruta.utility.VerifyCredentials;
 
 import java.util.HashMap;
 
-
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     User currentSignedUser;
 
