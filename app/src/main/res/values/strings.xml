@@ -15,7 +15,7 @@
     <string name="input_field_width">200dp</string>
     <string name="full_name">Full Name</string>
     <string name="minus_button">minus button</string>
-    <string name="product">Product</string>
+    <string name="productDB">Product</string>
     <string name="_1">1</string>
     <string name="rs_price">Rs Price</string>
     <string name="banana">banana</string>
@@ -94,5 +94,16 @@
     <string name="product_category">Product Category</string>
     <string name="product_unit">Product Unit</string>
     <string name="category">Category</string>
+
+    <string name="product_name_placeholder">Product</string>
+    <string name="product_price_placeholder">Rs 000</string>
+    <string name="add_to_cart">Add</string>
+
+    <string name="id_label">Order #</string>
+    <string name="total_label">Total:</string>
+    <string name="items_label">Items:</string>
+    <string name="ordered_on">Ordered on</string>
+    <string name="forward_arrow">Forward Arrow</string>
+
 
 </resources>

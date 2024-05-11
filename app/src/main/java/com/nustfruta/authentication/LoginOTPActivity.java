@@ -24,12 +24,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.nustfruta.dashboard.MenuActivity;
+import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
 import com.nustfruta.models.UserType;
-import com.nustfruta.utility.FirebaseUtil;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.util.concurrent.TimeUnit;
 
@@ -75,7 +75,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login_otpactivity);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawerLayout), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -168,7 +168,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                     Intent intent;
                     if (firstTimeUser)
                     {
-                        FirebaseUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
+                        FirebaseDBUtil.storeUser(new User(UserType.CUSTOMER, task.getResult().getUser().getPhoneNumber(), "","","",""), task.getResult().getUser().getUid());
                         intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
                         intent.putExtra("caller", "LoginOTPActivity");
                     }

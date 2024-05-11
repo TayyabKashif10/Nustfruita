@@ -1,5 +1,7 @@
 package com.nustfruta.models;
 
+import com.google.firebase.database.Exclude;
+
 public class User {
 
     private UserType userType;
@@ -75,7 +77,7 @@ public class User {
         this.roomNumber = roomNumber;
     }
 
-
+    @Exclude
     public  boolean isCompleteProfile()
     {
 

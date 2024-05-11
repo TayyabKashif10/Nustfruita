@@ -1,4 +1,4 @@
-package com.nustfruta.dashboard;
+package com.nustfruta.menu;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
-import com.nustfruta.utility.FirebaseUtil;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 public class SplashActivity extends AppCompatActivity implements SplashCompleteListener{
 
@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
 
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.drawerLayout), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -42,15 +42,18 @@ public class SplashActivity extends AppCompatActivity implements SplashCompleteL
     // switches to next activity once splash screen is closed
     @Override
     public void onSplashComplete() {
-        if (FirebaseUtil.getCurrentUserID() == null)
+
+        Intent intent;
+        if (FirebaseDBUtil.getCurrentUserID() == null)
         {
-            Intent authenticate = new Intent(this, LoginPhoneNumberActivity.class);
-            startActivity(authenticate);
+            intent = new Intent(this, LoginPhoneNumberActivity.class);
+
         }
         else {
-            Intent intent = new Intent(this, MenuActivity.class);
-            startActivity(intent);
+            intent = new Intent(this, MenuActivity.class);
         }
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }
 

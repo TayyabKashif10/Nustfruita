@@ -1,7 +1,5 @@
-package com.nustfruta.CartAndCheckout;
+package com.nustfruta.cart;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.CartProduct;
+import com.nustfruta.models.LegacyProduct;
+import com.nustfruta.utility.FirebaseStorageUtil;
 
 import java.util.ArrayList;
 
@@ -24,7 +22,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
     CartActivity parent;
 
-    ArrayList<Product> productList;
+    ArrayList<CartProduct> productList;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView productName, price, quantity, subtotalPrice;
@@ -51,7 +49,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     }
 
 
-    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<Product> productList) {
+    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<CartProduct> productList) {
 
         this.parent = parent;
         this.productList = productList;
@@ -77,12 +75,12 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.ViewHolder holder, int position) {
 
         if (getItemViewType(position) == 0) {
-            Product product = productList.get(position);
-            holder.productName.setText(product.getName());
+            CartProduct product = productList.get(position);
+            holder.productName.setText(product.getProductName());
             holder.price.setText("PKR " + product.getQuantity() * product.getUnitPrice());
             holder.quantity.setText(Integer.toString(product.getQuantity()));
-            holder.productIcon.setImageResource(productList.get(position).getImage());
 
+            FirebaseStorageUtil.BindImage(holder.productIcon, productList.get(position).getImageURL());
 
             // onClick listener of plus buttons
             holder.plusButton.setOnClickListener(new View.OnClickListener() {
@@ -103,8 +101,6 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
 
         else
             holder.subtotalPrice.setText("PKR " + parent.subtotal);
-
-
 
     }
 

@@ -1,11 +1,9 @@
 
 
-
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
 }
-
 
 android {
     namespace = "com.nustfruta"
@@ -64,6 +62,14 @@ dependencies {
 
     // country code picker
     implementation("com.hbb20:ccp:2.7.3")
+
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
+
+    // FirebaseUI for Firebase Realtime Database
+    implementation("com.firebaseui:firebase-ui-database:8.0.2")
+
+    //FirebaseUI for Firebase Auth
+    implementation ("com.firebaseui:firebase-ui-auth:8.0.2")
 
     // Image cropping library
     implementation("com.vanniktech:android-image-cropper:4.5.0")

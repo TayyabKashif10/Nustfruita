@@ -22,16 +22,16 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-import com.nustfruta.dashboard.MenuActivity;
+import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
-import com.nustfruta.utility.FirebaseUtil;
+import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.VerifyCredentials;
 
+import java.util.HashMap;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     User currentSignedUser;
 
@@ -107,8 +107,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             skipText.setOnClickListener(this);
             profileText.setText(getString(R.string.complete_profile_prompt));
         }
-        //TODO: remove
-        profileText.setText("nigga");
     }
 
     public void initializeViews()
@@ -129,12 +127,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         // this is for the possibility where the user has selected room number first, then hostel and the error doesnt go away (from the last time save button was called)
         roomNumber.setError(null);
 
-
         boolean validDataEntered = true;
         // this should never execute because the user should not be able to get to this activity without registering a phone number first.
         // if a guest acount is implemented, make him register a phone number first before getting to this activity.
 
-        if (FirebaseUtil.getCurrentUserID() == null)
+        if (FirebaseDBUtil.getCurrentUserID() == null)
         {
             Toast.makeText(getApplicationContext(), "You need to be registered with a Phone number to save a profile.", Toast.LENGTH_LONG).show();
             return;
@@ -209,20 +206,22 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             currentSignedUser.setHostel(inputHostel);
         }
 
-
         currentSignedUser.setRoomNumber(inputRoomNumber);
 
         //over-write the user with the new details.
-        FirebaseUtil.storeUser(currentSignedUser, FirebaseUtil.getCurrentUserID());
+        HashMap<String, Object> updates = new HashMap<>();
+        updates.put("fullName", inputName);
+        updates.put("hostel",inputHostel);
+        updates.put("email", inputEmail);
+        updates.put("roomNumber", inputRoomNumber);
+        FirebaseDBUtil.getCurrentUserReference().updateChildren(updates);
 
         Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
-
 
         // shift to main activity
         Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-
     }
 
 
@@ -231,7 +230,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public void getUser()
     {
 
-        FirebaseUtil.getCurrentUserReference().addValueEventListener(
+        FirebaseDBUtil.getCurrentUserReference().addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {

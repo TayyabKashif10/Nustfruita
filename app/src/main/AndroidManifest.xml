@@ -12,20 +12,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTheme"
 
-
         tools:targetApi="31" >
         <activity
-            android:name=".dashboard.MenuActivity"
+            android:name=".orders.YourOrdersActivity"
             android:exported="false" />
-
-        <activity android:name=".CartAndCheckout.CartActivity"
+        <activity
+            android:name=".menu.MenuActivity"
             android:exported="false" />
 
         <activity android:name=".productAdding.addProducts"
+            android:exported="false"/>
+
+
+
+        <activity android:name=".cart.CartActivity"
 
             android:exported="true" />
         <activity
-            android:name=".postorder.OrderTrackingActivity"
+            android:name=".post_order.OrderTrackingActivity"
+
             android:exported="false" />
         <activity
             android:name=".authentication.LoginOTPActivity"
@@ -37,16 +42,16 @@
             android:name=".authentication.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".dashboard.SplashActivity"
+            android:name=".menu.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.SplashTheme">
+            android:theme="@style/Theme.SplashTheme"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- exported is false because only the app itself should be able to call AuthActivity -->
-
+        </activity>
     </application>
 
 </manifest>

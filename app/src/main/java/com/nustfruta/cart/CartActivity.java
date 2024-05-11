@@ -1,39 +1,36 @@
-package com.nustfruta.CartAndCheckout;
+package com.nustfruta.cart;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
-import com.nustfruta.models.Product;
+import com.nustfruta.models.CartProduct;
+import com.nustfruta.models.Order;
+import com.nustfruta.models.OrderDB;
+import com.nustfruta.models.OrderStatus;
+import com.nustfruta.utility.Constants;
+import com.nustfruta.utility.FirebaseDBUtil;
+import com.nustfruta.utility.OrderParser;
 
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
-    int[] productImages = {}; //TODO: INITIALIZE WITH R.drawable.
-
-    public ArrayList<Product> productArrayList;
+    public ArrayList<CartProduct> productArrayList;
     public  CartRecyclerViewAdapter cartRecyclerViewAdapter;
 
-    public Button checkoutButton;
-
-    public String deliveryNotesString;
-
-    public EditText deliveryNotes;
+    public Button checkoutButton, backToMenuButton;
 
     public TextView checkoutPrice;
 
@@ -41,19 +38,23 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
     public Context context;
 
+    Intent backIntent = new Intent();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Initializing product array list
-        productArrayList = new ArrayList<>();
         initProductArrayList();
+
+        // register the result so that we can return the arrayList to menu.
+        registerResult();
 
         context = this;
 
         // If else statement to choose which layout to display depending on size of product array list.
         if (productArrayList.isEmpty()) {
-            setContentView(R.layout.empty_basket);
+            initializeWithEmptyCart();
         }
         else
         {
@@ -90,26 +91,28 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO: Place order, send order to database
+                    checkout();
                 }
             });
         }
     }
 
-    // to avoid memory leak
 
     private void initProductArrayList() {
-        productArrayList.add(new Product(1, 200, "Banana", 2, R.drawable.banana));
-        productArrayList.add(new Product(2, 500, "Strawberry", 2, R.drawable.banana));
-        productArrayList.add(new Product(3, 300, "Guava", 5, R.drawable.banana));
-        productArrayList.add(new Product(4, 100, "Pear", 2, R.drawable.banana));
-        productArrayList.add(new Product(5, 50, "Apple", 2, R.drawable.banana));
+        productArrayList = (ArrayList<CartProduct>)getIntent().getExtras().get("productArray");
     }
 
 
-    public void cartEmpty()
+    public void initializeWithEmptyCart()
     {
             setContentView(R.layout.empty_basket);
+        backToMenuButton = findViewById(R.id.backToMenuButton);
+        backToMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     public void minusButton(CartRecyclerViewAdapter.ViewHolder holder, int position) {
@@ -132,13 +135,15 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
 
         if (productArrayList.isEmpty())
-                cartEmpty();
+                initializeWithEmptyCart();
 
 
         // Updating the displayed prices on static card view
         checkoutPrice.setText("PKR " + (subtotal + 50));
 
         cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
+
+        registerResult();
     }
 
 
@@ -154,9 +159,38 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
         cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
         cartRecyclerViewAdapter.notifyItemChanged(position);
+
+        registerResult();
     }
 
+    public void registerResult()
+    {
+        backIntent.putExtra("productArray", productArrayList);
+        setResult(Constants.CART_RESULT_CODE, backIntent);
+    }
+
+    public void checkout()
+    {
+        String orderID = FirebaseDBUtil.getOrdersNodeReference().push().getKey();
+        DatabaseReference orderReference = FirebaseDBUtil.getOrdersNodeReference().child(orderID);
+        OrderDB currentOrder = new OrderDB();
+        currentOrder.setProductData(OrderParser.getProductDataString(productArrayList));
+        currentOrder.setOrderID(orderID);
+        currentOrder.setStatus(OrderStatus.PENDING);
+        orderReference.setValue(currentOrder);
+
+        // store ID in user's orders node.
+        FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID);
+
+        //TODO: navigate to order tracking.
+
+        // return to menu, clear basket.
+        productArrayList.clear();
+        finish();
+    }
 }
+
+
 
 
 

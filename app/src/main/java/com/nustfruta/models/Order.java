@@ -1,16 +1,22 @@
 package com.nustfruta.models;
 
+import static com.nustfruta.utility.Constants.DELIVERY_FEES;
+
 import java.util.Calendar;
 import java.util.ArrayList;
 
 public class Order {
-    private int orderID;
-    private ArrayList<Product> productList;
+
+    private String orderID;
+    private ArrayList<LegacyProduct> productList;
+
     private Calendar dateTime, estDateTime;
     private User user;
     private OrderStatus status;
 
-    public Order(int orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<Product> productList) {
+
+    public Order(String orderID, Calendar dateTime, Calendar estDateTime, User user, OrderStatus status, ArrayList<LegacyProduct> productList) {
+
         this.orderID = orderID;
         this.dateTime = dateTime;
         this.estDateTime = estDateTime;
@@ -23,11 +29,11 @@ public class Order {
     public Order() {
     }
 
-    public int getOrderID() {
+    public String getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(int orderID) {
+    public void setOrderID(String orderID) {
         this.orderID = orderID;
     }
 
@@ -63,11 +69,18 @@ public class Order {
         this.status = status;
     }
 
-    public ArrayList<Product> getProductList() {
+    public ArrayList<LegacyProduct> getProductList() {
         return productList;
     }
 
-    public void setProductList(ArrayList<Product> productList) {
+    public void setProductList(ArrayList<LegacyProduct> productList) {
         this.productList = productList;
+    }
+
+    public int getTotal() {
+        int total = DELIVERY_FEES;
+        for (int i = 0; i < productList.size(); i++)
+            total += productList.get(i).getUnitPrice() * productList.get(i).getQuantity();
+        return total;
     }
 }
