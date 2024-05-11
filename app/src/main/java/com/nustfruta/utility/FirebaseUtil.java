@@ -81,13 +81,13 @@ abstract public class FirebaseUtil {
     }
 
 // TODO: UPDATE THE IDENTIFIERS ACCORDING TO NEW PRODUCT CLASS
-    public static void storeProduct(Product product) {
-
-        if (product.getCategory() == "Fruits")
-            database.getReference("products/fruits").child(getProductName()).setValue(product);
-
-        else
-            database.getReference("products/salads").child(getProductName()).setValue(product);
-    }
+//    public static void storeProduct(Product product) {
+//
+//        if (product.getCategory() == "Fruits")
+//            database.getReference("products/fruits").child(getProductName()).setValue(product);
+//
+//        else
+//            database.getReference("products/salads").child(getProductName()).setValue(product);
+//    }
 
 }

@@ -20,7 +20,7 @@
     <string name="rs_price">Rs Price</string>
     <string name="banana">banana</string>
     <string name="profile">Profile</string>
-    <string name="save">Save</string>
+    <string name="save">SAVE</string>
     <string name="house_icon_description">An icon of a house</string>
     <string name="hostel">Hostel</string>
     <string name="sign_in">Sign In</string>
@@ -87,11 +87,12 @@
     <string name="company_logo_description">company logo</string>
     <string name="edit_your_profile_prompt">Edit Your Profile</string>
     <string name="unit_price">Unit Price</string>
-    <string name="add_new_product">Add New Product</string>
+    <string name="add_new_product">NEW PRODUCT</string>
     <string name="cherry_icon">cherry icon</string>
     <string name="product_name">Product Name</string>
-    <string name="select_image">Select Image</string>
+    <string name="select_image">SELECT IMAGE</string>
     <string name="product_category">Product Category</string>
     <string name="product_unit">Product Unit</string>
+    <string name="category">Category</string>
 
 </resources>
