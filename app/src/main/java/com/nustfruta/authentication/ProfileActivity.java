@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -66,6 +67,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+        else if (v.getId() == backButton.getId())
+        {
+            finish();
+        }
 
     }
 
@@ -76,6 +81,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     TextView skipText, profileText;
     Button saveBtn;
+
+    View toolbar;
+
+    ImageView backButton;
 
     boolean firstTimeUser;
 
@@ -97,6 +106,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         hostel.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, Constants.hostelNames));
         hostel.setOnClickListener(this);
         roomNumber.setOnClickListener(this);
+        backButton.setOnClickListener(this);
 
         firstTimeUser = getIntent().getExtras()!= null && getIntent().getExtras().getString("caller", "unknown").equals("LoginOTPActivity");
 
@@ -106,6 +116,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             skipText.setVisibility(View.VISIBLE);
             skipText.setOnClickListener(this);
             profileText.setText(getString(R.string.complete_profile_prompt));
+            toolbar.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -119,6 +130,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         hostelFieldContainer = findViewById(R.id.hostelFieldContainer);
         skipText = findViewById(R.id.skipText);
         profileText = findViewById(R.id.profileText);
+        toolbar = findViewById(R.id.toolBar);
+        backButton = findViewById(R.id.backIcon);
     }
 
     public void saveProfile()
