@@ -36,9 +36,7 @@ import com.nustfruta.utility.FirebaseDBUtil;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class addProducts extends AppCompatActivity implements View.OnClickListener, OnFailureListener, AdapterView.OnItemSelectedListener {
-
-
+public class AddProductActivity extends AppCompatActivity implements View.OnClickListener, OnFailureListener, AdapterView.OnItemSelectedListener {
 
     @Override
     public void onClick(View v) {
@@ -70,6 +68,10 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
 
         }
+        else if (v.getId() == backButton.getId())
+        {
+            finish();
+        }
 
     }
 
@@ -94,26 +96,29 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
     StorageReference storageReference;
 
+    ImageView backButton;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         setContentView(R.layout.activity_addproducts);
-
         initializeViews();
+        attachListeners();
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
+        unit.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
 
+    }
+
+    public void attachListeners()
+    {
         productSaveBtn.setOnClickListener(this);
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
         category.setOnItemSelectedListener(this);
         unit.setOnItemSelectedListener(this);
-
-
-        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
-        unit.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
-
+        backButton.setOnClickListener(this);
     }
 
 
@@ -135,6 +140,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         cropBtn = findViewById(R.id.cropDoneBtn);
         cropImageView = findViewById(R.id.cropImageView);
         cropImageView.setAspectRatio(1, 1);
+        backButton = findViewById(R.id.backIcon);
 
     }
 

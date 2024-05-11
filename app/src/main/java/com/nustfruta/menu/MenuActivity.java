@@ -122,6 +122,10 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         else if (v.getId() == orders.getId()) {
             navigateOut(YourOrdersActivity.class);
         }
+        else if (v.getId() == about.getId()) {
+
+            //TODO: link to about us.
+        }
 
         //TODO: navigate out for other buttons.
     }
@@ -129,6 +133,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     DrawerLayout drawerLayout;
 
     ImageButton basketButton;
+
+    // drawer children
     LinearLayout orders, profile, about, logout;
 
     TabLayout tabLayout;
@@ -173,7 +179,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     protected void onResume() {
-        fragmentAdapter.notifyDataSetChanged();
 
         /*
         * the drawer is left open when user navigates to another activity (this activity is set to pause) so if its open when user comes back, close it.
