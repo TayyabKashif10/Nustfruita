@@ -10,21 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
-import com.nustfruta.models.LegacyProduct;
-
-import java.util.ArrayList;
 
 public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdapter.ViewHolder> {
 
-
-    final private ArrayList<LegacyProduct> productList;
-
-
-    private HeightListener heightListener;
-
-    public void setHeightListener(HeightListener heightListener) {
-        this.heightListener = heightListener;
-    }
+    OrderTrackingActivity parent;
+    final private String[][] productData;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView tvProductName;
@@ -38,23 +28,21 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
         }
     }
 
-    public OrderTrackingAdapter(ArrayList<LegacyProduct> productList) {
-        this.productList = productList;
+    public OrderTrackingAdapter(OrderTrackingActivity parent, String[][] productData) {
+        this.productData = productData;
+        this.parent = parent;
     }
 
-    // Create new views (invoked by the layout manager)
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View llProductRow = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.product_text_row, viewGroup, false);
 
         llProductRow.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 llProductRow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                if (heightListener != null)
-                    heightListener.onHeightObtained(llProductRow.getHeight());
+                parent.setRowHeight(llProductRow.getHeight());
             }
         });
 
@@ -63,14 +51,14 @@ public class OrderTrackingAdapter extends RecyclerView.Adapter<OrderTrackingAdap
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        LegacyProduct thisProduct = productList.get(position);
+        String[] thisProduct = productData[position];
 
-        viewHolder.tvProductName.setText(String.format("%s x %d", thisProduct.getName(), thisProduct.getQuantity()));
-        viewHolder.tvProductPrice.setText(Integer.toString(thisProduct.getUnitPrice() * thisProduct.getQuantity()));
+        viewHolder.tvProductName.setText(thisProduct[0] + " x " + thisProduct[1]);
+        viewHolder.tvProductPrice.setText(Integer.toString(Integer.parseInt(thisProduct[1]) * Integer.parseInt(thisProduct[2])));
     }
 
     @Override
     public int getItemCount() {
-        return productList.size();
+        return productData.length;
     }
 }

@@ -1,5 +1,6 @@
 package com.nustfruta.orders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.nustfruta.R;
-import com.nustfruta.models.Order;
-import com.nustfruta.utility.DateFormat;
+import com.nustfruta.models.OrderDB;
+import com.nustfruta.utility.OrderParser;
 
-import java.util.ArrayList;
-
-public class YourOrdersAdapter extends RecyclerView.Adapter<YourOrdersAdapter.ViewHolder> {
-
-    final private ArrayList<Order> orderList;
+public class YourOrdersAdapter extends FirebaseRecyclerAdapter<OrderDB, YourOrdersAdapter.ViewHolder> {
 
     YourOrdersActivity parent;
 
@@ -36,40 +35,33 @@ public class YourOrdersAdapter extends RecyclerView.Adapter<YourOrdersAdapter.Vi
         }
     }
 
-    public YourOrdersAdapter(YourOrdersActivity parent, ArrayList<Order> orderList) {
-        this.orderList = orderList;
+    public YourOrdersAdapter(YourOrdersActivity parent, FirebaseRecyclerOptions options) {
+        super(options);
         this.parent = parent;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        Log.d("create", "created");
         View cOrderCard = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.your_orders_row, viewGroup, false);
 
         return new ViewHolder(cOrderCard);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        Order thisOrder = orderList.get(position);
+    public void onBindViewHolder(ViewHolder viewHolder, final int position, OrderDB order) {
+        Log.d("Bind", order.getProductData());
 
-        viewHolder.tvID.setText(thisOrder.getOrderID());
-        viewHolder.tvStatus.setText(thisOrder.getStatus().toString());
-        viewHolder.tvDate.setText(DateFormat.DDMMYY(thisOrder.getDateTime()));
-        viewHolder.tvTotal.setText(String.format("PKR %d", thisOrder.getTotal()));
-
+        viewHolder.tvID.setText(order.getOrderID());
+        viewHolder.tvStatus.setText(order.getStatus().toString());
+        viewHolder.tvDate.setText(order.getDateTime());
+        viewHolder.tvTotal.setText(String.format("PKR %d", OrderParser.getSubtotal(OrderParser.parseProductData(order.getProductData()))));
         viewHolder.cMainCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parent.expandCard(thisOrder.getOrderID()
-                );
+                parent.expandCard(order.getOrderID());
             }
         });
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return orderList.size();
     }
 }

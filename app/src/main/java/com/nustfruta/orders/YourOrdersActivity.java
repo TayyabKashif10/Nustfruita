@@ -2,6 +2,9 @@ package com.nustfruta.orders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,20 +14,17 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.Query;
 import com.nustfruta.R;
-import com.nustfruta.models.Order;
-import com.nustfruta.models.OrderStatus;
-import com.nustfruta.models.LegacyProduct;
-import com.nustfruta.models.User;
-
-import java.util.ArrayList;
-import java.util.Calendar;
+import com.nustfruta.models.OrderDB;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 public class YourOrdersActivity extends AppCompatActivity {
 
-    // dummy, provide from database later
-    ArrayList<Order> orderList;
+    ImageView ivBackButton;
 
+    FirebaseRecyclerOptions options;
     RecyclerView rvOrderList;
     YourOrdersAdapter adapter;
 
@@ -39,35 +39,49 @@ public class YourOrdersActivity extends AppCompatActivity {
             return insets;
         });
 
-        orderList = new ArrayList<>();
-
-        ArrayList<LegacyProduct> productList = new ArrayList<>();
-        productList.add(new LegacyProduct(1234, 299, "Oranges", 3, 0));
-        productList.add(new LegacyProduct(1314, 199, "Apples", 1,0));
-        orderList.add(new Order("firstOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.ON_WAY, productList));
-
-        productList.clear();
-        productList.add(new LegacyProduct(619, 169, "Bananas", 11,0));
-        productList.add(new LegacyProduct(0, 9999, "sabih", 1,0));
-        orderList.add(new Order("secondOrder", Calendar.getInstance(), Calendar.getInstance(), new User(), OrderStatus.DELIVERED, productList));
-
         initializeOrderList();
+        initializeBackButton();
     }
 
     private void initializeOrderList() {
         rvOrderList = findViewById(R.id.rvOrderList);
-        adapter = new YourOrdersAdapter(this, orderList);
+        Log.d("bruh", FirebaseDBUtil.getCurrentUserID());
+        Query query =  FirebaseDBUtil.getOrdersNodeReference().orderByChild("userID").equalTo(FirebaseDBUtil.getCurrentUserID());
+        options = new FirebaseRecyclerOptions.Builder<OrderDB>().setQuery(query, OrderDB.class).build();
+
+        adapter = new YourOrdersAdapter(this, options);
 
         rvOrderList.setLayoutManager(new LinearLayoutManager(this));
         rvOrderList.setAdapter(adapter);
     }
 
+    private void initializeBackButton() {
+        ivBackButton = findViewById(R.id.backIcon);
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     public void expandCard(String orderID)
     {
         Intent intent = new Intent(this, OrderTrackingActivity.class);
         intent.putExtra("ID", orderID);
         startActivity(intent);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 }

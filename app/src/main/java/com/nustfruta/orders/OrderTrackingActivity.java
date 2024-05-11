@@ -1,153 +1,170 @@
-package com.nustfruta.orders;
+    package com.nustfruta.orders;
 
-import static com.nustfruta.utility.Constants.DELIVERY_FEES;
+    import android.content.Intent;
+    import android.graphics.PorterDuff;
+    import android.os.Bundle;
+    import android.util.Log;
+    import android.view.View;
+    import android.view.ViewGroup;
+    import android.widget.ImageView;
+    import android.widget.TextView;
 
-import android.content.Intent;
-import android.graphics.PorterDuff;
-import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+    import androidx.activity.EdgeToEdge;
+    import androidx.annotation.NonNull;
+    import androidx.appcompat.app.AppCompatActivity;
+    import androidx.core.content.ContextCompat;
+    import androidx.core.graphics.Insets;
+    import androidx.core.view.ViewCompat;
+    import androidx.core.view.WindowInsetsCompat;
+    import androidx.recyclerview.widget.LinearLayoutManager;
+    import androidx.recyclerview.widget.RecyclerView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+    import com.google.firebase.database.DataSnapshot;
+    import com.google.firebase.database.DatabaseError;
+    import com.google.firebase.database.ValueEventListener;
+    import com.nustfruta.R;
+    import com.nustfruta.models.OrderDB;
+    import com.nustfruta.utility.Constants;
+    import com.nustfruta.utility.DateFormat;
+    import com.nustfruta.utility.FirebaseDBUtil;
+    import com.nustfruta.utility.OrderParser;
 
-import com.nustfruta.R;
-import com.nustfruta.models.Order;
-import com.nustfruta.models.OrderStatus;
-import com.nustfruta.models.LegacyProduct;
-import com.nustfruta.models.User;
-import com.nustfruta.utility.DateFormat;
+    public class OrderTrackingActivity extends AppCompatActivity {
 
-import java.util.Calendar;
-import java.util.ArrayList;
+        Intent intent;
 
-public class OrderTrackingActivity extends AppCompatActivity implements HeightListener {
+        String orderID;
+        OrderDB order;
+        String[][] parsedProducts;
 
-    Intent intent;
+        final int MAX_ITEMS = 3;
+        RecyclerView rvProducts;
+        OrderTrackingAdapter adapter;
 
-    // dummies, provide from Your Orders activity later
-    Order order;
-    ArrayList<LegacyProduct> productList;
+        int[] tintColors = new int[5];
+        ImageView[] fruits = new ImageView[5];
+        ImageView ivBackButton;
+        TextView tvOrderStatus, tvOrderID, tvOrderDate, tvEstimatedDate, tvSubtotal, tvTotal;
 
-    final int maxItems = 3;
-    RecyclerView rvProducts;
-    OrderTrackingAdapter adapter;
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            EdgeToEdge.enable(this);
+            setContentView(R.layout.activity_order_tracking);
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
 
-    int[] tintColors = new int[5];
-    ImageView[] fruits = new ImageView[5];
-    TextView tvOrderStatus, tvOrderID, tvOrderDate, tvEstimatedDate, tvSubtotal, tvTotal;
+            intent = getIntent();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_order_tracking);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+            orderID = intent.getStringExtra("ID");
+            FirebaseDBUtil.getOrdersNodeReference().child(orderID).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    order = snapshot.getValue(OrderDB.class);
+                    parsedProducts = OrderParser.parseProductData(order.getProductData());
+                    updateFruits();
+                    setViewTexts();
+                    initializeProductsList();
+                }
 
-        intent = getIntent();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // TODO
+                    Log.d("DatabaseCancelled", error.toString());
+                }
+            });
 
-        // dummy values, will be provided from database later
-        productList = new ArrayList<>();
-        productList.add(new LegacyProduct(1234, 299, "Oranges", 3, 0));
-        productList.add(new LegacyProduct(1314, 199, "Apples", 1,0));
-        productList.add(new LegacyProduct(619, 169, "Bananas", 11,0));
-        productList.add(new LegacyProduct(0, 9999, "sabih", 1,0));
-        order = new Order("12345678", Calendar.getInstance(), Calendar.getInstance(),new User(), OrderStatus.ON_WAY, productList);
+            initializeViews();
+            initializeColors();
+            initializeBackButton();
+        }
 
-        initializeViews();
-        initializeColors();
-        initializeProductsList();
+        private void initializeViews() {
+            ivBackButton = findViewById(R.id.backIcon);
+            fruits[0] = findViewById(R.id.ivApplePending);
+            fruits[1] = findViewById(R.id.ivPearConfirmed);
+            fruits[2] = findViewById(R.id.ivCherriesPacking);
+            fruits[3] = findViewById(R.id.ivWatermelonOnWay);
+            fruits[4] = findViewById(R.id.ivPineappleDelivered);
+            tvOrderStatus = findViewById(R.id.tvOrderStatus);
+            tvOrderID = findViewById(R.id.tvOrderID);
+            tvOrderDate = findViewById(R.id.tvOrderDate);
+            tvEstimatedDate = findViewById(R.id.tvEstimatedDate);
+            tvSubtotal = findViewById(R.id.tvSubtotal);
+            tvTotal = findViewById(R.id.tvTotal);
+        }
 
-        updateFruits();
-        setViewTexts();
+        private void initializeColors() {
+            tintColors[0] = ContextCompat.getColor(this, R.color.apple_red);
+            tintColors[1] = ContextCompat.getColor(this, R.color.pear_green);
+            tintColors[2] = ContextCompat.getColor(this, R.color.cherry_red);
+            tintColors[3] = ContextCompat.getColor(this, R.color.watermelon_red);
+            tintColors[4] = ContextCompat.getColor(this, R.color.pineapple_yellow);
+        }
 
-        Toast.makeText(this, intent.getStringExtra("ID"), Toast.LENGTH_SHORT).show();
-    }
+        private void initializeProductsList() {
+            rvProducts = findViewById(R.id.rvProductList);
+            adapter = new OrderTrackingAdapter(this, parsedProducts);
 
-    private void initializeViews() {
-        fruits[0] = findViewById(R.id.ivApplePending);
-        fruits[1] = findViewById(R.id.ivPearConfirmed);
-        fruits[2] = findViewById(R.id.ivCherriesPacking);
-        fruits[3] = findViewById(R.id.ivWatermelonOnWay);
-        fruits[4] = findViewById(R.id.ivPineappleDelivered);
-        tvOrderStatus = findViewById(R.id.tvOrderStatus);
-        tvOrderID = findViewById(R.id.tvOrderID);
-        tvOrderDate = findViewById(R.id.tvOrderDate);
-        tvEstimatedDate = findViewById(R.id.tvEstimatedDate);
-        tvSubtotal = findViewById(R.id.tvSubtotal);
-        tvTotal = findViewById(R.id.tvTotal);
-    }
+            rvProducts.setLayoutManager(new LinearLayoutManager(this));
+            rvProducts.setAdapter(adapter);
+        }
 
-    private void initializeColors() {
-        tintColors[0] = ContextCompat.getColor(this, R.color.apple_red);
-        tintColors[1] = ContextCompat.getColor(this, R.color.pear_green);
-        tintColors[2] = ContextCompat.getColor(this, R.color.cherry_red);
-        tintColors[3] = ContextCompat.getColor(this, R.color.watermelon_red);
-        tintColors[4] = ContextCompat.getColor(this, R.color.pineapple_yellow);
-    }
+        private void initializeBackButton() {
+            ivBackButton = findViewById(R.id.backIcon);
+            ivBackButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }
 
-    private void initializeProductsList() {
-        rvProducts = findViewById(R.id.rvProductList);
-        adapter = new OrderTrackingAdapter(productList);
+        private void updateFruits() {
+            int status = order.getStatus().ordinal();
+            for (int i = 0; i <= status; i++)
+                fruits[i].setColorFilter(tintColors[i], PorterDuff.Mode.SRC_ATOP);
+            tvOrderStatus.setTextColor(tintColors[status]);
+        }
 
-        adapter.setHeightListener(this);
+        private void setViewTexts() {
+            int subtotal = OrderParser.getSubtotal(parsedProducts);
 
-        rvProducts.setLayoutManager(new LinearLayoutManager(this));
-        rvProducts.setAdapter(adapter);
-    }
+            tvOrderStatus.setText(getOrderStatus());
 
-    private void updateFruits() {
-        int status = order.getStatus().ordinal();
-        for (int i = 0; i <= status; i++)
-            fruits[i].setColorFilter(tintColors[i], PorterDuff.Mode.SRC_ATOP);
-        tvOrderStatus.setTextColor(tintColors[status]);
-    }
+            tvOrderID.setText(order.getOrderID());
 
-    private void setViewTexts() {
-        tvOrderStatus.setText(getOrderStatus());
+            tvOrderDate.setText(order.getDateTime());
 
-        tvOrderID.setText(order.getOrderID());
+            tvEstimatedDate.setText(DateFormat.EEE_DDMMYY(DateFormat.addOneDay(order.getDateTime())));
 
-        tvOrderDate.setText(DateFormat.EEE_DDMMYY(order.getDateTime()));
-        tvEstimatedDate.setText(DateFormat.EEE_DDMMYY(order.getEstDateTime()));
+            tvSubtotal.setText(String.format("PKR %d", subtotal));
+            tvTotal.setText(String.format("PKR %d", subtotal + Constants.DELIVERY_FEES));
+        }
 
-        tvSubtotal.setText(String.format("PKR %d", order.getTotal() - DELIVERY_FEES));
-        tvTotal.setText(String.format("PKR %d", order.getTotal()));
-    }
+        private int getOrderStatus() {
+            switch (order.getStatus()) {
+                case PENDING:
+                    return R.string.order_status_pending;
+                case CONFIRMED:
+                    return R.string.order_status_confirmed;
+                case PACKING:
+                    return R.string.order_status_packing;
+                case ON_WAY:
+                    return R.string.order_status_on_way;
+                case DELIVERED:
+                    return R.string.order_status_delivered;
+                default:
+                    return R.string.error;
+            }
+        }
 
-    private int getOrderStatus() {
-        switch (order.getStatus()) {
-            case PENDING:
-                return R.string.order_status_pending;
-            case CONFIRMED:
-                return R.string.order_status_confirmed;
-            case PACKING:
-                return R.string.order_status_packing;
-            case ON_WAY:
-                return R.string.order_status_on_way;
-            case DELIVERED:
-                return R.string.order_status_delivered;
-            default:
-                return R.string.error;
+        public void setRowHeight(int height) {
+            ViewGroup.LayoutParams rvLayoutParams = rvProducts.getLayoutParams();
+            rvLayoutParams.height = height * Math.min(parsedProducts.length, MAX_ITEMS);
+            rvProducts.setLayoutParams(rvLayoutParams);
         }
     }
-
-    @Override
-    public void onHeightObtained(int height) {
-        ViewGroup.LayoutParams rvLayoutParams = rvProducts.getLayoutParams();
-        rvLayoutParams.height = height * Math.min(productList.size(), maxItems);
-        rvProducts.setLayoutParams(rvLayoutParams);
-    }
-}

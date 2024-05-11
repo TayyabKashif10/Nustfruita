@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,9 +16,9 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
 import com.nustfruta.models.CartProduct;
-import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
+import com.nustfruta.orders.OrderTrackingActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.OrderParser;
@@ -37,6 +37,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
     public int subtotal = 0;
 
     public Context context;
+
+    ImageView ivBackButton;
 
     Intent backIntent = new Intent();
 
@@ -85,7 +87,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
                 subtotal += productArrayList.get(i).getQuantity() * productArrayList.get(i).getUnitPrice();
 
             // Displaying initial subtotal price, total price, checkout price.
-            checkoutPrice.setText("PKR " + (subtotal + 50));
+            checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
 
             checkoutButton.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +96,8 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
                     checkout();
                 }
             });
+
+            initializeBackButton();
         }
     }
 
@@ -108,6 +112,16 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
             setContentView(R.layout.empty_basket);
         backToMenuButton = findViewById(R.id.backToMenuButton);
         backToMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void initializeBackButton() {
+        ivBackButton = findViewById(R.id.backIcon);
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -139,7 +153,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
 
 
         // Updating the displayed prices on static card view
-        checkoutPrice.setText("PKR " + (subtotal + 50));
+        checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
         cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
 
@@ -155,7 +169,7 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         subtotal += productArrayList.get(position).getUnitPrice();
 
         // Updating the displayed checkout price
-        checkoutPrice.setText("PKR " + (subtotal + 50));
+        checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
         cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
         cartRecyclerViewAdapter.notifyItemChanged(position);
@@ -182,15 +196,14 @@ public class CartActivity extends AppCompatActivity implements ModifyQuantity {
         // store ID in user's orders node.
         FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID);
 
-        //TODO: navigate to order tracking.
-
-        // return to menu, clear basket.
         productArrayList.clear();
-        finish();
+
+        // navigate to order tracking
+        Intent intent = new Intent(this, OrderTrackingActivity.class);
+        intent.putExtra("ID", orderID);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);    // prevent user from navigating back to checkout
+
+        startActivity(intent);
     }
 }
-
-
-
-
 

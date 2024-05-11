@@ -1,19 +1,22 @@
 package com.nustfruta.models;
 
 import com.nustfruta.utility.DateFormat;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.util.Calendar;
 
 public class OrderDB {
     private String orderID;
-    String productData;
+    private String productData;
     private String dateTime;
+    private String userID;
     private OrderStatus status;
 
-    public OrderDB(String orderID, String productData,OrderStatus status) {
+    public OrderDB(String orderID, String productData, OrderStatus status) {
         this.orderID = orderID;
         this.productData = productData;
         this.dateTime = DateFormat.EEE_DDMMYY(Calendar.getInstance());
+        this.userID = FirebaseDBUtil.getCurrentUserID();
         this.status = status;
     }
 
@@ -44,6 +47,14 @@ public class OrderDB {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public OrderStatus getStatus() {

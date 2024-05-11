@@ -8,7 +8,7 @@
     tools:context=".orders.YourOrdersActivity">
 
     <include
-        android:id="@+id/backButton"
+        android:id="@+id/subToolbar"
         layout="@layout/sub_toolbar_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backButton" />
+        app:layout_constraintTop_toBottomOf="@+id/subToolbar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
