@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nustfruta.models.ProductDB;
 import com.nustfruta.models.User;
 
 abstract public class FirebaseDBUtil {
@@ -88,14 +89,14 @@ abstract public class FirebaseDBUtil {
         });
     }
 
-// TODO: UPDATE THE IDENTIFIERS ACCORDING TO NEW PRODUCT CLASS
-//    public static void storeProduct(Product product) {
-//
-//        if (product.getCategory() == "Fruits")
-//            database.getReference("products/fruits").child(getProductName()).setValue(product);
-//
-//        else
-//            database.getReference("products/salads").child(getProductName()).setValue(product);
-//    }
+
+    public static void storeProductDB (ProductDB product, String category) {
+
+        if (category.equals("Fruit"))
+            database.getReference("products/fruits").child(product.getProductName()).setValue(product);
+
+        else
+            database.getReference("products/salads").child(product.getProductName()).setValue(product);
+    }
 
 }
