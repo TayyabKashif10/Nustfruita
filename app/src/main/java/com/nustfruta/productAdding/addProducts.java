@@ -1,5 +1,6 @@
 package com.nustfruta.productAdding;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,9 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -24,18 +24,19 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.canhub.cropper.CropImageView;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
+import com.nustfruta.models.ProductDB;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class addProducts extends AppCompatActivity implements View.OnClickListener, OnFailureListener, OnSuccessListener {
+public class addProducts extends AppCompatActivity implements View.OnClickListener, OnFailureListener, AdapterView.OnItemSelectedListener {
 
 
 
@@ -58,9 +59,11 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
             croppedImgUri = bitmapToUri(getApplicationContext(), Objects.requireNonNull(cropImageView.getCroppedImage()));
             productAddLayout();
 
-            if(croppedImgUri != null)
+            if(croppedImgUri != null) {
                 productImage.setImageURI(croppedImgUri);
 
+                cropBtn.setError(null);
+            }
 
             else
                 Toast.makeText(this, "Image upload failed.", Toast.LENGTH_LONG).show();
@@ -71,8 +74,10 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     }
 
 
-//    Product newProduct;
+    //    Product newProduct;
     TextInputEditText productName, unitPrice;
+
+    TextInputLayout categoryLayout, unitLayout, nameLayout, priceLayout;
 
     AutoCompleteTextView category, unit;
 
@@ -102,9 +107,12 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         productSaveBtn.setOnClickListener(this);
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
+        category.setOnItemSelectedListener(this);
+        unit.setOnItemSelectedListener(this);
 
-        category.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, new String[]{"Fruits", "Salads"}));
-        unit.setAdapter(new ArrayAdapter<String>(this, R.layout.dropdownitem_layout, new String[]{"Kilogram", "Dozen", "Piece"}));
+
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
+        unit.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
 
     }
 
@@ -119,13 +127,14 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         addNewProduct = findViewById(R.id.addNewProduct);
         category = findViewById(R.id.category);
         unit = findViewById(R.id.productUnit);
+        nameLayout = findViewById(R.id.productNameLayout);
+        priceLayout = findViewById(R.id.unitPriceLayout);
+        unitLayout = findViewById(R.id.productUnitLayout);
+        categoryLayout = findViewById(R.id.categoryLayout);
 
         cropBtn = findViewById(R.id.cropDoneBtn);
         cropImageView = findViewById(R.id.cropImageView);
         cropImageView.setAspectRatio(1, 1);
-
-        cropBtn.setVisibility(View.GONE);
-        cropImageView.setVisibility(View.GONE);
 
     }
 
@@ -139,35 +148,40 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         String inputCategory = (category.getText().toString());
         String inputUnit = (unit.getText().toString());
 
-        // Option to add OnSuccess listener but i dont see a need
-        String inputImageUrl = storageReference.getDownloadUrl().toString();
-
-
-        if (!unit.getHint().toString().isEmpty())
+        if (croppedImgUri == null)
         {
             isProductValid = false;
-            category.setError("Please select a unit");
+
+            imgSelectBtn.setError("Please select an image");
         }
+        else
+            imgSelectBtn.setError(null);
+
+        if (inputUnit.isEmpty())
+        {
+            isProductValid = false;
+
+            unit.setError("Please select a unit");
+        }
+        else
+            unit.setError(null);
 
 
-        if (!category.getHint().toString().isEmpty())
+        if (inputCategory.isEmpty())
         {
             isProductValid = false;
             category.setError("Please select a category");
         }
+        else
+            category.setError(null);
 
         if (inputProductName.isEmpty())
         {
-           isProductValid = false;
-           productName.setError("Please enter a product name");
-        }
-
-        if (inputImageUrl.isEmpty())
-        {
             isProductValid = false;
-
-            imgSelectBtn.setError("Please select an image.");
+            productName.setError("Please enter a product name");
         }
+        else
+            productName.setError(null);
 
 
         if (inputUnitPrice.isEmpty() || Integer.parseInt(inputUnitPrice) <= 0)
@@ -176,6 +190,8 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
             unitPrice.setError("Please enter a valid price");
         }
+        else
+            unitPrice.setError(null);
 
         if (!isProductValid)
         {
@@ -184,11 +200,13 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         uploadImage(inputProductName);
 
+        String inputImageUrl = inputCategory.toLowerCase() + "s/" + inputProductName;
 
-//        newProduct = new Product(inputProductName, inputUnitPrice, inputUnit, inputCategory, inputImageUrl);
+        ProductDB newProduct = new ProductDB(inputProductName, inputUnit, Integer.parseInt(inputUnitPrice), inputImageUrl);
 
-//        FirebaseUtil.storeProduct(newProduct);
+        FirebaseDBUtil.storeProductDB(newProduct, inputCategory);
 
+        finish();
     }
 
 
@@ -230,25 +248,19 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         // TODO: CONFIRM IF IT WORKS
 
-        if ((category.getText().toString()).equals("Fruits"))
+        if ((category.getText().toString()).equals("Fruit"))
             storageReference = FirebaseStorage.getInstance().getReference("fruits/" + productName);
 
-        else if ((category.getText().toString()).equals("Salads"))
+        else if ((category.getText().toString()).equals("Salad"))
             storageReference = FirebaseStorage.getInstance().getReference("salads/" + productName);
 
-        storageReference.putFile(imageUri).addOnFailureListener(this).addOnSuccessListener(this);
+        storageReference.putFile(croppedImgUri).addOnFailureListener(this);
     }
 
 
     @Override
     public void onFailure(@NonNull Exception e) {
-
         Toast.makeText(this, "Image upload failed.", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onSuccess(Object o) {
-        finish();
     }
 
 
@@ -275,8 +287,27 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         productSaveBtn.setVisibility(View.GONE);
         category.setVisibility(View.GONE);
         unit.setVisibility(View.GONE);
+        nameLayout.setVisibility(View.GONE);
+        priceLayout.setVisibility(View.GONE);
+        unitLayout.setVisibility(View.GONE);
+        categoryLayout.setVisibility(View.GONE);
     }
 
+    // TODO: TEST
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        if (view.getId() == categoryLayout.getId())
+            categoryLayout.setError(null);
+
+        if (view.getId() == unitLayout.getId())
+            unitLayout.setError(null);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 
     public void productAddLayout() {
 
@@ -288,6 +319,10 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         addNewProduct.setVisibility(View.VISIBLE);
         category.setVisibility(View.VISIBLE);
         unit.setVisibility(View.VISIBLE);
+        nameLayout.setVisibility(View.VISIBLE);
+        priceLayout.setVisibility(View.VISIBLE);
+        unitLayout.setVisibility(View.VISIBLE);
+        categoryLayout.setVisibility(View.VISIBLE);
 
 
         cropImageView.setVisibility(View.GONE);
@@ -306,14 +341,11 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
             if (cursor != null && cursor.moveToFirst()) {
 
-                long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.SIZE) + 1);
+                @SuppressLint("Range") long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.SIZE));
                 cursor.close();
 
                 if (size != 0)
-                    return size - 1 <= maxSize;
-
-                else
-                    Log.e("TAG", "Error: SIZE column not found in cursor");
+                    return size <= maxSize;
             }
         }
 

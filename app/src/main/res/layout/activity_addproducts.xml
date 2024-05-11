@@ -15,6 +15,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/primary_light"
         app:boxBackgroundColor="@color/primary_light"
+        app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
         app:boxCornerRadiusBottomStart="40dp"
         app:boxCornerRadiusTopEnd="40dp"
@@ -30,7 +31,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productNameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/unitPriceLayout"
         app:startIconDrawable="@drawable/cart_icon"
         app:startIconTint="@color/orange">
 
@@ -38,11 +39,9 @@
             android:id="@+id/category"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/product_category"
+            android:hint="@string/category"
             android:inputType="none"
-            android:padding="15dp"
-            android:paddingStart="50dp" />
+            android:paddingVertical="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -54,6 +53,7 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/primary_light"
         app:boxBackgroundColor="@color/primary_light"
+        app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
         app:boxCornerRadiusBottomStart="40dp"
         app:boxCornerRadiusTopEnd="40dp"
@@ -77,11 +77,9 @@
             android:id="@+id/productUnit"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:drawablePadding="10dp"
-            android:hint="@string/product_unit"
+            android:hint="Unit"
             android:inputType="none"
-            android:padding="15dp"
-            android:paddingStart="50dp" />
+            android:paddingVertical="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -114,7 +112,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         app:boxBackgroundColor="@color/primary_light"
-        app:boxBackgroundMode="filled"
+        app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
         app:boxCornerRadiusBottomStart="40dp"
         app:boxCornerRadiusTopEnd="40dp"
@@ -131,7 +129,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/productUnitLayout">
+        app:layout_constraintTop_toBottomOf="@id/productNameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/unitPrice"
@@ -152,19 +150,20 @@
         android:id="@+id/addNewProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="80dp"
         android:text="@string/add_new_product"
         android:textColor="@color/orange"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="50dp"
+        android:layout_width="107dp"
+        android:layout_height="104dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/cherry_icon"
         app:layout_constraintBottom_toTopOf="@+id/addNewProduct"
         app:layout_constraintEnd_toEndOf="parent"
@@ -183,9 +182,9 @@
         android:id="@+id/productNameLayout"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="-40dp"
         app:boxBackgroundColor="@color/primary_light"
-        app:boxBackgroundMode="filled"
+        app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
         app:boxCornerRadiusBottomStart="40dp"
         app:boxCornerRadiusTopEnd="40dp"
@@ -221,6 +220,8 @@
         android:layout_marginTop="20dp"
         android:text="@string/save"
         android:textColor="@color/onPrimary"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
@@ -232,9 +233,11 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:text="@string/select_image"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unitPriceLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/productUnitLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
