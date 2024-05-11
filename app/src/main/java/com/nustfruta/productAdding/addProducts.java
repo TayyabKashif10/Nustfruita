@@ -200,7 +200,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         uploadImage(inputProductName);
 
-        String inputImageUrl = storageReference.getDownloadUrl().toString();
+        String inputImageUrl = inputCategory.toLowerCase() + "s/" + inputProductName;
 
         ProductDB newProduct = new ProductDB(inputProductName, inputUnit, Integer.parseInt(inputUnitPrice), inputImageUrl);
 
