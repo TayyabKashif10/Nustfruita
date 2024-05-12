@@ -16,6 +16,9 @@
             android:name=".menu.AdminMenuActivity"
             android:exported="false" />
         <activity
+            android:name=".misc.AboutUsActivity"
+            android:exported="false" />
+        <activity
             android:name=".orders.YourOrdersActivity"
             android:exported="false" />
         <activity
@@ -28,7 +31,7 @@
             android:name=".cart.CartActivity"
             android:exported="true" />
         <activity
-            android:name=".post_order.OrderTrackingActivity"
+            android:name=".orders.OrderTrackingActivity"
             android:exported="false" />
         <activity
             android:name=".authentication.LoginOTPActivity"

@@ -51,6 +51,7 @@ import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
+import com.nustfruta.misc.AboutUsActivity;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.orders.YourOrdersActivity;
@@ -126,8 +127,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             navigateOut(YourOrdersActivity.class);
         }
         else if (v.getId() == about.getId()) {
-
-            //TODO: link to about us.
+            navigateOut(AboutUsActivity.class);
         }
 
         //TODO: navigate out for other buttons.
