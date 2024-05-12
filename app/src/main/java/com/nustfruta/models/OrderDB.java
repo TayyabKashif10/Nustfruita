@@ -23,6 +23,7 @@ public class OrderDB {
     // requirement for firebase implementation
     public OrderDB() {
         this.dateTime = DateFormat.EEE_DDMMYY(Calendar.getInstance());
+        this.userID = FirebaseDBUtil.getCurrentUserID();
     }
 
     public String getOrderID() {

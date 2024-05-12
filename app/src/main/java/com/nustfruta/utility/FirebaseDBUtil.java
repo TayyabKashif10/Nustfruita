@@ -1,5 +1,7 @@
 package com.nustfruta.utility;
 
+import android.provider.ContactsContract;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +37,11 @@ abstract public class FirebaseDBUtil {
     public static DatabaseReference getCurrentUserReference()
     {
         return database.getReference("users").child(getCurrentUserID());
+    }
+
+    public static DatabaseReference getUsersNodeReference()
+    {
+        return database.getReference("users");
     }
 
     public static DatabaseReference getFruitFactNodeReference()

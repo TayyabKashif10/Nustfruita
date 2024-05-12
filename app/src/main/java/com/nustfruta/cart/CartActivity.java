@@ -201,7 +201,7 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
         // navigate to order tracking
         Intent intent = new Intent(this, OrderTrackingActivity.class);
         intent.putExtra("ID", orderID);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);    // prevent user from navigating back to checkout
+        finish();  // prevent user from navigating back to checkout
 
         startActivity(intent);
     }
