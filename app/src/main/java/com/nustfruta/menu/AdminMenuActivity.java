@@ -22,6 +22,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
+import com.nustfruta.misc.AboutUsActivity;
+import com.nustfruta.orders.OrderManagementActivity;
 import com.nustfruta.productAdding.AddProductActivity;
 import com.nustfruta.utility.Constants;
 
@@ -50,11 +52,9 @@ public class AdminMenuActivity extends AppCompatActivity implements View.OnClick
             openDrawer();
         }
         else if (v.getId() == manageOrders.getId()) {
-
-            // TODO: Link to Order Management.
+            navigateOut(OrderManagementActivity.class);
         } else if (v.getId() == about.getId()) {
-
-          // TODO: link to About US.
+            navigateOut(AboutUsActivity.class);
         } else if (v.getId() == logout.getId()) {
             AuthUI.getInstance().signOut(this).addOnCompleteListener(task -> {
 

@@ -37,7 +37,7 @@ import com.nustfruta.utility.VerifyCredentials;
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class AddProductActivity extends AppCompatActivity implements View.OnClickListener, OnFailureListener, AdapterView.OnItemSelectedListener {
+public class AddProductActivity extends AppCompatActivity implements View.OnClickListener, OnFailureListener{
 
     @Override
     public void onClick(View v) {
@@ -109,7 +109,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         initializeViews();
         attachListeners();
         category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
-        unit.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
 
     }
 
@@ -118,11 +117,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         productSaveBtn.setOnClickListener(this);
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
-        category.setOnItemSelectedListener(this);
-        unit.setOnItemSelectedListener(this);
         backButton.setOnClickListener(this);
-
-
         category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
 
     }
@@ -147,6 +142,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         cropImageView = findViewById(R.id.cropImageView);
         cropImageView.setAspectRatio(1, 1);
         backButton = findViewById(R.id.backIcon);
+        unit = findViewById(R.id.productUnit);
 
     }
 
