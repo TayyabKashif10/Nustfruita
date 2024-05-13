@@ -123,6 +123,7 @@
     <string name="name_label">Name:</string>
     <string name="address_label">Address:</string>
 
+    <string name="unit">Unit</string>
 
 
 </resources>

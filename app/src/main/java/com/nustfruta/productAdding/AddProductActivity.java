@@ -32,6 +32,7 @@ import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.FirebaseDBUtil;
+import com.nustfruta.utility.VerifyCredentials;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
@@ -76,12 +77,13 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    //    Product newProduct;
-    TextInputEditText productName, unitPrice;
+    TextInputEditText productName, unitPrice, unit;
 
     TextInputLayout categoryLayout, unitLayout, nameLayout, priceLayout;
 
-    AutoCompleteTextView category, unit;
+    AutoCompleteTextView category;
+
+
 
     Button productSaveBtn, imgSelectBtn, cropBtn;
 
@@ -119,6 +121,10 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         category.setOnItemSelectedListener(this);
         unit.setOnItemSelectedListener(this);
         backButton.setOnClickListener(this);
+
+
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
+
     }
 
 
@@ -152,7 +158,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         String inputProductName = productName.getText().toString().toLowerCase();
         String inputUnitPrice =  unitPrice.getText().toString();
         String inputCategory = (category.getText().toString());
-        String inputUnit = (unit.getText().toString());
+        String inputUnit = (unit.getText().toString().toLowerCase());
 
         if (croppedImgUri == null)
         {
@@ -177,10 +183,12 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         {
             isProductValid = false;
             category.setError("Please select a category");
+            categoryLayout.setEndIconVisible(false);
         }
-        else
+        else {
             category.setError(null);
-
+            categoryLayout.setEndIconVisible(true);
+        }
         if (inputProductName.isEmpty())
         {
             isProductValid = false;
@@ -233,7 +241,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
         if (requestCode == 100 && data != null && data.getData() != null) {
 
-            if (!isImageValidSize(this, data.getData(), 1024 * 50))
+            if (!VerifyCredentials.isImageValidSize(this, data.getData(), 1024 * 50))
             {
                 Toast.makeText(this, "Image size is too large, try again", Toast.LENGTH_LONG).show();
 
@@ -300,20 +308,20 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     }
 
     // TODO: TEST
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//        if (view.getId() == categoryLayout.getId())
+//            categoryLayout.setError(null);
+//
+//        if (view.getId() == unitLayout.getId())
+//            unitLayout.setError(null);
+//    }
 
-        if (view.getId() == categoryLayout.getId())
-            categoryLayout.setError(null);
-
-        if (view.getId() == unitLayout.getId())
-            unitLayout.setError(null);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 
     public void productAddLayout() {
 
@@ -337,29 +345,5 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     }
 
 
-    public boolean isImageValidSize(Context context, Uri imageUri, long maxSize) {
-
-
-        try {
-
-            Cursor cursor = context.getContentResolver().query(imageUri, new String[]{MediaStore.Images.Media.SIZE}, null, null, null);
-
-
-            if (cursor != null && cursor.moveToFirst()) {
-
-                @SuppressLint("Range") long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.SIZE));
-                cursor.close();
-
-                if (size != 0)
-                    return size <= maxSize;
-            }
-        }
-
-        catch (Exception e) {
-            Log.e("TAG", "Error getting image size:", e);
-        }
-
-        return false;
-    }
 }
 
