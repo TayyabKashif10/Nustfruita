@@ -110,6 +110,9 @@
     <string name="placeholder_unit">unit</string>
     <string name="add_product">Add Product</string>
     <string name="manage_orders">Manage Orders</string>
+    <string name="phone_label">Phone:</string>
+    <string name="name_label">Name:</string>
+    <string name="address_label">Address:</string>
 
 
 </resources>
