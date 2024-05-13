@@ -77,7 +77,7 @@ public class SplashActivity extends AppCompatActivity {
                     if (FirebaseDBUtil.currentUserType == UserType.ADMIN)
                         intent = new Intent(SplashActivity.this, AdminMenuActivity.class);
                     else
-                        intent = new Intent(SplashActivity.this, AdminMenuActivity.class);
+                        intent = new Intent(SplashActivity.this, MenuActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
