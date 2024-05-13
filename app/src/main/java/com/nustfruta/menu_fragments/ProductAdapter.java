@@ -1,6 +1,7 @@
 package com.nustfruta.menu_fragments;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +24,15 @@ import com.nustfruta.utility.FirebaseStorageUtil;
 
 public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAdapter.ProductHolder> {
 
-    UserType context;
+    UserType userType;
+
+    Context parentContext;
     public ProductCardButtonListener productCardButtonListener;
-    public ProductAdapter(@NonNull FirebaseRecyclerOptions<ProductDB> options, ProductCardButtonListener modifier, UserType content) {
+    public ProductAdapter(@NonNull FirebaseRecyclerOptions<ProductDB> options, ProductCardButtonListener modifier, UserType userType, Context parentContext) {
         super(options);
         this.productCardButtonListener = modifier;
-        this.context = content;
+        this.userType = userType;
+        this.parentContext = parentContext;
     }
 
      public static class ProductHolder extends RecyclerView.ViewHolder {
@@ -52,9 +56,10 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
     {
         productHolder.productPrice.setText( "PKR " + productDB.getUnitPrice());
         productHolder.productName.setText(productDB.getProductName());
-        FirebaseStorageUtil.BindImage(productHolder.productImage, productDB.getImageURL());
 
-        if (context == UserType.CUSTOMER)
+        FirebaseStorageUtil.BindImage(productHolder.productImage, productDB.getImageURL(), parentContext);
+
+        if (userType == UserType.CUSTOMER)
         {
             productHolder.addButton.setVisibility(View.VISIBLE);
             productHolder.deleteButton.setVisibility(View.INVISIBLE);

@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     id("com.google.gms.google-services")
+
 }
 
 android {
@@ -71,6 +72,15 @@ dependencies {
     //FirebaseUI for Firebase Auth
     implementation ("com.firebaseui:firebase-ui-auth:8.0.2")
 
+    //FirebaseUI for Firebase Storage
+    implementation ("com.firebaseui:firebase-ui-storage:8.0.2")
+
     // Image cropping library
     implementation("com.vanniktech:android-image-cropper:4.5.0")
+
+    // glide library
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+    // kotlin annotation processor
+    annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
 }

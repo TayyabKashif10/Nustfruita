@@ -80,7 +80,8 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
             holder.price.setText("PKR " + product.getQuantity() * product.getUnitPrice());
             holder.quantity.setText(Integer.toString(product.getQuantity()));
 
-            FirebaseStorageUtil.BindImage(holder.productIcon, productList.get(position).getImageURL());
+
+            FirebaseStorageUtil.BindImage(holder.productIcon, productList.get(position).getImageURL(),parent.getApplicationContext());
 
             // onClick listener of plus buttons
             holder.plusButton.setOnClickListener(new View.OnClickListener() {

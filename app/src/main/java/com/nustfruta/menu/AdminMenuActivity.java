@@ -46,7 +46,6 @@ public class AdminMenuActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-
         if (v.getId() == optionsIcon.getId())
         {
             openDrawer();

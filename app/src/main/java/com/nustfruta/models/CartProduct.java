@@ -5,13 +5,6 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-
-//TODO: make parcelable
-// send snapshot of arraylist from viewmodel to cart activity
-// use activity for result to get changed arraylist from cart activity back in menu activity
-// update the viewmodel according to the result from cart activity
-// instead of extending productDB, give same fields, but make unitPrice integer and shit.
-
 public class CartProduct implements Parcelable
 {
 

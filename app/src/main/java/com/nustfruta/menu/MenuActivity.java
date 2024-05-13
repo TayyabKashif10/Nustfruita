@@ -401,7 +401,9 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         TextView productName = dialog.findViewById(R.id.bottomSheetProductName);
         TextView unitPrice = dialog.findViewById(R.id.bottomSheetUnitPrice);
         TextView productUnit = dialog.findViewById(R.id.bottomSheetProductUnit);
-        FirebaseStorageUtil.BindImage(productImage, product.getImageURL());
+
+
+        FirebaseStorageUtil.BindImage(productImage, product.getImageURL(), getApplicationContext());
 
         productName.setText(product.getProductName());
         quantity.setText(String.valueOf(product.getQuantity()));
