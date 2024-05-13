@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/primary_light"
+        android:hint="@string/category"
         app:boxBackgroundColor="@color/primary_light"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
@@ -31,7 +32,7 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/unitPriceLayout"
+        app:layout_constraintTop_toBottomOf="@+id/productUnitLayout"
         app:startIconDrawable="@drawable/cart_icon"
         app:startIconTint="@color/orange">
 
@@ -39,19 +40,22 @@
             android:id="@+id/category"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:fontFamily="@font/acme"
             android:hint="@string/category"
             android:inputType="none"
-            android:paddingVertical="10dp" />
+            android:paddingVertical="10dp"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/productUnitLayout"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/primary_light"
+        android:hint="@string/unit"
         app:boxBackgroundColor="@color/primary_light"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
@@ -62,24 +66,26 @@
         app:boxStrokeErrorColor="@color/apple_red"
         app:counterOverflowTextColor="@color/apple_red"
         app:cursorErrorColor="@color/apple_red"
-        app:endIconMode="dropdown_menu"
         app:errorIconTint="@color/apple_red"
         app:errorTextColor="@color/apple_red"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/categoryLayout"
+        app:layout_constraintTop_toBottomOf="@+id/unitPriceLayout"
         app:startIconDrawable="@drawable/balance_icon"
         app:startIconTint="@color/orange">
 
-        <AutoCompleteTextView
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/productUnit"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:hint="Unit"
-            android:inputType="none"
-            android:paddingVertical="10dp" />
+            android:fontFamily="@font/acme"
+            android:hint="@string/unit"
+            android:inputType="text"
+            android:paddingVertical="10dp"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -111,6 +117,8 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/primary_light"
+        android:hint="@string/unit_price"
         app:boxBackgroundColor="@color/primary_light"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
@@ -124,7 +132,7 @@
         app:endIconTint="@color/orange"
         app:errorIconTint="@color/apple_red"
         app:errorTextColor="@color/apple_red"
-        app:expandedHintEnabled="true"
+        app:expandedHintEnabled="false"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -139,11 +147,14 @@
             android:drawableStart="@drawable/money_icon"
             android:drawablePadding="10dp"
             android:drawableTint="@color/orange"
+            android:fontFamily="@font/acme"
             android:hint="@string/unit_price"
             android:inputType="number"
             android:paddingVertical="10dp"
+            android:textColor="@color/white"
             android:textColorHint="@color/m3_hint_foreground"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -151,8 +162,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
+        android:fontFamily="@font/acme"
         android:text="@string/add_new_product"
         android:textColor="@color/orange"
+        android:textScaleX="1.1"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
@@ -180,9 +193,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/productNameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="-40dp"
+        android:elevation="10dp"
+        android:hint="@string/product_name"
         app:boxBackgroundColor="@color/primary_light"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="40dp"
@@ -196,6 +212,7 @@
         app:endIconTint="@color/orange"
         app:errorIconTint="@color/apple_red"
         app:errorTextColor="@color/apple_red"
+        app:hintAnimationEnabled="true"
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -208,9 +225,12 @@
             android:drawableStart="@drawable/fruit_apple"
             android:drawablePadding="10dp"
             android:drawableTint="@color/orange"
+            android:fontFamily="@font/acme"
             android:hint="@string/product_name"
             android:inputType="textPersonName"
-            android:paddingVertical="10dp" />
+            android:paddingVertical="10dp"
+            android:textColor="@color/white"
+            android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -218,8 +238,10 @@
         android:id="@+id/productSaveBtn"
         style="@style/AuthButtonStyle"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/acme"
         android:text="@string/save"
         android:textColor="@color/onPrimary"
+        android:textScaleX="1.1"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -232,12 +254,14 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
+        android:fontFamily="@font/acme"
         android:text="@string/select_image"
+        android:textScaleX="1.1"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/productUnitLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

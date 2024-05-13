@@ -32,11 +32,12 @@ import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.FirebaseDBUtil;
+import com.nustfruta.utility.VerifyCredentials;
 
 import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class addProducts extends AppCompatActivity implements View.OnClickListener, OnFailureListener, AdapterView.OnItemSelectedListener {
+public class addProducts extends AppCompatActivity implements View.OnClickListener, OnFailureListener {
 
 
 
@@ -74,12 +75,13 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    //    Product newProduct;
-    TextInputEditText productName, unitPrice;
+    TextInputEditText productName, unitPrice, unit;
 
     TextInputLayout categoryLayout, unitLayout, nameLayout, priceLayout;
 
-    AutoCompleteTextView category, unit;
+    AutoCompleteTextView category;
+
+
 
     Button productSaveBtn, imgSelectBtn, cropBtn;
 
@@ -107,12 +109,9 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         productSaveBtn.setOnClickListener(this);
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
-        category.setOnItemSelectedListener(this);
-        unit.setOnItemSelectedListener(this);
 
 
         category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
-        unit.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Kg", "Dozen", "Piece"}));
 
     }
 
@@ -146,7 +145,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         String inputProductName = productName.getText().toString().toLowerCase();
         String inputUnitPrice =  unitPrice.getText().toString();
         String inputCategory = (category.getText().toString());
-        String inputUnit = (unit.getText().toString());
+        String inputUnit = (unit.getText().toString().toLowerCase());
 
         if (croppedImgUri == null)
         {
@@ -171,10 +170,12 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
         {
             isProductValid = false;
             category.setError("Please select a category");
+            categoryLayout.setEndIconVisible(false);
         }
-        else
+        else {
             category.setError(null);
-
+            categoryLayout.setEndIconVisible(true);
+        }
         if (inputProductName.isEmpty())
         {
             isProductValid = false;
@@ -227,7 +228,7 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
 
         if (requestCode == 100 && data != null && data.getData() != null) {
 
-            if (!isImageValidSize(this, data.getData(), 1024 * 50))
+            if (!VerifyCredentials.isImageValidSize(this, data.getData(), 1024 * 50))
             {
                 Toast.makeText(this, "Image size is too large, try again", Toast.LENGTH_LONG).show();
 
@@ -294,20 +295,20 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     }
 
     // TODO: TEST
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//
+//        if (view.getId() == categoryLayout.getId())
+//            categoryLayout.setError(null);
+//
+//        if (view.getId() == unitLayout.getId())
+//            unitLayout.setError(null);
+//    }
 
-        if (view.getId() == categoryLayout.getId())
-            categoryLayout.setError(null);
-
-        if (view.getId() == unitLayout.getId())
-            unitLayout.setError(null);
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 
     public void productAddLayout() {
 
@@ -331,29 +332,5 @@ public class addProducts extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    public boolean isImageValidSize(Context context, Uri imageUri, long maxSize) {
-
-
-        try {
-
-            Cursor cursor = context.getContentResolver().query(imageUri, new String[]{MediaStore.Images.Media.SIZE}, null, null, null);
-
-
-            if (cursor != null && cursor.moveToFirst()) {
-
-                @SuppressLint("Range") long size = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.SIZE));
-                cursor.close();
-
-                if (size != 0)
-                    return size <= maxSize;
-            }
-        }
-
-        catch (Exception e) {
-            Log.e("TAG", "Error getting image size:", e);
-        }
-
-        return false;
-    }
 }
 
