@@ -78,12 +78,18 @@ public class User {
     }
 
     @Exclude
-    public  boolean isCompleteProfile()
+    public boolean isCompleteProfile()
     {
-
         return !this.getEmail().isEmpty() && !this.getFullName().isEmpty() && !this.getHostel().isEmpty()  && !this.getRoomNumber().isEmpty();
     }
 
+    @Exclude
+    public String getFormattedPhone() {
+        return '0' + this.phoneNumber.substring(3, 6) + ' ' + this.phoneNumber.substring(6);
+    }
+
+    @Exclude
+    public String getFormattedAddress() {
+        return this.hostel + ' ' + this.roomNumber;
+    }
 }
-
-

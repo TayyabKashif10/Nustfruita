@@ -110,6 +110,7 @@
     <string name="placeholder_unit">unit</string>
     <string name="add_product">Add Product</string>
     <string name="manage_orders">Manage Orders</string>
+
     <string name="ahmed">Ahmed Afzal</string>
     <string name="sabih">Muhammad Sabih Ali</string>
     <string name="tayyab">Tayyab Bin Kashif</string>
@@ -117,6 +118,11 @@
     <string name="about_tayyab">The guy who literally made the entire app.</string>
     <string name="about_sabih">Tayyab\'s wife and love of his life.</string>
     <string name="about_ahmed">The only normal guy in the group.</string>
+
+    <string name="phone_label">Phone:</string>
+    <string name="name_label">Name:</string>
+    <string name="address_label">Address:</string>
+
 
 
 </resources>
