@@ -1,5 +1,4 @@
 package com.nustfruta.menu;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Dialog;
@@ -14,12 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -28,21 +25,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
-
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -53,14 +45,10 @@ import com.nustfruta.cart.CartActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.misc.AboutUsActivity;
 import com.nustfruta.models.CartProduct;
-import com.nustfruta.models.ProductDB;
 import com.nustfruta.orders.YourOrdersActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.FirebaseStorageUtil;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -130,7 +118,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             navigateOut(AboutUsActivity.class);
         }
 
-        //TODO: navigate out for other buttons.
     }
 
     DrawerLayout drawerLayout;
@@ -146,9 +133,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     MenuFragmentAdapter fragmentAdapter;
 
     ImageView optionsIcon;
-
-    // TODO: remove this, should always be enabled
-    boolean factChangeEnabled = false;
 
     Handler factChangeHandler;
 
@@ -328,11 +312,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void changeFact() {
-
-        if (!factChangeEnabled)
-        {
-            return;
-        }
 
         if (currentCard.getId() == cardA.getId())
         {
