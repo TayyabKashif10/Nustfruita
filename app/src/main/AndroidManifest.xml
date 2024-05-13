@@ -19,6 +19,9 @@
             android:name=".menu.AdminMenuActivity"
             android:exported="false" />
         <activity
+            android:name=".misc.AboutUsActivity"
+            android:exported="false" />
+        <activity
             android:name=".orders.YourOrdersActivity"
             android:exported="false" />
         <activity

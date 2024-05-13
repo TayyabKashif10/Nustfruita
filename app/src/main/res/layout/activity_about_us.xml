@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".misc.AboutUsActivity">
+
+    <include
+        android:id="@+id/lBackIcon"
+        layout="@layout/sub_toolbar_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvAboutUsLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/about_us"
+        android:textColor="@color/secondary_color"
+        android:textSize="26sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lBackIcon" />
+
+    <TextView
+        android:id="@+id/tvAboutUs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/about_us_text"
+        android:textColor="@color/onBackground"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/tvAboutUsLabel" />
+
+    <ImageView
+        android:layout_width="18sp"
+        android:layout_height="18sp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="@string/about_us"
+        android:scaleX="1.6"
+        android:scaleY="1.6"
+        android:src="@drawable/info_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tvAboutUsLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvAboutUsLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvAboutUsLabel"
+        app:tint="@color/secondary_color" />
+
+    <TextView
+        android:id="@+id/tvTayyab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        android:text="@string/tayyab"
+        android:textColor="@color/primary_light"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/tvAboutUs"
+        app:layout_constraintTop_toBottomOf="@+id/tvAboutUs" />
+
+    <TextView
+        android:id="@+id/tvAboutTayyab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="@string/about_tayyab"
+        android:textColor="@color/onBackground"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvTayyab"
+        app:layout_constraintTop_toBottomOf="@+id/tvTayyab" />
+
+
+    <TextView
+        android:id="@+id/tvSabih"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:text="@string/sabih"
+        android:textColor="@color/primary_light"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/tvAboutTayyab"
+        app:layout_constraintTop_toBottomOf="@+id/tvAboutTayyab" />
+
+    <TextView
+        android:id="@+id/tvAboutSabih"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="@string/about_sabih"
+        android:textColor="@color/onBackground"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvSabih"
+        app:layout_constraintTop_toBottomOf="@+id/tvSabih" />
+
+
+    <TextView
+        android:id="@+id/tvAhmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:text="@string/ahmed"
+        android:textColor="@color/primary_light"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@+id/tvAboutSabih"
+        app:layout_constraintTop_toBottomOf="@+id/tvAboutSabih" />
+
+    <TextView
+        android:id="@+id/tvAboutAhmed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:text="@string/about_ahmed"
+        android:textColor="@color/onBackground"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/tvAhmed"
+        app:layout_constraintTop_toBottomOf="@+id/tvAhmed" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
