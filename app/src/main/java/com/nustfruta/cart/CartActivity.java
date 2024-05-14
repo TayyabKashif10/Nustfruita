@@ -8,7 +8,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
@@ -30,7 +35,9 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
     public ArrayList<CartProduct> productArrayList;
     public  CartRecyclerViewAdapter cartRecyclerViewAdapter;
 
-    public Button checkoutButton, backToMenuButton;
+    public Button backToMenuButton;
+
+    public CardView checkoutButton;
 
     public TextView checkoutPrice;
 
@@ -60,7 +67,15 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
         }
         else
         {
+            EdgeToEdge.enable(this);
             setContentView(R.layout.cart_activity);
+
+            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cartActivityLayout), (v, insets) -> {
+                Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                return insets;
+            });
+
             // Recyclerview initialization
             RecyclerView recyclerView = findViewById(R.id.recyclerView);
             recyclerView.setHasFixedSize(true);
@@ -109,7 +124,15 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
 
     public void initializeWithEmptyCart()
     {
-            setContentView(R.layout.empty_basket);
+        setContentView(R.layout.empty_basket);
+        EdgeToEdge.enable(this);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.emptyBasketLayout), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
         backToMenuButton = findViewById(R.id.backToMenuButton);
         backToMenuButton.setOnClickListener(new View.OnClickListener() {
             @Override

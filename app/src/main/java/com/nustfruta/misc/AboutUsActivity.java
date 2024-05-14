@@ -44,7 +44,7 @@ public class AboutUsActivity extends AppCompatActivity implements View.OnClickLi
         ivBackIcon.setOnClickListener(this);
         tvTayyab.setOnClickListener(this);
         tvSabih.setOnClickListener(this);
-        // no ahmed drawable because i made this
+        tvAhmed.setOnClickListener(this);
 
         parent = findViewById(R.id.main);
         View popupView = LayoutInflater.from(this).inflate(R.layout.popup_image, parent, false);
@@ -58,6 +58,8 @@ public class AboutUsActivity extends AppCompatActivity implements View.OnClickLi
             ivPopupImage.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.tayyab));
         else if (v.getId() == R.id.tvSabih)
             ivPopupImage.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.sabih));
+        else if (v.getId() == R.id.tvAhmed)
+            ivPopupImage.setImageDrawable(AppCompatResources.getDrawable(this, R.drawable.ahmed));
         else if (v.getId() == R.id.backIcon)
             finish();
         popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);

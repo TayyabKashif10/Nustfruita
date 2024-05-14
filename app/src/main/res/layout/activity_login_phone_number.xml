@@ -14,7 +14,8 @@
         android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/phoneIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+       >
 
 
         <RelativeLayout
@@ -35,8 +36,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="25dp"
                 android:text="@string/num1"
-                android:textSize="30sp"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="30sp" />
 
         </RelativeLayout>
 
@@ -83,10 +84,10 @@
         android:id="@+id/phoneNumPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="@string/phone_num_prompt"
         android:textColor="@color/secondary_color"
-        android:textSize="25sp"
+        android:textSize="30sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,6 +127,7 @@
                 android:autofillHints="phone"
                 android:backgroundTint="@color/transparent"
                 android:ems="10"
+                android:textSize="18sp"
                 android:hint="@string/phoneNumberPlaceHolder"
                 android:inputType="phone"
                 android:importantForAutofill = "yes"
@@ -140,6 +142,7 @@
         style="@style/AuthButtonStyle"
         android:layout_marginTop="30dp"
         android:text="@string/send_otp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phoneCard" />
@@ -149,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5
+        app:layout_constraintGuide_percent="0.55
 " />
 
 

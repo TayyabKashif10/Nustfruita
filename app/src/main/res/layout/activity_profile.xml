@@ -49,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.37261504" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/nameCard"
@@ -79,6 +79,7 @@
 
             <EditText
                 android:id="@+id/name"
+                android:textSize="18sp"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
@@ -123,6 +124,7 @@
 
             <EditText
                 android:id="@+id/email"
+                android:textSize="18sp"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="5dp"
@@ -166,6 +168,7 @@
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/hostel"
+            android:textSize="18sp"
             android:inputType="none"
             android:padding="15dp" />
 
@@ -204,6 +207,7 @@
                 android:layout_width="250dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="5dp"
+                android:textSize="18sp"
                 android:layout_toEndOf="@id/roomNumberIcon"
                 android:autofillHints="emailAddress"
                 android:backgroundTint="@color/transparent"
@@ -234,6 +238,7 @@
         style="@style/AuthButtonStyle"
         android:layout_marginTop="40dp"
         android:text="@string/save"
+        android:textSize="18sp"
         android:textColor="@color/onPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

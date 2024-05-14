@@ -83,4 +83,7 @@ dependencies {
 
     // kotlin annotation processor
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
+    // lottie animations
+    implementation("com.airbnb.android:lottie:6.4.0")
 }

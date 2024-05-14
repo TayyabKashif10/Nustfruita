@@ -34,4 +34,7 @@ abstract public class Constants {
     public static final int COLOR_PRIMARY = Color.parseColor("#089C89");
 
 
+    public final static long MAX_IMAGE_SIZE = 1024 * 100; // 100 kbs.
+
+
 }
