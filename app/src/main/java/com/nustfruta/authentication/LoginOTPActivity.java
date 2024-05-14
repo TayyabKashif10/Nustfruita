@@ -100,6 +100,8 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
         // enable OTP button once OTP is sent.
         verifyOTPBtn.setClickable(false);
+
+        overridePendingTransition(com.firebase.ui.auth.R.anim.fui_slide_in_right, com.firebase.ui.auth.R.anim.fui_slide_out_left);
     }
 
     public void initializeViews()

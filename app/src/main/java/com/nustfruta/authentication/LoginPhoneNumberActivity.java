@@ -5,8 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.window.OnBackInvokedDispatcher;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.OnBackPressedDispatcher;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -49,6 +53,16 @@ public class LoginPhoneNumberActivity extends AppCompatActivity implements View.
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+
+        });
+
+        // enable the slide out transition only if the back key is pressed, this isn't set outside the backpressed method because then we'd get the slide in right
+        // transition when we're navigating to the next activity.
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                overridePendingTransition(com.firebase.ui.auth.R.anim.fui_slide_in_right, com.firebase.ui.auth.R.anim.fui_slide_out_left);
+            }
         });
 
         initializeViews();
@@ -66,4 +80,5 @@ public class LoginPhoneNumberActivity extends AppCompatActivity implements View.
         countryCodePicker.registerCarrierNumberEditText(carrierPhoneNumberField);
 
     }
+
 }
