@@ -1,5 +1,6 @@
 package com.nustfruta.orders;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
 
-public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagementAdapter.ViewHolder> {
+public class ProductTextAdapter extends RecyclerView.Adapter<ProductTextAdapter.ViewHolder> {
 
-    OrderManagementActivity parent;
+    Activity parent;
     final private String[][] productData;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -28,7 +29,7 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
         }
     }
 
-    public OrderManagementAdapter(OrderManagementActivity parent, String[][] productData) {
+    public ProductTextAdapter(Activity parent, String[][] productData) {
         this.productData = productData;
         this.parent = parent;
     }
@@ -42,7 +43,14 @@ public class OrderManagementAdapter extends RecyclerView.Adapter<OrderManagement
             @Override
             public void onGlobalLayout() {
                 llProductRow.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                parent.setRowHeight(llProductRow.getHeight());
+                if (parent instanceof OrderTrackingActivity) {
+                    OrderTrackingActivity why = (OrderTrackingActivity) parent;
+                    why.setRowHeight(llProductRow.getHeight());
+                }
+                else if (parent instanceof OrderManagementActivity) {
+                    OrderManagementActivity why = (OrderManagementActivity) parent;
+                    why.setRowHeight(llProductRow.getHeight());
+                }
             }
         });
 

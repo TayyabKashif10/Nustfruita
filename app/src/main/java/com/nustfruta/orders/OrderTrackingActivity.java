@@ -39,7 +39,7 @@
 
         final int MAX_ITEMS = 3;
         RecyclerView rvProducts;
-        OrderTrackingAdapter adapter;
+        ProductTextAdapter adapter;
 
         int[] tintColors = new int[5];
         ImageView[] fruits = new ImageView[5];
@@ -107,7 +107,7 @@
 
         private void initializeProductsList() {
             rvProducts = findViewById(R.id.rvProductList);
-            adapter = new OrderTrackingAdapter(this, parsedProducts);
+            adapter = new ProductTextAdapter(this, parsedProducts);
 
             rvProducts.setLayoutManager(new LinearLayoutManager(this));
             rvProducts.setAdapter(adapter);

@@ -24,6 +24,7 @@ import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.misc.AboutUsActivity;
 import com.nustfruta.orders.OrderManagementActivity;
+import com.nustfruta.orders.OrdersListActivity;
 import com.nustfruta.productAdding.AddProductActivity;
 import com.nustfruta.utility.Constants;
 
@@ -51,7 +52,7 @@ public class AdminMenuActivity extends AppCompatActivity implements View.OnClick
             openDrawer();
         }
         else if (v.getId() == manageOrders.getId()) {
-            navigateOut(OrderManagementActivity.class);
+            navigateOut(OrdersListActivity.class);
         } else if (v.getId() == about.getId()) {
             navigateOut(AboutUsActivity.class);
         } else if (v.getId() == logout.getId()) {

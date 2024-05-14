@@ -18,7 +18,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.nustfruta.R;
 import com.nustfruta.orders_fragments.OrdersFragmentAdapter;
 
-public class YourOrdersActivity extends AppCompatActivity {
+public class OrdersListActivity extends AppCompatActivity {
 
     ImageView ivBackButton;
 
@@ -84,7 +84,7 @@ public class YourOrdersActivity extends AppCompatActivity {
 
     public void expandCard(String orderID)
     {
-        Intent intent = new Intent(this, OrderTrackingActivity.class);
+        Intent intent = new Intent(this, OrderManagementActivity.class);
         intent.putExtra("ID", orderID);
         startActivity(intent);
     }
