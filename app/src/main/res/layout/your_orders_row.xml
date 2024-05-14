@@ -27,7 +27,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#171717">
+            android:background="@color/rowBackground">
 
             <TextView
                 android:id="@+id/tvIDLabel"

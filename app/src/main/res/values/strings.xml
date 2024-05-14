@@ -20,7 +20,7 @@
     <string name="rs_price">Rs Price</string>
     <string name="banana">banana</string>
     <string name="profile">Profile</string>
-    <string name="save">SAVE</string>
+    <string name="save">Save</string>
     <string name="house_icon_description">An icon of a house</string>
     <string name="hostel">Hostel</string>
     <string name="sign_in">Sign In</string>
@@ -40,8 +40,8 @@
     <string name="order_id">Order ID:</string>
     <string name="order_date">Order Date:</string>
     <string name="estimated_arrival">Estimated Arrival:</string>
-    <string name="order_status_pending">You\'re order is pending confirmation!</string>
-    <string name="order_status_confirmed">You\'re order has been confirmed!</string>
+    <string name="order_status_pending">Your order is pending confirmation!</string>
+    <string name="order_status_confirmed">Your order has been confirmed!</string>
     <string name="order_status_packing">Your order is being packed!</string>
     <string name="order_status_on_way">Your order is on the way!</string>
     <string name="order_status_delivered">Your order has been delivered!</string>
@@ -90,7 +90,7 @@
     <string name="add_new_product">NEW PRODUCT</string>
     <string name="cherry_icon">cherry icon</string>
     <string name="product_name">Product Name</string>
-    <string name="select_image">SELECT IMAGE</string>
+    <string name="select_image">Select Image</string>
     <string name="product_category">Product Category</string>
     <string name="product_unit">Product Unit</string>
     <string name="category">Category</string>
@@ -105,8 +105,6 @@
     <string name="ordered_on">Ordered on</string>
     <string name="forward_arrow">Forward Arrow</string>
     <string name="delivery_fees_pkr">PKR 99</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="placeholder_unit">unit</string>
     <string name="add_product">Add Product</string>
     <string name="manage_orders">Manage Orders</string>
@@ -114,16 +112,18 @@
     <string name="ahmed">Ahmed Afzal</string>
     <string name="sabih">Muhammad Sabih Ali</string>
     <string name="tayyab">Tayyab Bin Kashif</string>
-    <string name="about_us_text">We\'re a group of software engineering students passionate for developing innovative solutions in the realm of android development. Our team comprises of:</string>
-    <string name="about_tayyab">The guy who literally made the entire app.</string>
-    <string name="about_sabih">Tayyab\'s wife and love of his life.</string>
-    <string name="about_ahmed">The only normal guy in the group.</string>
+    <string name="about_us_text">We\'re a group of software engineering students passionate for developing innovative solutions in the realm of android development (ty chatGPT). Our team comprises of:</string>
+    <string name="about_tayyab">The guy who literally made the entire app (debatable), chronically sleep deprived.</string>
+    <string name="about_sabih">Max Verstappen\'s third wife and F1 enthusiast.</string>
+    <string name="about_ahmed">The princess of the group, strict feminist.</string>
 
     <string name="phone_label">Phone:</string>
     <string name="name_label">Name:</string>
     <string name="address_label">Address:</string>
 
     <string name="unit">Unit</string>
+    <string name="your_basket">Your Basket</string>
+    <string name="icon_of_a_fruit">Icon of a Fruit</string>
 
 
 </resources>

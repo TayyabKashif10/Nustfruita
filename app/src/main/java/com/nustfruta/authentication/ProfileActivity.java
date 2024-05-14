@@ -194,8 +194,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        Snackbar.make(saveBtn,currentSignedUser.getPhoneNumber(),Snackbar.LENGTH_SHORT).show();
-
         currentSignedUser.setEmail(inputEmail);
         currentSignedUser.setFullName(inputName);
 
@@ -229,16 +227,17 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         updates.put("roomNumber", inputRoomNumber);
         FirebaseDBUtil.getCurrentUserReference().updateChildren(updates);
 
-        Snackbar.make(saveBtn,"Saved Successfully.",Snackbar.LENGTH_SHORT).show();
-
-        // shift to main activity
-        Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+        Snackbar.make(saveBtn,"Profile Saved Successfully.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).addCallback(new Snackbar.Callback(){
+            @Override
+            public void onShown(Snackbar sb) {
+                super.onShown(sb);
+                // shift to main activity
+                Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        }).show();
     }
-
-
-
 
     public void getUser()
     {
