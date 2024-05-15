@@ -63,7 +63,7 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
         @Override
         public void onLoginClicked() {
             DialogFactory.destroyLoginDialog();
-            Intent intent = new Intent(CartActivity.this, LoginPhoneNumberActivity.class);
+            Intent intent = new Intent(BasketActivity.this, LoginPhoneNumberActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
@@ -130,7 +130,7 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
                 public void onClick(View v) {
                     if (FirebaseDBUtil.currentUserType == UserType.GUEST)
                     {
-                        DialogFactory.createLoginDialog(CartActivity.this, true, loginDialogEventListener);
+                        DialogFactory.createLoginDialog(BasketActivity.this, true, loginDialogEventListener);
                         return;
                     }
                     checkout();
