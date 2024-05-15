@@ -126,6 +126,7 @@
     <string name="icon_of_a_fruit">Icon of a Fruit</string>
     <string name="no_orders">No orders</string>
     <string name="all_orders">All orders</string>
+    <string name="empty_basket">Your basket is empty</string>
 
 
 </resources>
