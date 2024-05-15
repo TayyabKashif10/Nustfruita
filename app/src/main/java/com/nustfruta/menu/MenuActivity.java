@@ -285,7 +285,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                    break;
                case 2:
                    // bundle tab
-                   tab.setIcon(R.drawable.fruit_bundle);
+                   tab.setIcon(R.drawable.fruit_juice);
            }
 
         }).attach();

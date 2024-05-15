@@ -29,7 +29,7 @@ public class MenuFragmentAdapter extends FragmentStateAdapter {
                 fragment = new Salads();
                 break;
             case 2:
-                fragment = new FruitBundles();
+                fragment = new Juices();
                 break;
             default:
                 fragment = new Fruits();
