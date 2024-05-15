@@ -138,7 +138,7 @@
         app:boxStrokeErrorColor="@color/apple_red"
         app:cursorErrorColor="@color/apple_red"
         app:endIconMode="clear_text"
-        app:endIconTint="@color/orange"
+        app:endIconTint="@color/grey"
         app:errorIconTint="@color/apple_red"
         app:errorTextColor="@color/apple_red"
         app:expandedHintEnabled="false"

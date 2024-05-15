@@ -6,9 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,6 +35,8 @@ public class Active extends Fragment {
 
     RecyclerView rvOrderList;
 
+    FrameLayout lEmptyLayout;
+
     public Active() {
     }
 
@@ -45,6 +50,7 @@ public class Active extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        lEmptyLayout = view.findViewById(R.id.lEmptyOrders);
         rvOrderList = view.findViewById(R.id.rvOrderList);
         orderList = new ArrayList<>();
 
@@ -59,7 +65,14 @@ public class Active extends Fragment {
                         if (!thisOrder.getStatus().equals(OrderStatus.DELIVERED))
                             orderList.add(thisOrder);
                     }
-                    initializeRecyclerView();
+                    if (!orderList.isEmpty()) {
+                        initializeRecyclerView();
+                        lEmptyLayout.setVisibility(View.GONE);
+                    }
+                    else {
+                        initializeRecyclerView();
+                        lEmptyLayout.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 @Override
@@ -79,7 +92,12 @@ public class Active extends Fragment {
                         if (!thisOrder.getStatus().equals(OrderStatus.DELIVERED))
                             orderList.add(thisOrder);
                     }
-                    initializeRecyclerView();
+                    if (!orderList.isEmpty()) {
+                        initializeRecyclerView();
+                        lEmptyLayout.setVisibility(View.GONE);
+                    }
+                    else
+                        lEmptyLayout.setVisibility(View.VISIBLE);
                 }
 
                 @Override

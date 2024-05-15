@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,8 @@ public class Delivered extends Fragment {
 
     RecyclerView rvOrderList;
 
+    FrameLayout lEmptyLayout;
+
     public Delivered() {
     }
 
@@ -45,6 +48,7 @@ public class Delivered extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        lEmptyLayout = view.findViewById(R.id.lEmptyOrders);
         rvOrderList = view.findViewById(R.id.rvOrderList);
         orderList = new ArrayList<>();
 
@@ -59,7 +63,14 @@ public class Delivered extends Fragment {
                         if (thisOrder.getStatus().equals(OrderStatus.DELIVERED))
                             orderList.add(thisOrder);
                     }
-                    initializeRecyclerView();
+                    if (!orderList.isEmpty()) {
+                        initializeRecyclerView();
+                        lEmptyLayout.setVisibility(View.GONE);
+                    }
+                    else {
+                        initializeRecyclerView();
+                        lEmptyLayout.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 @Override
@@ -76,7 +87,12 @@ public class Delivered extends Fragment {
                     orderList.clear();
                     for (DataSnapshot childSnapshot : snapshot.getChildren())
                         orderList.add(childSnapshot.getValue(OrderDB.class));
-                    initializeRecyclerView();
+                    if (!orderList.isEmpty()) {
+                        initializeRecyclerView();
+                        lEmptyLayout.setVisibility(View.GONE);
+                    }
+                    else
+                        lEmptyLayout.setVisibility(View.VISIBLE);
                 }
 
                 @Override
