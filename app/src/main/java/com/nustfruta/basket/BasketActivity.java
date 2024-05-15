@@ -1,4 +1,4 @@
-package com.nustfruta.cart;
+package com.nustfruta.basket;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,10 +30,10 @@ import com.nustfruta.utility.OrderParser;
 
 import java.util.ArrayList;
 
-public class CartActivity extends AppCompatActivity implements CartCardButtonListener {
+public class BasketActivity extends AppCompatActivity implements BasketCardButtonListener {
 
     public ArrayList<CartProduct> productArrayList;
-    public  CartRecyclerViewAdapter cartRecyclerViewAdapter;
+    public BasketRecyclerViewAdapter basketRecyclerViewAdapter;
 
     public Button backToMenuButton;
 
@@ -68,7 +68,7 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
         else
         {
             EdgeToEdge.enable(this);
-            setContentView(R.layout.cart_activity);
+            setContentView(R.layout.basket_activity);
 
             ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cartActivityLayout), (v, insets) -> {
                 Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -83,8 +83,8 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
             // Creating recyclerview adapter
-            cartRecyclerViewAdapter = new CartRecyclerViewAdapter(this, productArrayList);
-            recyclerView.setAdapter(cartRecyclerViewAdapter);
+            basketRecyclerViewAdapter = new BasketRecyclerViewAdapter(this, productArrayList);
+            recyclerView.setAdapter(basketRecyclerViewAdapter);
 
             // Turning click animations off on recycler view
             SimpleItemAnimator simpleItemAnimator = (SimpleItemAnimator) recyclerView.getItemAnimator();
@@ -152,7 +152,7 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
         });
     }
 
-    public void minusButton(CartRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void minusButton(BasketRecyclerViewAdapter.ViewHolder holder, int position) {
 
         // Decrease quantity of given item
         productArrayList.get(position).decrementQuantity();
@@ -165,10 +165,10 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
 
             productArrayList.remove(position);
 
-            cartRecyclerViewAdapter.notifyItemRemoved(position);
+            basketRecyclerViewAdapter.notifyItemRemoved(position);
         }
         else
-            cartRecyclerViewAdapter.notifyItemChanged(position);
+            basketRecyclerViewAdapter.notifyItemChanged(position);
 
 
         if (productArrayList.isEmpty())
@@ -178,14 +178,14 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
         // Updating the displayed prices on static card view
         checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
-        cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
+        basketRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
 
         registerResult();
     }
 
 
 
-    public void plusButton(CartRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void plusButton(BasketRecyclerViewAdapter.ViewHolder holder, int position) {
         productArrayList.get(position).incrementQuantity();
 
         // Updating subtotal variable.
@@ -194,8 +194,8 @@ public class CartActivity extends AppCompatActivity implements CartCardButtonLis
         // Updating the displayed checkout price
         checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
-        cartRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
-        cartRecyclerViewAdapter.notifyItemChanged(position);
+        basketRecyclerViewAdapter.notifyItemChanged(productArrayList.size());
+        basketRecyclerViewAdapter.notifyItemChanged(position);
 
         registerResult();
     }

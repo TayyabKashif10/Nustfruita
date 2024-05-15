@@ -1,4 +1,4 @@
-package com.nustfruta.cart;
+package com.nustfruta.basket;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,15 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
 import com.nustfruta.models.CartProduct;
-import com.nustfruta.models.LegacyProduct;
 import com.nustfruta.utility.FirebaseStorageUtil;
 
 import java.util.ArrayList;
 
-public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder> {
+public class BasketRecyclerViewAdapter extends RecyclerView.Adapter<BasketRecyclerViewAdapter.ViewHolder> {
 
 
-    CartActivity parent;
+    BasketActivity parent;
 
     ArrayList<CartProduct> productList;
 
@@ -49,7 +48,7 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     }
 
 
-    public CartRecyclerViewAdapter(CartActivity parent, ArrayList<CartProduct> productList) {
+    public BasketRecyclerViewAdapter(BasketActivity parent, ArrayList<CartProduct> productList) {
 
         this.parent = parent;
         this.productList = productList;
@@ -58,21 +57,21 @@ public class CartRecyclerViewAdapter extends RecyclerView.Adapter<CartRecyclerVi
     // Where to get the single card as view holder object
     @NonNull
     @Override
-    public CartRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public BasketRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
 
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View view;
         if(viewType == 0)
-            view = inflater.inflate(R.layout.cart_activity_row, viewGroup, false);
+            view = inflater.inflate(R.layout.basket_activity_row, viewGroup, false);
 
         else
             view = inflater.inflate(R.layout.costs_row, viewGroup, false);
 
-        return new CartRecyclerViewAdapter.ViewHolder(view, viewType);
+        return new BasketRecyclerViewAdapter.ViewHolder(view, viewType);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartRecyclerViewAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BasketRecyclerViewAdapter.ViewHolder holder, int position) {
 
         if (getItemViewType(position) == 0) {
             CartProduct product = productList.get(position);

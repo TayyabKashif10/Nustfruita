@@ -41,7 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.authentication.ProfileActivity;
-import com.nustfruta.cart.CartActivity;
+import com.nustfruta.basket.BasketActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.misc.AboutUsActivity;
 import com.nustfruta.models.CartProduct;
@@ -94,7 +94,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (v.getId()== basketButton.getId())
         {
-            Intent intent = new Intent(this, CartActivity.class);
+            Intent intent = new Intent(this, BasketActivity.class);
             intent.putExtra("productArray", productArrayViewModel.getArray());
             cartLauncher.launch(intent);
 

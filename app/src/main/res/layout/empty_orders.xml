@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:id="@+id/lEmptyOrders"
     android:backgroundTint="@color/orange"
-    tools:context=".cart.CartActivity">
+    tools:context=".basket.BasketActivity">
 
     <ImageView
         android:id="@+id/imageView"
