@@ -59,15 +59,15 @@ public class ProductAdapter extends FirebaseRecyclerAdapter<ProductDB, ProductAd
 
         FirebaseStorageUtil.BindImage(productHolder.productImage, productDB.getImageURL(), parentContext);
 
-        if (userType == UserType.CUSTOMER)
-        {
-            productHolder.addButton.setVisibility(View.VISIBLE);
-            productHolder.deleteButton.setVisibility(View.INVISIBLE);
-        }
-        else
+        if (userType == UserType.ADMIN)
         {
             productHolder.addButton.setVisibility(View.INVISIBLE);
             productHolder.deleteButton.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            productHolder.addButton.setVisibility(View.VISIBLE);
+            productHolder.deleteButton.setVisibility(View.INVISIBLE);
         }
         productHolder.addButton.setOnClickListener(new View.OnClickListener() {
             @Override
