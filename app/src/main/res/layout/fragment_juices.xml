@@ -3,15 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".menu_fragments.FruitBundles">
+    tools:context=".menu_fragments.Juices">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/juicesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Bundles"
-        android:gravity="center"
-        android:textColor="@color/secondary_color"
-        android:textSize="50sp"/>
+        android:layout_marginVertical="15dp"/>
 
 </FrameLayout>

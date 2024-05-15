@@ -165,6 +165,14 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
                 finish();
             }
         });
+
+        ivBackButton = findViewById(R.id.backIcon);
+        ivBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initializeBackButton() {
