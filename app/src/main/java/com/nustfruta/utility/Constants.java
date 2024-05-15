@@ -36,5 +36,4 @@ abstract public class Constants {
 
     public final static long MAX_IMAGE_SIZE = 1024 * 100; // 100 kbs.
 
-
 }

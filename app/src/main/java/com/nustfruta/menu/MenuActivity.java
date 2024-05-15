@@ -42,9 +42,12 @@ import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.cart.CartActivity;
+import com.nustfruta.dialog.DialogFactory;
+import com.nustfruta.dialog.LoginDialogEventListener;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.misc.AboutUsActivity;
 import com.nustfruta.models.CartProduct;
+import com.nustfruta.models.UserType;
 import com.nustfruta.orders.YourOrdersActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
@@ -55,6 +58,19 @@ import java.util.Random;
 public class MenuActivity extends AppCompatActivity implements View.OnClickListener{
 
     ProductArrayViewModel productArrayViewModel;
+
+    LoginDialogEventListener loginDialogEventListener = new LoginDialogEventListener() {
+        @Override
+        public void onGoBackClicked() {
+            DialogFactory.destroyLoginDialog();
+        }
+
+        @Override
+        public void onLoginClicked() {
+            DialogFactory.destroyLoginDialog();
+            navigateOut(LoginPhoneNumberActivity.class);
+        }
+    };
 
     ActivityResultLauncher<Intent> cartLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -90,6 +106,13 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         {
             openDrawer();
         } else if (v.getId()==profile.getId()) {
+
+            if (FirebaseDBUtil.currentUserType == UserType.GUEST)
+            {
+                DialogFactory.createLoginDialog(this, true, loginDialogEventListener);
+                return;
+            }
+
             navigateOut(ProfileActivity.class);
         }
         else if (v.getId()== basketButton.getId())
@@ -107,8 +130,17 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                     startActivity(intent);
             });
         }
-
+        else if (v.getId() == login.getId()) {
+            navigateOut(LoginPhoneNumberActivity.class);
+        }
         else if (v.getId() == orders.getId()) {
+
+            if (FirebaseDBUtil.currentUserType == UserType.GUEST)
+            {
+                DialogFactory.createLoginDialog(this, true, loginDialogEventListener);
+                return;
+            }
+
             navigateOut(YourOrdersActivity.class);
         }
         else if (v.getId() == about.getId()) {
@@ -122,7 +154,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     ImageButton basketButton;
 
     // drawer children
-    LinearLayout orders, profile, about, logout;
+    LinearLayout orders, profile, about, logout, login;
 
     TabLayout tabLayout;
 
@@ -159,6 +191,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         setupMenuFragments();
         syncFruitFactNumber();
         factChangeHandler = new Handler();
+
+        if (FirebaseDBUtil.currentUserType == UserType.GUEST)
+        {
+            logout.setVisibility(View.GONE);
+            login.setVisibility(View.VISIBLE);
+        }
 
     }
     @Override
@@ -215,6 +253,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         profile.setOnClickListener(this);
         about.setOnClickListener(this);
         logout.setOnClickListener(this);
+        login.setOnClickListener(this);
         basketButton.setOnClickListener(this);
     }
 
@@ -260,6 +299,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         orders=findViewById(R.id.orderRow); profile=findViewById(R.id.profileRow);
         about=findViewById(R.id.aboutRow); logout=findViewById(R.id.logoutRow);
         logout = findViewById(R.id.logoutRow);
+        login = findViewById(R.id.loginRow);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
         productCounter = findViewById(R.id.productCounter);

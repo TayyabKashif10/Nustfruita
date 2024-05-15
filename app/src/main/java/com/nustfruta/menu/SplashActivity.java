@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
@@ -48,7 +49,13 @@ public class SplashActivity extends AppCompatActivity {
             return insets;
         });
 
-        if (FirebaseDBUtil.getCurrentUserID() == null) {
+        if (FirebaseDBUtil.getCurrentUserID() == null || FirebaseDBUtil.isAnonymousUserLoggedIn()) {
+
+            if (FirebaseDBUtil.getCurrentUserID() != null)
+            {
+                FirebaseDBUtil.currentUserType = UserType.GUEST;
+            }
+
             Intent intent;
             intent = new Intent(this, LoginPhoneNumberActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -76,7 +83,8 @@ public class SplashActivity extends AppCompatActivity {
 
                     if (FirebaseDBUtil.currentUserType == UserType.ADMIN)
                         intent = new Intent(SplashActivity.this, AdminMenuActivity.class);
-                    else
+                    else //CUSTOMER LOGIN.
+
                         intent = new Intent(SplashActivity.this, MenuActivity.class);
 
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -126,7 +126,33 @@
                 android:textSize="30sp"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/loginRow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
 
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                app:srcCompat="@drawable/login_icon"
+                app:tint="@color/secondary_color"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/login_icon_description" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/log_in"
+                android:textColor="@color/secondary_color"
+                android:layout_marginStart="20dp"
+
+                android:textStyle="bold"
+                android:textSize="30sp"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>
