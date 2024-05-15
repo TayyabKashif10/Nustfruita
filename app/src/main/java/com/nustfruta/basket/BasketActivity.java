@@ -20,9 +20,14 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
+import com.nustfruta.authentication.LoginPhoneNumberActivity;
+import com.nustfruta.dialog.DialogFactory;
+import com.nustfruta.dialog.LoginDialogEventListener;
+import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
+import com.nustfruta.models.UserType;
 import com.nustfruta.orders.OrderTrackingActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
@@ -48,6 +53,21 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
     ImageView ivBackButton;
 
     Intent backIntent = new Intent();
+
+    LoginDialogEventListener loginDialogEventListener = new LoginDialogEventListener() {
+        @Override
+        public void onGoBackClicked() {
+            DialogFactory.destroyLoginDialog();
+        }
+
+        @Override
+        public void onLoginClicked() {
+            DialogFactory.destroyLoginDialog();
+            Intent intent = new Intent(BasketActivity.this, LoginPhoneNumberActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +128,11 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
             checkoutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (FirebaseDBUtil.currentUserType == UserType.GUEST)
+                    {
+                        DialogFactory.createLoginDialog(BasketActivity.this, true, loginDialogEventListener);
+                        return;
+                    }
                     checkout();
                 }
             });

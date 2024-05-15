@@ -3,7 +3,6 @@ package com.nustfruta.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,18 +27,16 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.nustfruta.menu.AdminMenuActivity;
 import com.nustfruta.menu.MenuActivity;
-import com.nustfruta.menu.SplashActivity;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
 import com.nustfruta.models.UserType;
-import com.nustfruta.utility.DialogFactory;
+import com.nustfruta.dialog.DialogFactory;
 import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.util.concurrent.TimeUnit;
 
 public class LoginOTPActivity extends AppCompatActivity implements View.OnClickListener {
-
 
      public static boolean  firstTimeUser = true;
 
@@ -140,7 +137,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                     // this method triggers when OTP is added automatically / autofilled
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-
+                        signIn(phoneAuthCredential);
                     }
 
                     @Override

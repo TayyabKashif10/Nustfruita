@@ -126,7 +126,15 @@
     <string name="icon_of_a_fruit">Icon of a Fruit</string>
     <string name="no_orders">No orders</string>
     <string name="all_orders">All orders</string>
+
     <string name="empty_basket">Your basket is empty</string>
+
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="you_need_to_login_first">You need to login first.</string>
+    <string name="go_back">Go Back</string>
+    <string name="log_in">Login</string>
+    <string name="login_icon_description">Login icon</string>
+
 
 
 </resources>
