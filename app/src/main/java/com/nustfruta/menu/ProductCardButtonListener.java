@@ -1,6 +1,5 @@
 package com.nustfruta.menu;
 
-import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.models.ProductDB;
 
 public interface ProductCardButtonListener {

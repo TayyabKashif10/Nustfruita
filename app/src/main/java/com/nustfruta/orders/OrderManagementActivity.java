@@ -23,7 +23,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.R;
-import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
 import com.nustfruta.models.User;

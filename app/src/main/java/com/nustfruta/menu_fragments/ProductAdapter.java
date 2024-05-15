@@ -1,6 +1,5 @@
 package com.nustfruta.menu_fragments;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

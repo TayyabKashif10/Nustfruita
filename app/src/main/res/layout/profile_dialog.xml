@@ -12,13 +12,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp">
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/deleteProductText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete Product?"
+            android:text="Complete your profile first."
             android:textColor="@color/white"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -30,13 +30,13 @@
             android:layout_marginTop="20dp"/>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/dialogCancelButton"
+            android:id="@+id/dialogGoBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
-            android:text="Cancel"
+            android:text="@string/go_back"
             android:textSize="15sp"
-            app:layout_constraintEnd_toStartOf="@+id/dialogConfirmButton"
+            app:layout_constraintEnd_toStartOf="@+id/dialogCompleteButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/deleteProductText"
@@ -45,16 +45,16 @@
 
         <com.google.android.material.button.MaterialButton
             app:backgroundTint="@color/primary_light"
-            android:id="@+id/dialogConfirmButton"
+            android:id="@+id/dialogCompleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:text="Complete"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/dialogCancelButton"
+            app:layout_constraintStart_toEndOf="@+id/dialogGoBackButton"
             tools:layout_editor_absoluteY="20dp"
-            app:layout_constraintBaseline_toBaselineOf="@id/dialogCancelButton"/>
+            app:layout_constraintBaseline_toBaselineOf="@id/dialogGoBackButton"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

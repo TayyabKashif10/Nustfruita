@@ -1,7 +1,5 @@
 package com.nustfruta.utility;
 
-import android.provider.ContactsContract;
-
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;

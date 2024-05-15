@@ -16,6 +16,7 @@ abstract public class DialogFactory {
 
     private static Dialog loginDialog;
 
+    private static Dialog profileDialog;
 
     public static void createLoadingDialog(Activity context, boolean isCancellable)
     {
@@ -68,6 +69,40 @@ abstract public class DialogFactory {
     {
         if (loginDialog == null) {return;}
         loginDialog.dismiss();
+    }
+
+    public static void createProfileDialog(Activity context, boolean isCancellable, ProfileDialogEventListener eventListener)
+    {
+        if (profileDialog != null) {return;}
+
+        profileDialog =  new Dialog(context);
+        profileDialog.setCancelable(isCancellable);
+        profileDialog.setContentView(R.layout.profile_dialog);
+        profileDialog.getWindow().setLayout(RecyclerView.LayoutParams.WRAP_CONTENT,RecyclerView.LayoutParams.WRAP_CONTENT);
+        profileDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        profileDialog.findViewById(R.id.dialogGoBackButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventListener.onGoBackClicked();
+            }
+        });
+
+        profileDialog.findViewById(R.id.dialogCompleteButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventListener.onCompleteClicked();
+            }
+        });
+
+
+        profileDialog.show();
+    }
+
+    public static void destroyProfileDialog()
+    {
+        if (profileDialog == null) {return;}
+        profileDialog.dismiss();
     }
 
 

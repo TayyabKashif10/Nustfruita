@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.nustfruta.models.CartProduct;
-import com.nustfruta.models.ProductDB;
 
 import java.util.ArrayList;
 

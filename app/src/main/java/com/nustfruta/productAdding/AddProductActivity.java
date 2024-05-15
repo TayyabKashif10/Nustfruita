@@ -1,16 +1,12 @@
 package com.nustfruta.productAdding;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -35,8 +31,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
-import com.nustfruta.authentication.ProfileActivity;
-import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.models.ProductDB;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;

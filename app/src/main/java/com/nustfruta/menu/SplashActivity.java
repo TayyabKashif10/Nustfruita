@@ -15,21 +15,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.models.UserType;
-import com.nustfruta.orders.OrderManagementActivity;
-import com.nustfruta.orders.OrderTrackingActivity;
-import com.nustfruta.orders.YourOrdersActivity;
 import com.nustfruta.utility.FirebaseDBUtil;
 
 public class SplashActivity extends AppCompatActivity {
 
-    //TODO: Remove ALL toasts.
-
-    //TODO: either link splash activity to data fetching, or add a custom delay.
 
     private static final long MIN_SPLASH_DURATION = 1000;
     private long startTime, elapsedTime, remainingTime;

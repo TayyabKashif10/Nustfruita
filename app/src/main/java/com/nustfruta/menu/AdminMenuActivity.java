@@ -9,10 +9,7 @@ import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -23,10 +20,8 @@ import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
 import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.misc.AboutUsActivity;
-import com.nustfruta.orders.OrderManagementActivity;
 import com.nustfruta.orders.OrdersListActivity;
 import com.nustfruta.productAdding.AddProductActivity;
-import com.nustfruta.utility.Constants;
 
 public class AdminMenuActivity extends AppCompatActivity implements View.OnClickListener{
 
