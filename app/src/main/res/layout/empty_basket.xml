@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/emptyBasketLayout"
     android:backgroundTint="@color/orange"
-    tools:context=".cart.CartActivity">
+    tools:context=".basket.BasketActivity">
 
 
     <ImageView

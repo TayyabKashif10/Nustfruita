@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:elevation="16dp"
     android:outlineProvider="background"
-    tools:context=".cart.CartActivity">
+    tools:context=".basket.BasketActivity">
 
     <include
         android:id="@+id/subToolbar"

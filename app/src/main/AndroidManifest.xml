@@ -31,7 +31,7 @@
             android:name=".productAdding.AddProductActivity"
             android:exported="false" />
         <activity
-            android:name=".cart.CartActivity"
+            android:name=".basket.BasketActivity"
             android:exported="true" />
         <activity
             android:name=".orders.OrderTrackingActivity"
