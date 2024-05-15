@@ -34,6 +34,14 @@ abstract public class FirebaseDBUtil {
         return FirebaseAuth.getInstance().getUid();
     }
 
+    public static boolean isAnonymousUserLoggedIn()
+    {
+        /*this is NUll if there is no signed in user.
+         once a user signs in the App with mAuth.signWithCredentials(), FirebaseAuth stores that user details
+         somewhere in app memory, so this method will return currentUserID() as long as we dont clear data after signing in*/
+        return FirebaseAuth.getInstance().getCurrentUser() != null && FirebaseAuth.getInstance().getCurrentUser().isAnonymous();
+    }
+
     public static DatabaseReference getCurrentUserReference()
     {
         return database.getReference("users").child(getCurrentUserID());
