@@ -124,6 +124,8 @@
     <string name="unit">Unit</string>
     <string name="your_basket">Your Basket</string>
     <string name="icon_of_a_fruit">Icon of a Fruit</string>
+    <string name="no_orders">No orders</string>
+    <string name="all_orders">All orders</string>
 
 
 </resources>

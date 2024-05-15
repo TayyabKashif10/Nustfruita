@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,17 +23,17 @@ public class OrdersListActivity extends AppCompatActivity {
 
     ImageView ivBackButton;
 
-    FirebaseRecyclerOptions options;
-
     ViewPager2 viewPager;
     TabLayout tabLayout;
     OrdersFragmentAdapter adapter;
+
+    TextView tvActivityLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_your_orders);
+        setContentView(R.layout.activity_orders_list);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -47,6 +48,8 @@ public class OrdersListActivity extends AppCompatActivity {
     private void initializeViews() {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
+        tvActivityLabel = findViewById(R.id.tvActivityLabel);
+        tvActivityLabel.setText(R.string.all_orders);
     }
 
     private void initializeBackButton() {

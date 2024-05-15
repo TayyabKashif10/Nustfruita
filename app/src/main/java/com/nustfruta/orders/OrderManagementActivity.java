@@ -23,7 +23,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.nustfruta.R;
+import com.nustfruta.models.Order;
 import com.nustfruta.models.OrderDB;
+import com.nustfruta.models.OrderStatus;
 import com.nustfruta.models.User;
 import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.DateFormat;
@@ -58,6 +60,7 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_order_management);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -151,12 +154,23 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
 
     @Override
     public void onClick(View v) {
+        OrderStatus nextStatus;
         if (v.getId() == R.id.ivBackArrow) {
-            statusUpdate.put("status", order.getStatus().move(-1));
+            nextStatus = order.getStatus().move(-1);
+            statusUpdate.put("status", nextStatus);
+            if (nextStatus == OrderStatus.PENDING)
+                ivBackArrow.setColorFilter(ContextCompat.getColor(this, R.color.grey));
+            else
+                ivBackArrow.setColorFilter(ContextCompat.getColor(this, R.color.onBackground));
             FirebaseDBUtil.getOrdersNodeReference().child(order.getOrderID()).updateChildren(statusUpdate);
         }
         else if (v.getId() == R.id.ivForwardArrow) {
-            statusUpdate.put("status", order.getStatus().move(1));
+            nextStatus = order.getStatus().move(1);
+            statusUpdate.put("status", nextStatus);
+            if (nextStatus == OrderStatus.DELIVERED)
+                ivBackArrow.setColorFilter(ContextCompat.getColor(this, R.color.grey));
+            else
+                ivBackArrow.setColorFilter(ContextCompat.getColor(this, R.color.onBackground));
             FirebaseDBUtil.getOrdersNodeReference().child(order.getOrderID()).updateChildren(statusUpdate);
         }
         else if (v.getId() == R.id.backIcon) {

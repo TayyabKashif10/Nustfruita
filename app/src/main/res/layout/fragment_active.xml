@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".orders_fragments.Active">
 
+    <include
+        android:id="@+id/lEmptyOrders"
+        android:visibility="gone"
+        layout="@layout/empty_orders" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOrderList"
         android:layout_width="match_parent"

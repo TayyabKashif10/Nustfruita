@@ -127,6 +127,8 @@
             int status = order.getStatus().ordinal();
             for (int i = 0; i <= status; i++)
                 fruits[i].setColorFilter(tintColors[i], PorterDuff.Mode.SRC_ATOP);
+            for (int i = fruits.length - 1; i > status; i--)
+                fruits[i].setColorFilter(tintColors[5], PorterDuff.Mode.SRC_ATOP);
             tvOrderStatus.setTextColor(tintColors[status]);
         }
 
