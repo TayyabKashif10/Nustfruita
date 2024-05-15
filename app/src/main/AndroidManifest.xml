@@ -37,6 +37,9 @@
             android:name=".orders.OrderTrackingActivity"
             android:exported="false" />
         <activity
+            android:name=".orders.OrdersListActivity"
+            android:exported="false" />
+        <activity
             android:name=".authentication.LoginOTPActivity"
             android:exported="false" />
         <activity

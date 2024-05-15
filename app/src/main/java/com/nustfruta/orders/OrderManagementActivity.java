@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -46,7 +45,7 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
 
     final int MAX_ITEMS = 3;
     RecyclerView rvProducts;
-    OrderManagementAdapter adapter;
+    ProductTextAdapter adapter;
 
     int[] tintColors = new int[6];
     ImageView[] fruits = new ImageView[5];
@@ -136,7 +135,7 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
 
     private void initializeProductsList() {
         rvProducts = findViewById(R.id.rvProductList);
-        adapter = new OrderManagementAdapter(this, parsedProducts);
+        adapter = new ProductTextAdapter(this, parsedProducts);
 
         rvProducts.setLayoutManager(new LinearLayoutManager(this));
         rvProducts.setAdapter(adapter);
@@ -154,15 +153,13 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         if (v.getId() == R.id.ivBackArrow) {
             statusUpdate.put("status", order.getStatus().move(-1));
-            Log.d("back", order.getStatus().move(-1).toString());
             FirebaseDBUtil.getOrdersNodeReference().child(order.getOrderID()).updateChildren(statusUpdate);
         }
         else if (v.getId() == R.id.ivForwardArrow) {
             statusUpdate.put("status", order.getStatus().move(1));
             FirebaseDBUtil.getOrdersNodeReference().child(order.getOrderID()).updateChildren(statusUpdate);
-            Log.d("back", order.getStatus().move(1).toString());
         }
-        else if (v.getId() == R.id.llBackButton) {
+        else if (v.getId() == R.id.backIcon) {
             finish();
         }
     }

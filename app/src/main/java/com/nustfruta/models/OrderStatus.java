@@ -22,13 +22,12 @@ public enum OrderStatus {
 
     @Exclude
     public OrderStatus move(int step) {
-        assert step == -1 || step == 1;
         OrderStatus[] statuses = OrderStatus.values();
         int ordinal = this.ordinal();
         if (ordinal + step < 0)
-            ordinal = 4;
-        else if (ordinal + step > 4)
             ordinal = 0;
+        else if (ordinal + step > 4)
+            ordinal = 4;
         else
             ordinal += step;
         return statuses[ordinal];
