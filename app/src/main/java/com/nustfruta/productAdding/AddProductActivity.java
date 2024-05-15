@@ -19,18 +19,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.canhub.cropper.CropImageView;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.nustfruta.R;
+import com.nustfruta.authentication.ProfileActivity;
+import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.models.ProductDB;
+import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.VerifyCredentials;
 
@@ -104,8 +112,14 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_addproducts);
+
+        EdgeToEdge.enable(this);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.productAddLayout), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
         initializeViews();
         attachListeners();
         category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
@@ -216,7 +230,14 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
         FirebaseDBUtil.storeProductDB(newProduct, inputCategory);
 
-        finish();
+        Snackbar.make(productSaveBtn,"Product Added Successfully.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).addCallback(new Snackbar.Callback(){
+            @Override
+            public void onShown(Snackbar sb) {
+                super.onShown(sb);
+                finish();
+            }
+        }).show();
+
     }
 
 
@@ -237,7 +258,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
         if (requestCode == 100 && data != null && data.getData() != null) {
 
-            if (!VerifyCredentials.isImageValidSize(this, data.getData(), 1024 * 50))
+            if (!VerifyCredentials.isImageValidSize(this, data.getData(), Constants.MAX_IMAGE_SIZE))
             {
                 Toast.makeText(this, "Image size is too large, try again", Toast.LENGTH_LONG).show();
 
@@ -256,7 +277,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
     public void uploadImage(String productName) {
 
-        // TODO: CONFIRM IF IT WORKS
 
         if ((category.getText().toString()).equals("Fruit"))
             storageReference = FirebaseStorage.getInstance().getReference("fruits/" + productName);
@@ -277,7 +297,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     // Helper function to convert bitmap to uri.
     public Uri bitmapToUri(Context inContext, Bitmap inImage) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        inImage.compress(Bitmap.CompressFormat.PNG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
     }
@@ -302,22 +322,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         unitLayout.setVisibility(View.GONE);
         categoryLayout.setVisibility(View.GONE);
     }
-
-    // TODO: TEST
-//    @Override
-//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//
-//        if (view.getId() == categoryLayout.getId())
-//            categoryLayout.setError(null);
-//
-//        if (view.getId() == unitLayout.getId())
-//            unitLayout.setError(null);
-//    }
-
-//    @Override
-//    public void onNothingSelected(AdapterView<?> parent) {
-//
-//    }
 
     public void productAddLayout() {
 

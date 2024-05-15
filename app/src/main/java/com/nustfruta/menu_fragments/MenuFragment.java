@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
 import com.nustfruta.menu.ProductCardButtonListener;
@@ -19,6 +20,7 @@ import com.nustfruta.menu.MenuActivity;
 import com.nustfruta.menu.ProductArrayViewModel;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.ProductDB;
+import com.nustfruta.utility.Constants;
 import com.nustfruta.utility.FirebaseStorageUtil;
 
 abstract public class MenuFragment extends Fragment{
@@ -55,6 +57,8 @@ abstract public class MenuFragment extends Fragment{
                         }
                     });
                     deleteProductDialog.dismiss();
+                    Snackbar.make(getView(),"Product Deleted Successfully.",Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();
+
                 }
             });
             deleteProductDialog.show();

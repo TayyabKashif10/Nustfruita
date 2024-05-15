@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="85dp">
+    android:layout_height="wrap_content"
+    android:paddingTop="5dp"
+    android:paddingBottom="10dp"
+    android:paddingHorizontal="20dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
-        android:layout_height="75dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:cardBackgroundColor="@color/rowBackground"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#171717">
+            android:paddingVertical="10dp">
 
             <TextView
                 android:id="@+id/subtotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="6dp"
-                android:paddingTop="10dp"
 
                 android:text="Sub total"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,13 +38,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-
-                android:textColor="@color/white"
-
-                android:paddingTop="10dp"
+                android:layout_marginTop="5dp"
 
                 android:text="Delivery fees"
-                android:textSize="10sp"
+
+
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subtotal" />
@@ -55,34 +54,33 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
-                android:textColor="@color/white"
-
                 android:layout_marginTop="6dp"
 
                 android:layout_marginEnd="30dp"
-                android:paddingTop="10dp"
 
                 android:text="@string/delivery_fees_pkr"
-                android:textSize="10sp"
+
+
+                android:textColor="@color/white"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBaseline_toBaselineOf="@id/subtotal"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/deliveryPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="30dp"
-                android:paddingTop="10dp"
                 android:text="@string/delivery_fees_pkr"
                 android:textColor="@color/white"
-                android:textSize="10sp"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/subtotalPrice" />
+                app:layout_constraintBaseline_toBaselineOf="@id/delivery"
+                app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

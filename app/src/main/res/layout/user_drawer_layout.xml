@@ -33,6 +33,7 @@
                 app:tint="@color/secondary_color"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@string/profile_icon_description"
+                android:layout_marginTop="5dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
                 android:layout_marginStart="20dp"
 
                 android:textStyle="bold"
-                android:textSize="28sp"/>
+                android:textSize="30sp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -59,6 +60,7 @@
                 app:tint="@color/secondary_color"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@string/list_icon_description"
+                android:layout_marginTop="5dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -68,7 +70,7 @@
                 android:layout_marginStart="20dp"
 
                 android:textStyle="bold"
-                android:textSize="28sp"/>
+                android:textSize="30sp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -85,6 +87,7 @@
                 app:tint="@color/secondary_color"
                 android:layout_marginStart="10dp"
                 android:contentDescription="@string/information_icon_description"
+                android:layout_marginTop="5dp"
                 />
             <TextView
                 android:layout_width="wrap_content"
@@ -94,7 +97,7 @@
                 android:layout_marginStart="20dp"
 
                 android:textStyle="bold"
-                android:textSize="28sp"/>
+                android:textSize="30sp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -110,6 +113,7 @@
                 app:srcCompat="@drawable/logout_icon"
                 app:tint="@color/secondary_color"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
                 android:contentDescription="@string/logout_icon_description" />
             <TextView
                 android:layout_width="wrap_content"
@@ -119,7 +123,7 @@
                 android:layout_marginStart="20dp"
 
                 android:textStyle="bold"
-                android:textSize="28sp"/>
+                android:textSize="30sp"/>
 
         </LinearLayout>
 

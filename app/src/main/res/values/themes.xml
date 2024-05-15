@@ -10,6 +10,7 @@
         <item name="colorOnSecondary">@color/onSecondary</item>
         <item name="android:windowBackground">@drawable/background_gradient</item>
         <item name="colorOnBackground">@color/onBackground</item>
+        <item name="fontFamily">@font/quicksand_medium</item>
     </style>
 
 </resources>

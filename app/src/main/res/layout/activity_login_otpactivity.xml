@@ -85,10 +85,10 @@
         android:id="@+id/otpPrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:text="@string/otp_prompt"
         android:textColor="@color/secondary_color"
-        android:textSize="25sp"
+        android:textSize="30sp"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -136,6 +136,7 @@
         android:id="@+id/verifyOTPBtn"
         style="@style/AuthButtonStyle"
         android:text="@string/verify"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/otpCard"
@@ -146,12 +147,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5
+        app:layout_constraintGuide_percent="0.55
 " />
 
     <TextView
         android:id="@+id/resendText"
         android:text="@string/resend_otp_prompt"
+        android:textSize="16sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

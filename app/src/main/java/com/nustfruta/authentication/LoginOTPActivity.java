@@ -3,6 +3,7 @@ package com.nustfruta.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,6 +33,7 @@ import com.nustfruta.utility.Constants;
 import com.nustfruta.R;
 import com.nustfruta.models.User;
 import com.nustfruta.models.UserType;
+import com.nustfruta.utility.DialogFactory;
 import com.nustfruta.utility.FirebaseDBUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -98,6 +100,8 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
         // enable OTP button once OTP is sent.
         verifyOTPBtn.setClickable(false);
+
+        overridePendingTransition(com.firebase.ui.auth.R.anim.fui_slide_in_right, com.firebase.ui.auth.R.anim.fui_slide_out_left);
     }
 
     public void initializeViews()
@@ -165,7 +169,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
     public void signIn(PhoneAuthCredential phoneAuthCredential)
     {
-        // register the user with firebase authentication
+
         mAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -184,17 +188,20 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                         intent = new Intent(LoginOTPActivity.this, ProfileActivity.class);
                         intent.putExtra("caller", "LoginOTPActivity");
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
                         startActivity(intent);
                     }
                     else
                     {
+                        DialogFactory.createLoadingDialog(LoginOTPActivity.this, false);
+
+
                         // this triggers if the user has signed in before, decide whether the user is an admin or customer.
                         FirebaseDBUtil.getCurrentUserReference().child("userType").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DataSnapshot> task) {
 
                                 FirebaseDBUtil.currentUserType = task.getResult().getValue(UserType.class);
-
                                 Intent intent;
                                 if (FirebaseDBUtil.currentUserType == UserType.ADMIN)
                                 {
@@ -206,6 +213,8 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                                     intent = new Intent(LoginOTPActivity.this, MenuActivity.class);
                                 }
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                DialogFactory.destroyLoadingDialog();
                                 startActivity(intent);
                             }
 
@@ -221,7 +230,6 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-
     }
 
 }

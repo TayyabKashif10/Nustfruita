@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/constraintLayout"
+    android:id="@+id/cartActivityLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:elevation="16dp"
@@ -17,27 +17,39 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/yourBasketText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/your_basket"
+        android:textColor="@color/secondary_color"
+        android:textSize="35sp"
+        app:layout_constraintTop_toBottomOf="@id/subToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@+id/checkoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subToolbar"
+        app:layout_constraintTop_toBottomOf="@+id/yourBasketText"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/checkoutButton"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="90dp"
         android:layout_marginBottom="-20dp"
         android:background="#00000000"
         android:outlineProvider="background"
         app:cardBackgroundColor="@color/watermelon_red"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -45,7 +57,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/secondary_color">
+            android:background="@color/primary_color">
 
 
             <TextView
@@ -53,37 +65,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:shadowColor="#454545"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="3"
-                android:text="@string/pkr_0"
+
+                android:text="@string/product_price_placeholder"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/checkoutButton"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/checkoutButton" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.3" />
 
-            <Button
-                android:id="@+id/checkoutButton"
-                android:layout_width="200dp"
-                android:layout_height="55dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:backgroundTint="#001F25"
-                android:shadowColor="#000000"
-                android:shadowDx="2"
+            <TextView
+                android:id="@+id/checkoutText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
 
-                android:shadowDy="2"
-                android:shadowRadius="3"
+
+                android:layout_marginEnd="20dp"
                 android:text="@string/checkout"
                 android:textColor="@color/white"
-                android:textColorLink="#00FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                android:textSize="20sp"
+                app:layout_constraintBaseline_toBaselineOf="@id/checkoutPrice"
+                app:layout_constraintEnd_toStartOf="@id/imageView2" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/checkoutText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/checkoutText"
+                app:srcCompat="@drawable/double_arrow_icon"
+                app:tint="@color/white"
+                />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
