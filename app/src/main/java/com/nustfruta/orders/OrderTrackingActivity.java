@@ -38,7 +38,7 @@
         final int MAX_ITEMS = 3;
         RecyclerView rvProducts;
         ProductTextAdapter adapter;
-        int[] tintColors = new int[5];
+        int[] tintColors = new int[6];
         ImageView[] fruits = new ImageView[5];
         ImageView ivBackButton;
         TextView tvOrderStatus, tvOrderID, tvOrderDate, tvEstimatedDate, tvSubtotal, tvTotal;
@@ -53,6 +53,10 @@
                 v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
                 return insets;
             });
+
+            initializeViews();
+            initializeColors();
+            initializeBackButton();
 
             intent = getIntent();
 
@@ -73,9 +77,6 @@
                 }
             });
 
-            initializeViews();
-            initializeColors();
-            initializeBackButton();
         }
 
         private void initializeViews() {
@@ -99,6 +100,7 @@
             tintColors[2] = ContextCompat.getColor(this, R.color.cherry_red);
             tintColors[3] = ContextCompat.getColor(this, R.color.watermelon_red);
             tintColors[4] = ContextCompat.getColor(this, R.color.pineapple_yellow);
+            tintColors[5] = ContextCompat.getColor(this, R.color.black);
         }
 
         private void initializeProductsList() {
@@ -120,7 +122,8 @@
         }
 
         //TODO: afzal fix this.
-        private void updateFruits() {
+        private void updateFruits()
+        {
             int status = order.getStatus().ordinal();
             for (int i = 0; i <= status; i++)
                 fruits[i].setColorFilter(tintColors[i], PorterDuff.Mode.SRC_ATOP);
