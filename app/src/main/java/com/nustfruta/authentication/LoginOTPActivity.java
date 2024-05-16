@@ -127,6 +127,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
     }
     public void sendOTP(String phoneNumber, boolean isResend)
     {
+        DialogFactory.createLoadingDialog(LoginOTPActivity.this, false);
         PhoneAuthOptions.Builder builder = new PhoneAuthOptions.Builder(mAuth)
                 .setPhoneNumber(phoneNumber)
                 .setTimeout(Constants.OTP_TIMEOUT, TimeUnit.SECONDS)
@@ -138,15 +139,18 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
                         signIn(phoneAuthCredential);
+                        DialogFactory.destroyLoadingDialog();
                     }
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
+                        DialogFactory.destroyLoadingDialog();
                     }
 
                     @Override
                     public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         super.onCodeSent(s, forceResendingToken);
+                        DialogFactory.destroyLoadingDialog();
                         resendingToken = forceResendingToken;
                         verificationOTP = s;
                         Snackbar.make(verifyOTPBtn, "OTP sent", Snackbar.LENGTH_SHORT).setBackgroundTint(Constants.COLOR_PRIMARY).show();

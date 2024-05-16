@@ -1,6 +1,7 @@
 package com.nustfruta.authentication;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -67,6 +68,8 @@ public class LoginPhoneNumberActivity extends AppCompatActivity implements View.
 
         sendOTPBtn.setOnClickListener(this);
         guestText.setOnClickListener(this);
+
+
     }
 
     public void initializeViews()
@@ -107,7 +110,11 @@ public class LoginPhoneNumberActivity extends AppCompatActivity implements View.
 
             });
         }
-
     }
+
+
+
+
+
 
 }
