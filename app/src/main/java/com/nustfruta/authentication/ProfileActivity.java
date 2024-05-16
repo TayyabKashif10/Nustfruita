@@ -231,10 +231,23 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onShown(Snackbar sb) {
                 super.onShown(sb);
-                // shift to main activity
-                Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+
+                // start main activity from scratch only if the user comes across profile activity for the first time
+                // otherwise, profile activity is always opened from the menu itself, so we call finish()
+                if (firstTimeUser)
+                {
+                    // shift to main activity
+                    Intent intent = new Intent(ProfileActivity.this, MenuActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else
+                {
+                    finish();
+                }
+
+
+
             }
         }).show();
     }

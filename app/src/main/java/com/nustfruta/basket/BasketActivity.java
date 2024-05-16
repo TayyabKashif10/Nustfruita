@@ -42,9 +42,6 @@ import com.nustfruta.utility.OrderParser;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity implements BasketCardButtonListener {
-
-    //TODO: fix profile to make it finish() not start new activity.
-
     public ArrayList<CartProduct> productArrayList;
     public BasketRecyclerViewAdapter basketRecyclerViewAdapter;
 
@@ -289,6 +286,7 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
         FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
+
                 productArrayList.clear();
 
                 // navigate to order tracking
@@ -296,7 +294,7 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
 
                 intent.putExtra("ID", orderID);
 
-                //finish();  // prevent user from navigating back to checkout
+                finish();  // prevent user from navigating back to checkout
 
                 startActivity(intent);
             }
