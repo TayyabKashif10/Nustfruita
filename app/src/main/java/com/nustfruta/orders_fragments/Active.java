@@ -75,7 +75,6 @@ public class Active extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // TODO
                     Log.d("CANCELLED", error.toString());
                 }
             });
@@ -100,7 +99,6 @@ public class Active extends Fragment {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // TODO
                 }
             });
     }
