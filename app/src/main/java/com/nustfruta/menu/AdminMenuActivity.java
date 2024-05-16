@@ -22,6 +22,7 @@ import com.nustfruta.menu_fragments.MenuFragmentAdapter;
 import com.nustfruta.misc.AboutUsActivity;
 import com.nustfruta.orders.OrdersListActivity;
 import com.nustfruta.productAdding.AddProductActivity;
+import com.nustfruta.utility.FirebaseDBUtil;
 
 public class AdminMenuActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -54,6 +55,7 @@ public class AdminMenuActivity extends AppCompatActivity implements View.OnClick
             AuthUI.getInstance().signOut(this).addOnCompleteListener(task -> {
 
                 // clear backstack and send user to sign in page.
+                FirebaseDBUtil.currentUserType = null;
                 Intent intent = new Intent(AdminMenuActivity.this, LoginPhoneNumberActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

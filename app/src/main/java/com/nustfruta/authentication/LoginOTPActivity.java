@@ -173,7 +173,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
                 if (task.isSuccessful())
                 {
-                    if (task.getResult().getUser().getMetadata().getCreationTimestamp() != task.getResult().getUser().getMetadata().getLastSignInTimestamp())
+                    if (!task.getResult().getAdditionalUserInfo().isNewUser())
                     {
                         firstTimeUser = false;
                     }
