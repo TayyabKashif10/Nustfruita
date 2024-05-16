@@ -37,6 +37,9 @@ import com.nustfruta.utility.FirebaseDBUtil;
 import com.nustfruta.utility.VerifyCredentials;
 
 import java.io.ByteArrayOutputStream;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Objects;
 
 public class AddProductActivity extends AppCompatActivity implements View.OnClickListener, OnFailureListener{
@@ -79,13 +82,13 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     }
 
 
+    public String creationTimestamp;
+
     TextInputEditText productName, unitPrice, unit;
 
     TextInputLayout categoryLayout, unitLayout, nameLayout, priceLayout;
 
     AutoCompleteTextView category;
-
-
 
     Button productSaveBtn, imgSelectBtn, cropBtn;
 
@@ -94,7 +97,6 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     TextView addNewProduct;
 
     CropImageView cropImageView;
-
 
     Uri imageUri, croppedImgUri;
 
@@ -116,8 +118,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         });
         initializeViews();
         attachListeners();
-        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad", "Juice"}));
-
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, Constants.PRODUCT_CATEGORIES));
+        creationTimestamp = LocalDateTime.now().toString();
     }
 
     public void attachListeners()
@@ -126,7 +128,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
         backButton.setOnClickListener(this);
-        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad", "Juice"}));
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, Constants.PRODUCT_CATEGORIES));
 
     }
 
@@ -159,10 +161,10 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
         boolean isProductValid = true;
 
-        String inputProductName = productName.getText().toString().toLowerCase();
-        String inputUnitPrice =  unitPrice.getText().toString();
-        String inputCategory = (category.getText().toString());
-        String inputUnit = (unit.getText().toString().toLowerCase());
+        String inputProductName = productName.getText().toString().toLowerCase().trim();
+        String inputUnitPrice =  unitPrice.getText().toString().trim();
+        String inputCategory = (category.getText().toString()).trim();
+        String inputUnit = (unit.getText().toString().toLowerCase()).trim();
 
         if (croppedImgUri == null)
         {
@@ -216,9 +218,11 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        uploadImage(inputProductName);
+        // when saving the image to firebase storage, and realtime database, bundle the product name with creation time stamp (only for image URL, not product name)
+        // to add uniqueness and reset cache for that image.
+        uploadImage(inputProductName + creationTimestamp);
 
-        String inputImageUrl = inputCategory.toLowerCase() + "s/" + inputProductName;
+        String inputImageUrl = inputCategory.toLowerCase() + "/" + inputProductName + creationTimestamp;
 
         ProductDB newProduct = new ProductDB(inputProductName, inputUnit, Integer.parseInt(inputUnitPrice), inputImageUrl);
 
@@ -272,13 +276,13 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
     public void uploadImage(String productName) {
 
 
-        if ((category.getText().toString()).equals("Fruit"))
+        if ((category.getText().toString()).equals("Fruits"))
             storageReference = FirebaseStorage.getInstance().getReference("fruits/" + productName);
 
-        else if ((category.getText().toString()).equals("Salad"))
+        else if ((category.getText().toString()).equals("Salads"))
             storageReference = FirebaseStorage.getInstance().getReference("salads/" + productName);
 
-        else if ((category.getText().toString()).equals("Juice"))
+        else if ((category.getText().toString()).equals("Juices"))
             storageReference = FirebaseStorage.getInstance().getReference("juices/" + productName);
 
         storageReference.putFile(croppedImgUri).addOnFailureListener(this);
@@ -334,11 +338,8 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         priceLayout.setVisibility(View.VISIBLE);
         unitLayout.setVisibility(View.VISIBLE);
         categoryLayout.setVisibility(View.VISIBLE);
-
-
         cropImageView.setVisibility(View.GONE);
         cropBtn.setVisibility(View.GONE);
-
     }
 
 

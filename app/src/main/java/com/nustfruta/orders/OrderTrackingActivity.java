@@ -121,7 +121,6 @@
             });
         }
 
-        //TODO: afzal fix this.
         private void updateFruits()
         {
             int status = order.getStatus().ordinal();

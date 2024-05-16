@@ -92,7 +92,6 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-                        // TODO
                         Log.d("DatabaseCancelled", error.toString());
                     }
                 });
@@ -100,7 +99,6 @@ public class OrderManagementActivity extends AppCompatActivity implements View.O
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // TODO
                 Log.d("DatabaseCancelled", error.toString());
             }
         });
