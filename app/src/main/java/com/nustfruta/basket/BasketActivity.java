@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.Insets;
@@ -18,15 +19,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
 import com.nustfruta.authentication.LoginPhoneNumberActivity;
+import com.nustfruta.authentication.ProfileActivity;
 import com.nustfruta.dialog.DialogFactory;
 import com.nustfruta.dialog.LoginDialogEventListener;
-import com.nustfruta.menu.MenuActivity;
+import com.nustfruta.dialog.ProfileDialogEventListener;
 import com.nustfruta.models.CartProduct;
 import com.nustfruta.models.OrderDB;
 import com.nustfruta.models.OrderStatus;
+import com.nustfruta.models.User;
 import com.nustfruta.models.UserType;
 import com.nustfruta.orders.OrderTrackingActivity;
 import com.nustfruta.utility.Constants;
@@ -36,6 +42,8 @@ import com.nustfruta.utility.OrderParser;
 import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity implements BasketCardButtonListener {
+
+    //TODO: fix profile to make it finish() not start new activity.
 
     public ArrayList<CartProduct> productArrayList;
     public BasketRecyclerViewAdapter basketRecyclerViewAdapter;
@@ -53,6 +61,22 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
     ImageView ivBackButton;
 
     Intent backIntent = new Intent();
+
+    ProfileDialogEventListener profileDialogEventListener = new ProfileDialogEventListener() {
+        @Override
+        public void onGoBackClicked() {
+            DialogFactory.destroyProfileDialog();
+        }
+
+        @Override
+        public void onCompleteClicked() {
+            DialogFactory.destroyProfileDialog();
+            Intent intent = new Intent(BasketActivity.this, ProfileActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+    };
+
 
     LoginDialogEventListener loginDialogEventListener = new LoginDialogEventListener() {
         @Override
@@ -125,16 +149,27 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
             checkoutPrice.setText("PKR " + (subtotal + Constants.DELIVERY_FEES));
 
 
-            checkoutButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (FirebaseDBUtil.currentUserType == UserType.GUEST)
-                    {
-                        DialogFactory.createLoginDialog(BasketActivity.this, true, loginDialogEventListener);
-                        return;
-                    }
-                    checkout();
+            checkoutButton.setOnClickListener(v -> {
+
+                if (FirebaseDBUtil.currentUserType == UserType.GUEST)
+                {
+                    DialogFactory.createLoginDialog(BasketActivity.this, true, loginDialogEventListener);
+                    return;
                 }
+
+                FirebaseDBUtil.getCurrentUserReference().get().addOnCompleteListener(task -> {
+                    User fetchedUser = task.getResult().getValue(User.class);
+
+                    if (fetchedUser.isCompleteProfile())
+                    {
+                        checkout();
+                    }
+                    else
+                    {
+                        DialogFactory.createProfileDialog(BasketActivity.this, true, profileDialogEventListener);
+                    }
+                });
+
             });
 
             initializeBackButton();
@@ -241,6 +276,7 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
 
     public void checkout()
     {
+
         String orderID = FirebaseDBUtil.getOrdersNodeReference().push().getKey();
         DatabaseReference orderReference = FirebaseDBUtil.getOrdersNodeReference().child(orderID);
         OrderDB currentOrder = new OrderDB();
@@ -250,16 +286,23 @@ public class BasketActivity extends AppCompatActivity implements BasketCardButto
         orderReference.setValue(currentOrder);
 
         // store ID in user's orders node.
-        FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID);
+        FirebaseDBUtil.getCurrentUserReference().child("orders").push().setValue(orderID).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                productArrayList.clear();
 
-        productArrayList.clear();
+                // navigate to order tracking
+                Intent intent = new Intent(BasketActivity.this, OrderTrackingActivity.class);
 
-        // navigate to order tracking
-        Intent intent = new Intent(this, OrderTrackingActivity.class);
-        intent.putExtra("ID", orderID);
-        finish();  // prevent user from navigating back to checkout
+                intent.putExtra("ID", orderID);
 
-        startActivity(intent);
+                //finish();  // prevent user from navigating back to checkout
+
+                startActivity(intent);
+            }
+        });
+
+
     }
 }
 

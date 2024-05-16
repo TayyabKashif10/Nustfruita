@@ -3,10 +3,12 @@ package com.nustfruta.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
+import com.nustfruta.basket.BasketActivity;
 
 
 // this class maintains single use dialogs to use in the application.
@@ -16,6 +18,7 @@ abstract public class DialogFactory {
 
     private static Dialog loginDialog;
 
+    private static Dialog profileDialog;
 
     public static void createLoadingDialog(Activity context, boolean isCancellable)
     {
@@ -34,6 +37,7 @@ abstract public class DialogFactory {
 
         if (loadingDialog == null) {return;}
         loadingDialog.dismiss();
+        loadingDialog = null;
     }
 
     public static void createLoginDialog(Activity context, boolean isCancellable, LoginDialogEventListener eventListener)
@@ -68,6 +72,42 @@ abstract public class DialogFactory {
     {
         if (loginDialog == null) {return;}
         loginDialog.dismiss();
+        loginDialog = null;
+    }
+
+    public static void createProfileDialog(Activity context, boolean isCancellable, ProfileDialogEventListener eventListener)
+    {
+        if (profileDialog != null) {return;}
+
+        profileDialog =  new Dialog(context);
+        profileDialog.setCancelable(isCancellable);
+        profileDialog.setContentView(R.layout.profile_dialog);
+        profileDialog.getWindow().setLayout(RecyclerView.LayoutParams.WRAP_CONTENT,RecyclerView.LayoutParams.WRAP_CONTENT);
+        profileDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        profileDialog.findViewById(R.id.dialogGoBackButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventListener.onGoBackClicked();
+            }
+        });
+
+        profileDialog.findViewById(R.id.dialogCompleteButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eventListener.onCompleteClicked();
+            }
+        });
+
+
+        profileDialog.show();
+    }
+
+    public static void destroyProfileDialog()
+    {
+        if (profileDialog == null) {return;}
+        profileDialog.dismiss();
+        profileDialog = null;
     }
 
 

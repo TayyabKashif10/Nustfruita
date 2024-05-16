@@ -10,7 +10,6 @@ public class ProductDB {
 
     private String imageURL;
 
-
     public ProductDB(String productName, String productUnit, int unitPrice, String imageURL) {
         this.productName = productName;
         this.productUnit = productUnit;

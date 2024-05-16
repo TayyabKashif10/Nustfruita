@@ -13,7 +13,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DatabaseReference;
 import com.nustfruta.R;
 import com.nustfruta.menu.ProductCardButtonListener;
 import com.nustfruta.menu.MenuActivity;
@@ -34,7 +33,6 @@ abstract public class MenuFragment extends Fragment{
 
     Dialog deleteProductDialog;
     Button dialogCancel, dialogConfirm;
-
 
     ProductCardButtonListener productCardButtonListener = new ProductCardButtonListener() {
         @Override
@@ -72,7 +70,7 @@ abstract public class MenuFragment extends Fragment{
     public void setUpDeleteProductDialog()
     {
         deleteProductDialog = new Dialog(this.getContext());
-        deleteProductDialog.setContentView(R.layout.delete_product_dialog);
+        deleteProductDialog.setContentView(R.layout.confirm_dialog);
         deleteProductDialog.getWindow().setLayout(RecyclerView.LayoutParams.WRAP_CONTENT,RecyclerView.LayoutParams.WRAP_CONTENT);
         deleteProductDialog.setCancelable(true);
         deleteProductDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -85,7 +83,6 @@ abstract public class MenuFragment extends Fragment{
                 deleteProductDialog.dismiss();
             }
         });
-
 
     }
 
