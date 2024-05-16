@@ -107,13 +107,12 @@ abstract public class FirebaseDBUtil {
         });
     }
 
-
     public static void storeProductDB (ProductDB product, String category) {
 
-        if (category.equals("Fruit"))
+        if (category.equals("Fruits"))
             database.getReference("products/fruits").child(product.getProductName()).setValue(product);
 
-        else if (category.equals("Salad"))
+        else if (category.equals("Salads"))
             database.getReference("products/salads").child(product.getProductName()).setValue(product);
 
         else

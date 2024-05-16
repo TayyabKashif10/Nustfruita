@@ -88,7 +88,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     boolean firstTimeUser;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,13 +149,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        String inputName = fullName.getText().toString();
-        String inputEmail = email.getText().toString();
-        String inputRoomNumber = roomNumber.getText().toString();
+        String inputName = fullName.getText().toString().trim();
+        String inputEmail = email.getText().toString().trim();
+        String inputRoomNumber = roomNumber.getText().toString().trim();
 
         // returns empty string if nothing is selected, and item string otherwise.
-        String inputHostel = (hostelFieldContainer.getEditText()).getText().toString();
-        String inputHostelHint = hostel.getHint().toString();
+        String inputHostel = (hostelFieldContainer.getEditText()).getText().toString().trim();
+        String inputHostelHint = hostel.getHint().toString().trim();
 
         if (!inputName.isEmpty() && !VerifyCredentials.verifyFullName(inputName))
         {
