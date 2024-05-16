@@ -113,8 +113,12 @@ abstract public class FirebaseDBUtil {
         if (category.equals("Fruit"))
             database.getReference("products/fruits").child(product.getProductName()).setValue(product);
 
-        else
+        else if (category.equals("Salad"))
             database.getReference("products/salads").child(product.getProductName()).setValue(product);
+
+        else
+            database.getReference("products/juices").child(product.getProductName()).setValue(product);
+
     }
 
 }
