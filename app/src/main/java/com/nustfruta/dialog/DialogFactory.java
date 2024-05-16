@@ -3,10 +3,12 @@ package com.nustfruta.dialog;
 import android.app.Activity;
 import android.app.Dialog;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.nustfruta.R;
+import com.nustfruta.basket.BasketActivity;
 
 
 // this class maintains single use dialogs to use in the application.
@@ -35,6 +37,7 @@ abstract public class DialogFactory {
 
         if (loadingDialog == null) {return;}
         loadingDialog.dismiss();
+        loadingDialog = null;
     }
 
     public static void createLoginDialog(Activity context, boolean isCancellable, LoginDialogEventListener eventListener)
@@ -69,6 +72,7 @@ abstract public class DialogFactory {
     {
         if (loginDialog == null) {return;}
         loginDialog.dismiss();
+        loginDialog = null;
     }
 
     public static void createProfileDialog(Activity context, boolean isCancellable, ProfileDialogEventListener eventListener)
@@ -103,6 +107,7 @@ abstract public class DialogFactory {
     {
         if (profileDialog == null) {return;}
         profileDialog.dismiss();
+        profileDialog = null;
     }
 
 

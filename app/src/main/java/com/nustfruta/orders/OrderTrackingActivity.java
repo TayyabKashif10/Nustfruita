@@ -32,15 +32,12 @@
     public class OrderTrackingActivity extends AppCompatActivity {
 
         Intent intent;
-
         String orderID;
         OrderDB order;
         String[][] parsedProducts;
-
         final int MAX_ITEMS = 3;
         RecyclerView rvProducts;
         ProductTextAdapter adapter;
-
         int[] tintColors = new int[5];
         ImageView[] fruits = new ImageView[5];
         ImageView ivBackButton;
@@ -72,7 +69,6 @@
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    // TODO
                     Log.d("DatabaseCancelled", error.toString());
                 }
             });
@@ -123,6 +119,7 @@
             });
         }
 
+        //TODO: afzal fix this.
         private void updateFruits() {
             int status = order.getStatus().ordinal();
             for (int i = 0; i <= status; i++)
