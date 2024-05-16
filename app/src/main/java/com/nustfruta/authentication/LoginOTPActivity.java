@@ -3,6 +3,7 @@ package com.nustfruta.authentication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -144,6 +145,7 @@ public class LoginOTPActivity extends AppCompatActivity implements View.OnClickL
 
                     @Override
                     public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Log.d("AUTH_FAILTURE" , e.getMessage());
                         DialogFactory.destroyLoadingDialog();
                     }
 

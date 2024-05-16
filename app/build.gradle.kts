@@ -86,4 +86,7 @@ dependencies {
 
     // lottie animations
     implementation("com.airbnb.android:lottie:6.4.0")
+
+    // firebase play integrity
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
 }
