@@ -126,6 +126,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             AuthUI.getInstance().signOut(this).addOnCompleteListener(task -> {
 
                     // clear backstack and send user to sign in page.
+                    FirebaseDBUtil.currentUserType = null;
                     Intent intent = new Intent(MenuActivity.this, LoginPhoneNumberActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
