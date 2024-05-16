@@ -116,7 +116,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         });
         initializeViews();
         attachListeners();
-        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad", "Juice"}));
 
     }
 
@@ -126,7 +126,7 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
         imgSelectBtn.setOnClickListener(this);
         cropBtn.setOnClickListener(this);
         backButton.setOnClickListener(this);
-        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad"}));
+        category.setAdapter(new ArrayAdapter<>(this, R.layout.dropdownitem_layout, new String[]{"Fruit", "Salad", "Juice"}));
 
     }
 
@@ -277,6 +277,9 @@ public class AddProductActivity extends AppCompatActivity implements View.OnClic
 
         else if ((category.getText().toString()).equals("Salad"))
             storageReference = FirebaseStorage.getInstance().getReference("salads/" + productName);
+
+        else if ((category.getText().toString()).equals("Juice"))
+            storageReference = FirebaseStorage.getInstance().getReference("juices/" + productName);
 
         storageReference.putFile(croppedImgUri).addOnFailureListener(this);
     }

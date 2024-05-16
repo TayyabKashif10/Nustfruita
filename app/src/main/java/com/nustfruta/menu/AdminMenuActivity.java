@@ -145,7 +145,7 @@ public class AdminMenuActivity extends AppCompatActivity implements View.OnClick
                     break;
                 case 2:
                     // bundle tab
-                    tab.setIcon(R.drawable.fruit_bundle);
+                    tab.setIcon(R.drawable.fruit_juice);
             }
 
         }).attach();
